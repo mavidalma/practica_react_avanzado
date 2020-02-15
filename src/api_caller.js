@@ -77,10 +77,10 @@ const userLogin = async(username, password) => {
 const fetchAnuncios = async(query) => {
     
     try {
-    const endpoint = `${URL}apiv1/anunciossss`;
+    const endpoint = `${URL}apiv1/anuncios?${query ? query : ""}`;
     const response = await fetch (endpoint, {
         method: 'GET',
-    });
+        });
     
     const data = await response.json();
     console.log(data)
@@ -95,8 +95,7 @@ const fetchAnuncios = async(query) => {
 //userRegister("test8", "pass2");
 
 const showAds = async() => {
-    //await userRegister("mario", "password")
-    await userLogin("mario", "password");
+    await userLogin("test8", "pass2");
     await fetchAnuncios();
 }
 /*
