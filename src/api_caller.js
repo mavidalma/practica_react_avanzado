@@ -22,7 +22,7 @@ class apiCaller {
 }*/
 
 
-const userRegister = async(username, password) => {
+export const userRegister = async(username, password) => {
     
     try {
     const endpoint = `${URL}apiv1/register`;
@@ -39,15 +39,16 @@ const userRegister = async(username, password) => {
     
     const data = await response.json();
     const isRegisterOk = data.success;
-    isRegisterOk ? window.alert("usuario correctamente creado") : window.alert('error creando usuario')
+    isRegisterOk ? window.alert("usuario correctamente creado") : window.alert('error creando usuario');
+    return isRegisterOk;
 } catch (err) {
     console.log(err);
-    throw error;
+    throw new Error;
   }
 }
 
 
-const userLogin = async(username, password) => {
+export const userLogin = async(username, password) => {
     
     try {
     const endpoint = `${URL}apiv1/login`;
@@ -66,41 +67,30 @@ const userLogin = async(username, password) => {
     const data = await response.json();
     console.log(data)
     const hasLogged = data.success;
+    return hasLogged;
     //hasLogged ? window.alert("usuario correctamente logueado") : window.alert('error de login')
 
 } catch (err) {
     console.log(err);
-    throw error;
+    throw new Error;
   }
 }
 
-const fetchAnuncios = async(query) => {
+export const fetchAnuncios = async(query) => {
     
     try {
     const endpoint = `${URL}apiv1/anuncios?${query ? query : ""}`;
     const response = await fetch (endpoint, {
         method: 'GET',
+        credentials: 'include',
         });
     
     const data = await response.json();
     console.log(data)
+    return data;
 
 } catch (err) {
     console.log(err);
-    throw error;
+    throw new Error;
   }
 }
-
-
-//userRegister("test8", "pass2");
-
-const showAds = async() => {
-    await userLogin("test8", "pass2");
-    await fetchAnuncios();
-}
-/*
-userLogin("test8", "pass2");
-
-fetchAnuncios();*/
-
-showAds();
