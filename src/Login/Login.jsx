@@ -24,11 +24,8 @@ export default class Login extends Component {
         event.preventDefault();
         console.log(this.state.username, this.state.password)
         const response = await userLogin(this.state.username, this.state.password);
-        console.log(response)
 
-        /*
-        if response => navega a "/home"
-        */
+        response ? this.props.history.push("/home") : console.log("error loging in")
     }
     render() {
         return (
@@ -43,7 +40,7 @@ export default class Login extends Component {
                     id="register-form" 
                     className="register"
                     onSubmit={this.submitForm}>
-					    <h2> Register form </h2>
+					    <h2> LOGIN </h2>
 					    <label for="username" className="form-label"> Username </label>
                         <input 
                             name="username" 

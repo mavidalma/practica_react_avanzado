@@ -65,7 +65,6 @@ export const userLogin = async(username, password) => {
     });
     
     const data = await response.json();
-    console.log(data)
     const hasLogged = data.success;
     return hasLogged;
     //hasLogged ? window.alert("usuario correctamente logueado") : window.alert('error de login')
@@ -76,7 +75,7 @@ export const userLogin = async(username, password) => {
   }
 }
 
-export const fetchAnuncios = async(query) => {
+export const fetchAds = async(query) => {
     
     try {
     const endpoint = `${URL}apiv1/anuncios?${query ? query : ""}`;
@@ -86,8 +85,9 @@ export const fetchAnuncios = async(query) => {
         });
     
     const data = await response.json();
-    console.log(data)
-    return data;
+    const results = data.results;
+
+    return results;
 
 } catch (err) {
     console.log(err);
