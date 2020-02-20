@@ -1,4 +1,4 @@
-const URL = 'http://34.89.93.186:8080/';
+const URL = 'http://34.89.93.186:8080/apiv1/';
 /*
 class apiCaller {
 
@@ -25,7 +25,7 @@ class apiCaller {
 export const userRegister = async(username, password) => {
     
     try {
-    const endpoint = `${URL}apiv1/register`;
+    const endpoint = `${URL}register`;
     const response = await fetch (endpoint, {
         method: 'POST',
         body: JSON.stringify({
@@ -51,7 +51,7 @@ export const userRegister = async(username, password) => {
 export const userLogin = async(username, password) => {
     
     try {
-    const endpoint = `${URL}apiv1/login`;
+    const endpoint = `${URL}login`;
     const response = await fetch (endpoint, {
         method: 'POST',
         body: JSON.stringify({
@@ -78,7 +78,7 @@ export const userLogin = async(username, password) => {
 export const fetchAds = async(query) => {
     
     try {
-    const endpoint = `${URL}apiv1/anuncios?${query ? query : ""}`;
+    const endpoint = `${URL}/anuncios?${query ? query : ""}?`;
     const response = await fetch (endpoint, {
         method: 'GET',
         credentials: 'include',
