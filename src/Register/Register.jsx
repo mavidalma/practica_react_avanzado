@@ -23,12 +23,9 @@ export default class Register extends Component {
     submitForm = async event => {
         event.preventDefault();
         console.log(this.state.username, this.state.password)
-        const response = await userRegister(this.state.username, this.state.password); //response = true or false (si está creado o no)
-
-        const {match} = Router;
-        /*
-        if response => navega a "/home"
-        */
+        const response = await userRegister(this.state.username, this.state.password);
+ 
+        response ? this.props.history.push("/login") : console.log("error registering")
     }
     
     render() {
@@ -54,8 +51,7 @@ export default class Register extends Component {
                             placeholder="username"
                             value={this.state.username}
                             onChange={this.typeOnInput} 
-                            required>
-                        </input>
+                            required/>
 					    <label for="password" className="form-label"> password </label>
                         <input name="password" 
                                id="password" 
@@ -63,8 +59,7 @@ export default class Register extends Component {
                                type="password" 
                                placeholder="password"
                                onChange={this.typeOnInput}  
-                               required>    
-                        </input>
+                               required />    
 					    <button type="submit">Submit</button>
 				    </form>
                 </div>
