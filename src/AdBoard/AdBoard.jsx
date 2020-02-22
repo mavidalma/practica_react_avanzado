@@ -4,9 +4,7 @@ import './AdBoard.css';
 import styled, { css } from 'styled-components'
 //import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
 
-
-const constructing = {}
-
+const array = [];
 
 export default class AdBoard extends Component {
 
@@ -18,8 +16,9 @@ export default class AdBoard extends Component {
             params: {
                 name:"",
                 minPrice: 0,
-                maxPrice: 100000,
+                maxPrice: 1000000,
                 venta:true,
+                tag:"",
             }
         }
     }
@@ -47,28 +46,30 @@ export default class AdBoard extends Component {
         this.getAds();
     }
 
-    handleSubmit = () => {
-        console.log('submit!')
-    }
+
     handleChange = event => {
         const value = event.target.value;
         const name = event.target.name;
-        console.log(value);
-        console.log(name)
         this.setState({
             params:{...this.state.params, [name]: value}
         })
     }
 
-    sendQuery=()=>{
-        console.log("DO SOMETHING")
+    sendQuery=event=>{
+        event.preventDefault();
+        const queryParams =`name=${this.state.params.name}&price=${this.state.params.minPrice}-${this.state.params.maxPrice}&venta=${this.state.params.venta}&tag=${this.state.params.tag}`;
+        array.push(queryParams);
+        this.setState({query: queryParams});
+        this.props.history.push(`/anuncios/${queryParams}`);
+
     }
 
     render() {
-       // console.log(this.state.data)
-        console.log(this.state.query)
+        console.log(this.state.data)
         console.log(this.state.params)
-
+        console.log(this.props.match.params)
+        console.log(this.props.match.path)
+        console.log(array)
 
 
         return (
@@ -79,14 +80,14 @@ export default class AdBoard extends Component {
                         placeholder="type your search"
                         name="name"
                         onChange={this.handleChange} />
-                    <label for="name">See what you've got</label>
+                    <label htmlfor="name">See what you've got</label>
 
                     <div>
                         <label for="min-price">min price</label>
                         <input type="number"
                             onChange={this.handleChange}
                             name="minPrice" />
-                        <label for="max-price">min price</label>
+                        <label htmlfor="max-price">min price</label>
                         <input type="number"
                             onChange={this.handleChange}
                             name="maxPrice" />
@@ -117,9 +118,10 @@ export default class AdBoard extends Component {
                     )
                 })}
                 </div>
+                { /*   <Route path={`anuncios/:query`} component={Adboard query={this.state.query}}/> */}
             </div>
 
-
+        
         )
     }
 }
