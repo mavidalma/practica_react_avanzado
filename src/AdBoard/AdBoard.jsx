@@ -4,7 +4,6 @@ import './AdBoard.css';
 import styled, { css } from 'styled-components'
 //import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
 
-const array = [];
 
 export default class AdBoard extends Component {
 
@@ -23,8 +22,8 @@ export default class AdBoard extends Component {
         }
     }
 
-    getAds = () => {
-        fetchAds(this.state.query)
+    getAds = (query) => {
+        fetchAds(query)
             .then(data => this.setState({ data: data }));
 
     }
@@ -42,9 +41,9 @@ export default class AdBoard extends Component {
             this.getAds();
         }*/
 
-    componentDidMount() {
-        this.getAds();
-    }
+        componentWillMount() {
+            this.getAds(this.state.query)
+        }
 
 
     handleChange = event => {
@@ -55,39 +54,40 @@ export default class AdBoard extends Component {
         })
     }
 
-    sendQuery=event=>{
+    sendQuery = event => {
         event.preventDefault();
-        const queryParams =`name=${this.state.params.name}&price=${this.state.params.minPrice}-${this.state.params.maxPrice}&venta=${this.state.params.venta}&tag=${this.state.params.tag}`;
-        array.push(queryParams);
+
+        let queryParams =`price=${this.state.params.minPrice}-${this.state.params.maxPrice}&venta=${this.state.params.venta}`;
+        if(this.state.params.name) {queryParams = queryParams + `&name=${this.state.params.name}`}
+    
         this.setState({query: queryParams});
-        this.props.history.push(`/anuncios/${queryParams}`);
+        this.props.history.push(`/anuncios?${queryParams}`);
+
+        this.getAds(queryParams);
+
 
     }
 
     render() {
         console.log(this.state.data)
-        console.log(this.state.params)
-        console.log(this.props.match.params)
-        console.log(this.props.match.path)
-        console.log(array)
-
+        console.log(this.state.query)
 
         return (
-            // <FilterBar data={this.state.data}/> --> componente de filtro
+            // <FilterBar data={this.state.data}/> --> convertirlo en componente de filtro
             <div>
                 <form onSubmit={this.sendQuery}>
                     <input type="text"
                         placeholder="type your search"
                         name="name"
                         onChange={this.handleChange} />
-                    <label htmlfor="name">See what you've got</label>
+                    <label htmlFor="name">See what you've got</label>
 
                     <div>
-                        <label for="min-price">min price</label>
+                        <label htmlFor="min-price">min price</label>
                         <input type="number"
                             onChange={this.handleChange}
                             name="minPrice" />
-                        <label htmlfor="max-price">min price</label>
+                        <label htmlFor="max-price">min price</label>
                         <input type="number"
                             onChange={this.handleChange}
                             name="maxPrice" />
@@ -95,7 +95,7 @@ export default class AdBoard extends Component {
                     <select name="venta"
                             onChange={this.handleChange}>
 
-                        <option value="true" selected>Venta</option>
+                        <option value="true" defaultValue>Venta</option>
                         <option value="false">Compra</option>
                     </select>
                 
@@ -104,7 +104,7 @@ export default class AdBoard extends Component {
                 </form>
 
                 <div className="ads-wall">{this.state.data.map(card => {
-                    return (
+                    return ( //turn this into conditional rendering, either this component or "NO ITEMS"
                         <div key={card._id}
                             className="card-container"
                             onClick={this.handleClick}>
@@ -121,7 +121,6 @@ export default class AdBoard extends Component {
                 { /*   <Route path={`anuncios/:query`} component={Adboard query={this.state.query}}/> */}
             </div>
 
-        
         )
     }
 }
