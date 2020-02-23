@@ -78,7 +78,7 @@ export const userLogin = async(username, password) => {
 export const fetchAds = async(query) => {
     
     try {
-    const endpoint = `${URL}/anuncios?${query ? `name:${query}` : ""}`;
+    const endpoint = `${URL}/anuncios?${query}`;
     console.log('endpoint=', endpoint);
     const response = await fetch (endpoint, {
         method: 'GET',
