@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { fetchSingleAd } from '../api_caller';
 import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
+import ReactImageFallback from "react-image-fallback";
 import './detail.css';
+import fallbackPic from '../resources/img-not-found.png'
 
 export default class adDetail extends Component {
     constructor(props){
@@ -31,6 +33,7 @@ export default class adDetail extends Component {
                         <p>{data.price}€</p>
                         <p>description: {data.description}</p>
                         <p>type: {data.type}</p>
+                        <ReactImageFallback src={data.photo} fallbackImage = {fallbackPic} className="image" />
             </div>
             </>
         )
