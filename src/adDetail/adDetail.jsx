@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { fetchSingleAd } from '../api_caller';
 import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
+import './detail.css';
 
 export default class adDetail extends Component {
     constructor(props){
@@ -21,11 +22,17 @@ export default class adDetail extends Component {
         }
 
     render() {
-
+        console.log(this.state.data)
+        const data = this.state.data;
         return (
-            <div>
-                <h1>hello!</h1>
+            <>
+            <Link to={`/anuncios/`}><p>Return to Ad Board</p></Link>
+            <div className="ad">
+                        <p>{data.price}€</p>
+                        <p>description: {data.description}</p>
+                        <p>type: {data.type}</p>
             </div>
+            </>
         )
     }
 }

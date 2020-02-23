@@ -10,13 +10,13 @@ export default class AdBoard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            query: "",
+            query: sessionStorage.getItem('search'),
             data: [],
             params: {
-                name:"",
-                minPrice: 0,
-                maxPrice: 1000000,
-                venta:true,
+                name: sessionStorage.getItem('name'),
+                minPrice: sessionStorage.getItem('minPrice'),
+                maxPrice: sessionStorage.getItem('maxPrice') === 0 ? 100000 : sessionStorage.getItem('maxPrice'),
+                venta: sessionStorage.getItem('venta'),
                 tag:"",
             }
         }
@@ -39,6 +39,7 @@ export default class AdBoard extends Component {
         this.setState({
             params:{...this.state.params, [name]: value}
         })
+        sessionStorage.setItem(name,value);
     }
 
     sendQuery = event => {
@@ -49,6 +50,7 @@ export default class AdBoard extends Component {
     
         this.setState({query: queryParams});
         this.props.history.push(`/anuncios?${queryParams}`);
+        sessionStorage.setItem("search", queryParams);
 
         this.getAds(queryParams);
 
@@ -57,12 +59,15 @@ export default class AdBoard extends Component {
 
     render() {
 
+        console.log(this.state.params)
+
         return (
             // <FilterBar data={this.state.data}/> --> convertirlo en componente de filtro
             <div>
                 <form onSubmit={this.sendQuery}>
                     <input type="text"
-                        placeholder="type your search"
+                        placeholder="insert item"
+                        value= {this.state.params.name}
                         name="name"
                         onChange={this.handleChange} />
                     <label htmlFor="name">See what you've got</label>
@@ -71,14 +76,17 @@ export default class AdBoard extends Component {
                         <label htmlFor="min-price">min price</label>
                         <input type="number"
                             onChange={this.handleChange}
-                            name="minPrice" />
-                        <label htmlFor="max-price">min price</label>
+                            name="minPrice" 
+                            value = {sessionStorage.getItem("minPrice")}/>
+                        <label htmlFor="max-price">max price</label>
                         <input type="number"
                             onChange={this.handleChange}
-                            name="maxPrice" />
+                            name="maxPrice" 
+                            value= {sessionStorage.getItem("maxPrice")}/>
                     </div>
                     <select name="venta"
-                            onChange={this.handleChange}>
+                            onChange={this.handleChange}
+                            value={sessionStorage.getItem("venta")}>
 
                         <option value="true" defaultValue>Venta</option>
                         <option value="false">Compra</option>
