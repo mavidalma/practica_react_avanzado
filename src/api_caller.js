@@ -115,3 +115,24 @@ export const fetchSingleAd = async(query) => {
     throw new Error;
   }
 }
+
+export const getTags = async() => {
+
+    try {
+        const endpoint = `${URL}/tags`;
+
+        const response = await fetch (endpoint, {
+            method: 'GET',
+            credentials: 'include',
+            });
+        
+        const data = await response.json();
+        const results = data.results;
+        return results;
+    
+    } catch (err) {
+        console.log(err);
+        throw new Error;
+    }
+
+}

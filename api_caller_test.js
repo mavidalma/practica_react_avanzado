@@ -97,11 +97,34 @@ class apiCaller {
   }
 }
 
+const getTags = async() => {
+
+    try {
+        const endpoint = `${URL}/tags`;
+        console.log('endpoint=', endpoint);
+        const response = await fetch (endpoint, {
+            method: 'GET',
+            credentials: 'include',
+            });
+        
+        const data = await response.json();
+        const results = data.results;
+        console.log(results)
+
+        return results;
+    } catch (err) {
+        console.log(err);
+        throw new Error;
+    }
+
+}
+
 
 const showAds = async() => {
     //await userRegister("mario", "password")
     await userLogin("react3", "react3");
     await fetchAds("price=1-600&venta=true");
+    await getTags()
 }
 /*
 userLogin("test8", "pass2");

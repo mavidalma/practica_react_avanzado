@@ -59,8 +59,6 @@ export default class AdBoard extends Component {
 
     render() {
 
-        console.log(this.state.params)
-
         return (
             // <FilterBar data={this.state.data}/> --> convertirlo en componente de filtro
             <div>
@@ -98,14 +96,11 @@ export default class AdBoard extends Component {
 
                 <div className="ads-wall">{this.state.data.map(card => {
                     return ( //turn this into conditional rendering, either this component or "NO ITEMS"
-                        <div key={card._id}
-                            className="card-container"
-                            onClick={this.handleClick}>
+                        <div key={card._id} className="card-container">
                             <Link to={`/anuncios/${card._id}`}><h2>{card.name}</h2></Link>
                             <p>{card.price}€</p>
                             <p>description: {card.description}</p>
                             <p>type: {card.type}</p>
-
                         </div>
 
                     )
