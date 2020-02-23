@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { fetchAds } from '../api_caller';
 import './AdBoard.css';
-import styled, { css } from 'styled-components'
-//import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
+import adDetail from '../adDetail/adDetail';
 
 
 export default class AdBoard extends Component {
@@ -27,23 +27,10 @@ export default class AdBoard extends Component {
             .then(data => this.setState({ data: data }));
 
     }
-    /*
-        componentDidMount() {
-            //esto para cuando tenga que hacer queryparams
-            console.log(this.state.query)
-            this.setState({
-                query: this.props.match.path
-            });
-      
-            console.log(this.props.match.path)
-            console.log(this.state.query)
-    
-            this.getAds();
-        }*/
 
-        componentWillMount() {
-            this.getAds(this.state.query)
-        }
+    componentWillMount() {
+        this.getAds(this.state.query)
+    }
 
 
     handleChange = event => {
@@ -69,8 +56,6 @@ export default class AdBoard extends Component {
     }
 
     render() {
-        console.log(this.state.data)
-        console.log(this.state.query)
 
         return (
             // <FilterBar data={this.state.data}/> --> convertirlo en componente de filtro
@@ -108,7 +93,7 @@ export default class AdBoard extends Component {
                         <div key={card._id}
                             className="card-container"
                             onClick={this.handleClick}>
-                            <h2>{card.name}</h2>
+                            <Link to={`/anuncios/${card._id}`}><h2>{card.name}</h2></Link>
                             <p>{card.price}€</p>
                             <p>description: {card.description}</p>
                             <p>type: {card.type}</p>
@@ -118,7 +103,7 @@ export default class AdBoard extends Component {
                     )
                 })}
                 </div>
-                { /*   <Route path={`anuncios/:query`} component={Adboard query={this.state.query}}/> */}
+               {/* <Route path={`/anuncios/:id`} component={adDetail}/> */}
             </div>
 
         )

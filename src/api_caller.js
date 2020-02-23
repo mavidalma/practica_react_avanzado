@@ -78,7 +78,7 @@ export const userLogin = async(username, password) => {
 export const fetchAds = async(query) => {
     
     try {
-    const endpoint = `${URL}/anuncios?${query}`;
+    const endpoint = `${URL}anuncios?${query}`;
     console.log('endpoint=', endpoint);
     const response = await fetch (endpoint, {
         method: 'GET',
@@ -89,6 +89,26 @@ export const fetchAds = async(query) => {
     const results = data.results;
 
     return results;
+
+} catch (err) {
+    console.log(err);
+    throw new Error;
+  }
+}
+
+export const fetchSingleAd = async(query) => {
+    
+    try {
+    const endpoint = `${URL}anuncios/${query}`;
+    console.log('endpoint=', endpoint);
+    const response = await fetch (endpoint, {
+        method: 'GET',
+        credentials: 'include',
+        });
+    
+    const data = await response.json();
+    const result = data.result;
+    return result;
 
 } catch (err) {
     console.log(err);

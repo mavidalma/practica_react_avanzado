@@ -41,7 +41,7 @@ export default class Login extends Component {
                     className="register"
                     onSubmit={this.submitForm}>
 					    <h2> LOGIN </h2>
-					    <label for="username" className="form-label"> Username </label>
+					    <label htmlFor="username" className="form-label"> Username </label>
                         <input 
                             name="username" 
                             id="username" 
@@ -52,7 +52,7 @@ export default class Login extends Component {
                             onChange={this.typeOnInput} 
                             required>
                         </input>
-					    <label for="password" className="form-label"> password </label>
+					    <label htmlFor="password" className="form-label"> password </label>
                         <input name="password" 
                                id="password" 
                                className="password form-input" 
