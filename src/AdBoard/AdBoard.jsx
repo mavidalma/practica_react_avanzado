@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { fetchAds } from '../api_caller';
+import { fetchAds, getTags } from '../api_caller';
 import './AdBoard.css';
 import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
 import adDetail from '../adDetail/adDetail';
+//import {Tags} from './Tags/Tags'
 
 
 export default class AdBoard extends Component {
@@ -10,15 +11,16 @@ export default class AdBoard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            query: sessionStorage.getItem('search'),
+            query: sessionStorage.getItem('search') ? sessionStorage.getItem('search') : "",
             data: [],
             params: {
                 name: sessionStorage.getItem('name'),
-                minPrice: sessionStorage.getItem('minPrice'),
-                maxPrice: sessionStorage.getItem('maxPrice') === 0 ? 100000 : sessionStorage.getItem('maxPrice'),
+                minPrice: sessionStorage.getItem('minPrice') ? sessionStorage.getItem('minPrice') : 0,
+                maxPrice: sessionStorage.getItem('maxPrice') ? sessionStorage.getItem('maxPrice') : 100000,
                 venta: sessionStorage.getItem('venta'),
-                tag:"",
-            }
+                tag: sessionStorage.getItem('tag'),
+            },
+            tags: [],
         }
     }
 
@@ -28,8 +30,16 @@ export default class AdBoard extends Component {
 
     }
 
+    getTags = () => {
+        getTags()
+            .then(data => this.setState({ tags: data }));
+        //.then(data => this.setState({ params: { ...this.state.params, tags: data }}))
+    }
+
+
     componentWillMount() {
-        this.getAds(this.state.query)
+        this.getAds(this.state.query);
+        this.getTags();
     }
 
 
@@ -37,24 +47,36 @@ export default class AdBoard extends Component {
         const value = event.target.value;
         const name = event.target.name;
         this.setState({
-            params:{...this.state.params, [name]: value}
+            params: { ...this.state.params, [name]: value }
         })
-        sessionStorage.setItem(name,value);
+        sessionStorage.setItem(name, value);
     }
 
     sendQuery = event => {
         event.preventDefault();
 
-        let queryParams =`price=${this.state.params.minPrice}-${this.state.params.maxPrice}&venta=${this.state.params.venta}`;
-        if(this.state.params.name) {queryParams = queryParams + `&name=${this.state.params.name}`}
-    
-        this.setState({query: queryParams});
+        let queryParams = `price=${this.state.params.minPrice}-${this.state.params.maxPrice}`;
+        if (this.state.params.name) { queryParams = queryParams + `&name=${this.state.params.name}` }
+        if (this.state.params.tag) { queryParams = queryParams + `&tag=${this.state.params.tag}` }
+        if (this.state.params.venta) { queryParams = queryParams + `&venta=${this.state.params.venta}` }
+
+        this.setState({ query: queryParams });
         this.props.history.push(`/anuncios?${queryParams}`);
         sessionStorage.setItem("search", queryParams);
 
         this.getAds(queryParams);
+    }
 
-
+    clearFilter = () => {
+        this.setState({
+            params: { ...this.state.params,
+                name: "",
+                minPrice: 0,
+                maxPrice: 100000,
+                venta: "",
+                tag: "",
+            }
+        })
     }
 
     render() {
@@ -65,7 +87,7 @@ export default class AdBoard extends Component {
                 <form onSubmit={this.sendQuery}>
                     <input type="text"
                         placeholder="insert item"
-                        value= {this.state.params.name}
+                        value={this.state.params.name}
                         name="name"
                         onChange={this.handleChange} />
                     <label htmlFor="name">See what you've got</label>
@@ -74,22 +96,36 @@ export default class AdBoard extends Component {
                         <label htmlFor="min-price">min price</label>
                         <input type="number"
                             onChange={this.handleChange}
-                            name="minPrice" 
-                            value = {sessionStorage.getItem("minPrice")}/>
+                            name="minPrice"
+                            value={this.state.params.minPrice} />
                         <label htmlFor="max-price">max price</label>
                         <input type="number"
                             onChange={this.handleChange}
-                            name="maxPrice" 
-                            value= {sessionStorage.getItem("maxPrice")}/>
+                            name="maxPrice"
+                            value={this.state.params.maxPrice} />
                     </div>
                     <select name="venta"
-                            onChange={this.handleChange}
-                            value={sessionStorage.getItem("venta")}>
-
-                        <option value="true" defaultValue>Venta</option>
+                        onChange={this.handleChange}
+                        value={this.state.params.venta}>
+                        <option value="" defaultValue>Todos</option>
+                        <option value="true" >Venta</option>
                         <option value="false">Compra</option>
                     </select>
-                
+                    <select name="tag"
+                        onChange={this.handleChange}
+                        value={this.state.params.tag}> Filter by Tags
+                        {this.state.tags.map(item => {
+                            if (item !== null) {
+                                return (
+                                    <option value={item}>{item}</option>
+                                )
+                            } else {
+                                return <option value="">All</option>
+                            }
+                        })}
+
+                    </select>
+                    <button onClick={this.clearFilter}> Clear</button>
                     <button type="submit">SEND</button>
 
                 </form>
@@ -106,7 +142,7 @@ export default class AdBoard extends Component {
                     )
                 })}
                 </div>
-               {/* <Route path={`/anuncios/:id`} component={adDetail}/> */}
+                {/* <Route path={`/anuncios/:id`} component={adDetail}/> */}
             </div>
 
         )
