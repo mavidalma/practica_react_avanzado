@@ -136,3 +136,38 @@ export const getTags = async() => {
     }
 
 }
+
+export const createAdvertisement = async(name, price, description, tags, type, photo) => {
+    
+    try {
+    const endpoint = `${URL}anuncios`;
+    const response = await fetch (endpoint, {
+        method: 'POST',
+        body: JSON.stringify({
+            'name': name,
+            'price': price,
+            'description': description,
+            'tags': tags,
+            'type': type,
+            'photo': photo
+        }),
+        headers: {
+            'content-type': 'application/json'
+        },
+        credentials: 'include',
+    });
+    
+    const data = await response.json();
+    const hasposted = data.success;
+
+    console.log(hasposted)
+    
+    hasposted ? window.alert("usuario correctamente logueado") : window.alert('error posting');
+
+    return hasposted;
+
+} catch (err) {
+    console.log(err);
+    throw new Error;
+  }
+}

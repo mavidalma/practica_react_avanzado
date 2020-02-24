@@ -100,7 +100,7 @@ class apiCaller {
 const getTags = async() => {
 
     try {
-        const endpoint = `${URL}/tags`;
+        const endpoint = `${URL}tags`;
         console.log('endpoint=', endpoint);
         const response = await fetch (endpoint, {
             method: 'GET',
@@ -119,12 +119,48 @@ const getTags = async() => {
 
 }
 
+const createAdvertisement = async(name, price, description, tags, type, photo) => {
+    
+    try {
+    const endpoint = `${URL}anuncios`;
+    const response = await fetch (endpoint, {
+        method: 'POST',
+        body: JSON.stringify({
+            'name': name,
+            'price': price,
+            'decription': description,
+            'tags': tags,
+            'type': type,
+            'photo': photo
+        }),
+        headers: {
+            'content-type': 'application/json'
+        },
+        credentials: 'include',
+    });
+    
+    const data = await response.json();
+    const hasposted = data.success;
+
+    console.log(hasposted)
+    
+    hasposted ? window.alert("usuario correctamente logueado") : window.alert('error posting');
+
+    return hasposted;
+
+} catch (err) {
+    console.log(err);
+    throw new Error;
+  }
+}
+
 
 const showAds = async() => {
     //await userRegister("mario", "password")
     await userLogin("react3", "react3");
     await fetchAds("price=1-600&venta=true");
     await getTags()
+    await createAdvertisement ("name", 120, "description", ["work", "motor"], "buy", "http://www.picture.com")
 }
 /*
 userLogin("test8", "pass2");

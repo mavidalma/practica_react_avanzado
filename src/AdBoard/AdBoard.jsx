@@ -36,12 +36,10 @@ export default class AdBoard extends Component {
         //.then(data => this.setState({ params: { ...this.state.params, tags: data }}))
     }
 
-
     componentWillMount() {
         this.getAds(this.state.query);
         this.getTags();
     }
-
 
     handleChange = event => {
         const value = event.target.value;
@@ -129,6 +127,7 @@ export default class AdBoard extends Component {
                     <button type="submit">SEND</button>
 
                 </form>
+                <Link to="/create"><div>Crear anuncio</div></Link>
 
                 <div className="ads-wall">{this.state.data.map(card => {
                     return ( //turn this into conditional rendering, either this component or "NO ITEMS"
