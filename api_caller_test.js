@@ -119,12 +119,45 @@ const getTags = async() => {
 
 }
 
+const editAd = async(id, name, price, description, tags, type, photo) => {
+    
+    try {
+    const endpoint = `${URL}anuncios?id=${id}`;
+    const response = await fetch (endpoint, {
+        method: 'PUT',
+        body: JSON.stringify({
+            'name': name,
+            'price': price,
+            'description': description,
+            'tags': tags,
+            'type': type,
+            'photo': photo
+        }),
+        headers: {
+            'content-type': 'application/json'
+        },
+        credentials: 'include',
+    });
+    
+    const data = await response.json();
+    const hasChanged = data.success;
+    hasChanged ? window.alert("ad correctly updated") : window.alert('edit failed')
+    return hasChanged;
+
+
+} catch (err) {
+    console.log(err);
+    throw new Error;
+  }
+}
+
 
 const showAds = async() => {
     //await userRegister("mario", "password")
     await userLogin("react3", "react3");
     await fetchAds("price=1-600&venta=true");
     await getTags()
+    await editAd('5e43096e99660405061db854',"name", 45, "changing the description", ['work'], "sell", "http://www.pics.com" )
 }
 /*
 userLogin("test8", "pass2");
