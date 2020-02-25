@@ -158,13 +158,43 @@ export const createAdvertisement = async(name, price, description, tags, type, p
     });
     
     const data = await response.json();
+
     const hasposted = data.success;
 
     console.log(hasposted)
     
     hasposted ? window.alert("ad correctly created") : window.alert('error creating ad, please check the info provided');
-
     return hasposted;
+} catch (err) {
+    console.log(err);
+    throw new Error;
+  }
+}
+
+export const editAd = async(id, name, price, description, tags, type, photo) => {
+    
+    try {
+    const endpoint = `${URL}anuncios/${id}`;
+    const response = await fetch (endpoint, {
+        method: 'PUT',
+        body: JSON.stringify({
+            'name': name,
+            'price': price,
+            'description': description,
+            'tags': tags,
+            'type': type,
+            'photo': photo
+        }),
+        headers: {
+            'content-type': 'application/json'
+        },
+        credentials: 'include',
+    });
+    
+    const data = await response.json();
+    const hasChanged = data.success;
+    hasChanged ? window.alert("ad correctly updated") : window.alert('edit failed')
+    return hasChanged;
 
 } catch (err) {
     console.log(err);

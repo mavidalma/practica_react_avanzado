@@ -4,12 +4,14 @@ import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-
 import ReactImageFallback from "react-image-fallback";
 import './detail.css';
 import fallbackPic from '../resources/img-not-found.png'
+import EditAd from './EditAd/EditAd';
 
 export default class adDetail extends Component {
     constructor(props){
         super(props);
         this.state = {
             data: [],
+            editMode: false,
         }
     }
 
@@ -27,6 +29,7 @@ export default class adDetail extends Component {
         console.log(this.state.data)
         const data = this.state.data;
         return (
+            // Meter un conditional render según editmode sea true or false
             <>
             <Link to={`/anuncios/`}><p>Return to Ad Board</p></Link>
             <div className="ad">
@@ -35,6 +38,7 @@ export default class adDetail extends Component {
                         <p>type: {data.type}</p>
                         <ReactImageFallback src={data.photo} fallbackImage = {fallbackPic} className="image" />
             </div>
+            <EditAd ad={this.state.data} method={this.getAd}/>
             </>
         )
     }
