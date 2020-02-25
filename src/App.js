@@ -9,6 +9,13 @@ import CreateAd from './CreateAd/CreateAd';
 
 function App() {
   return (
+
+    /* error Boundary --> 
+    {
+      success: false
+      error: "Error: User not found"
+    }
+    */
     <Router>
       <Switch>
       <Route exact path="/anuncios" component = {AdBoard} />

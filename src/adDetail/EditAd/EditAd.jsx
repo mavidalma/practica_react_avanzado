@@ -31,7 +31,9 @@ export default class EditAd extends Component {
             this.state.photo)
             .then(data => console.log(data));
             
-      //  this.props.method.getAd(this.props.match.params.id);   
+        this.props.props.history.push(`${this.props.ad._id}`);   
+        this.props.fetchAd(this.props.props.match.params.id)
+        this.props.closeEditor();
     }
 
     handleChange = event => {
@@ -61,6 +63,9 @@ export default class EditAd extends Component {
 
 
     render() {
+        console.log(this.props.props)
+        console.log(this.props)
+        console.log(this.props.ad._id)
 
         return(
             <form onSubmit = { this.editAd } >

@@ -7,7 +7,7 @@ import fallbackPic from '../resources/img-not-found.png'
 import EditAd from './EditAd/EditAd';
 
 export default class adDetail extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             data: [],
@@ -18,27 +18,41 @@ export default class adDetail extends Component {
     getAd = (query) => {
         fetchSingleAd(query)
             .then(data => this.setState({ data: data }));
-
     }
 
-    componentWillMount() {
-            this.getAd(this.props.match.params.id)
-        }
+    componentDidMount() {
+        this.getAd(this.props.match.params.id)
+    }
+    switchEditMode = () => {
+        const mode = !this.state.editMode;
+
+        this.setState({
+            editMode: mode,
+        });
+
+        this.componentDidMount();
+    }
 
     render() {
         console.log(this.state.data)
+
         const data = this.state.data;
         return (
             // Meter un conditional render según editmode sea true or false
             <>
-            <Link to={`/anuncios/`}><p>Return to Ad Board</p></Link>
-            <div className="ad">
-                        <p>{data.price}€</p>
-                        <p>description: {data.description}</p>
-                        <p>type: {data.type}</p>
-                        <ReactImageFallback src={data.photo} fallbackImage = {fallbackPic} className="image" />
-            </div>
-            <EditAd ad={this.state.data} method={this.getAd}/>
+                <Link to={`/anuncios/`}><p>Return to Ad Board</p></Link>
+                <div className="ad">
+                    <p>{data.price}€</p>
+                    <p>description: {data.description}</p>
+                    <p>type: {data.type}</p>
+                    <ReactImageFallback src={data.photo} fallbackImage={fallbackPic} className="image" />
+                </div>
+                <button onClick={this.switchEditMode}> Edit Ad </button>
+                {this.state.editMode ? <EditAd ad={this.state.data}
+                    closeEditor={this.switchEditMode}
+                    fetchAd={this.getAd}
+                    props={this.props} /> 
+                    : <></>}
             </>
         )
     }
