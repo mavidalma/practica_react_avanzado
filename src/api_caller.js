@@ -162,7 +162,7 @@ export const createAdvertisement = async(name, price, description, tags, type, p
 
     console.log(hasposted)
     
-    hasposted ? window.alert("usuario correctamente logueado") : window.alert('error posting');
+    hasposted ? window.alert("ad correctly created") : window.alert('error creating ad, please check the info provided');
 
     return hasposted;
 
