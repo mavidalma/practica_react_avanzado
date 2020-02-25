@@ -119,7 +119,6 @@ const getTags = async() => {
 
 }
 
-<<<<<<< HEAD
 const createAdvertisement = async(name, price, description, tags, type, photo) => {
     
     try {
@@ -148,14 +147,17 @@ const createAdvertisement = async(name, price, description, tags, type, photo) =
 
     return hasposted;
 
-    }
+    } catch (err) {
+    console.log(err);
+    throw new Error;
+  }
 }
 
 
 const editAd = async(id, name, price, description, tags, type, photo) => {
     
     try {
-    const endpoint = `${URL}anuncios?id=${id}`;
+    const endpoint = `${URL}anuncios/${id}`;
     const response = await fetch (endpoint, {
         method: 'PUT',
         body: JSON.stringify({
@@ -177,8 +179,6 @@ const editAd = async(id, name, price, description, tags, type, photo) => {
     hasChanged ? window.alert("ad correctly updated") : window.alert('edit failed')
     return hasChanged;
 
->>>>>>> db009eee56903f1671e33e6279115641cbbf9f9c
-
 } catch (err) {
     console.log(err);
     throw new Error;
@@ -191,7 +191,7 @@ const showAds = async() => {
     await userLogin("react3", "react3");
     await fetchAds("price=1-600&venta=true");
     await getTags()
-    await editAd('5e43096e99660405061db854',"name", 45, "changing the description", ['work'], "sell", "http://www.pics.com" )
+    await editAd('5e54fb183976de16b4d343e4',"name changed", 45, "changing the description", ['work'], "sell", "http://www.pics.com" )
 
 }
 
