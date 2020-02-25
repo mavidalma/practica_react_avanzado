@@ -38,7 +38,7 @@ export default class adDetail extends Component {
                         <p>type: {data.type}</p>
                         <ReactImageFallback src={data.photo} fallbackImage = {fallbackPic} className="image" />
             </div>
-            <EditAd ad={this.state.data} />
+            <EditAd ad={this.state.data} method={this.getAd}/>
             </>
         )
     }

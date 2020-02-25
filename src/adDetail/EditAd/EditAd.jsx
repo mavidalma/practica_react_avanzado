@@ -22,7 +22,7 @@ export default class EditAd extends Component {
         event.preventDefault();
 
         editAd(
-            this.props.data._id,
+            this.props.ad._id,
             this.state.name,
             this.state.price,
             this.state.description,
@@ -30,6 +30,8 @@ export default class EditAd extends Component {
             this.state.type,
             this.state.photo)
             .then(data => console.log(data));
+            
+      //  this.props.method.getAd(this.props.match.params.id);   
     }
 
     handleChange = event => {
@@ -48,22 +50,20 @@ export default class EditAd extends Component {
     componentWillMount() {
         this.getTags();
         this.setState({
-            name: this.props.name,
-            price: this.props.price,
-            description: this.props.description,
-            tags: this.props.tags,
-            type: this.props.type,
-            photo: this.props.photo,
+            name: this.props.ad.name,
+            price: this.props.ad.price,
+            description: this.props.ad.description,
+            tags: this.props.ad.tags,
+            type: this.props.ad.type,
+            photo: this.props.ad.photo,
         })
     }
 
 
     render() {
 
-            console.log(this.state)
-
         return(
-            <form onSubmit = { this.sendAd } >
+            <form onSubmit = { this.editAd } >
                     <label htmlFor="name">Ad name</label>
                     <input type='text'
                         name="name"
