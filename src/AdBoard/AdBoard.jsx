@@ -36,6 +36,10 @@ export default class AdBoard extends Component {
         //.then(data => this.setState({ params: { ...this.state.params, tags: data }}))
     }
 
+    getMaxPrice (data) {
+        return data.map(item => item.price).reduce((previous, current) => (current > previous) ? current : previous)
+    }
+
     componentWillMount() {
         this.getAds(this.state.query);
         this.getTags();
@@ -54,11 +58,12 @@ export default class AdBoard extends Component {
         event.preventDefault();
 
         let queryParams = `price=${this.state.params.minPrice}-${this.state.params.maxPrice}`;
+
         if (this.state.params.name) { queryParams = queryParams + `&name=${this.state.params.name}` }
         if (this.state.params.tag) { queryParams = queryParams + `&tag=${this.state.params.tag}` }
         if (this.state.params.venta) { queryParams = queryParams + `&venta=${this.state.params.venta}` }
 
-        this.setState({ query: queryParams });
+        //this.setState({ query: queryParams });
         this.props.history.push(`/anuncios?${queryParams}`);
         sessionStorage.setItem("search", queryParams);
 
@@ -75,9 +80,13 @@ export default class AdBoard extends Component {
                 tag: "",
             }
         })
+        Object.keys(sessionStorage).forEach(key => sessionStorage.removeItem(key));
     }
 
     render() {
+     //  (this.state.data.length > 0) ? console.log(this.getMaxPrice(this.state.data)) : console.log("no data")
+
+
 
         return (
             // <FilterBar data={this.state.data}/> --> convertirlo en componente de filtro
@@ -123,10 +132,10 @@ export default class AdBoard extends Component {
                         })}
 
                     </select>
-                    <button onClick={this.clearFilter}> Clear</button>
                     <button type="submit">SEND</button>
-
+                    <button onClick={this.clearFilter}> Clear</button>
                 </form>
+                
                 <Link to="/create"><div>Crear anuncio</div></Link>
 
                 <div className="ads-wall">{this.state.data.map(card => {

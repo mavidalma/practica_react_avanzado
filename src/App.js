@@ -6,27 +6,24 @@ import Login from './Login/Login';
 import AdBoard from './AdBoard/AdBoard';
 import adDetail from './adDetail/adDetail';
 import CreateAd from './CreateAd/CreateAd';
+import ErrorLogin from './ErrorLogin/ErrorLogin.js'
 
 function App() {
   return (
 
-    /* error Boundary --> 
-    {
-      success: false
-      error: "Error: User not found"
-    }
-    */
-    <Router>
-      <Switch>
-      <Route exact path="/anuncios" component = {AdBoard} />
-      <Route path={`/anuncios/:id`} component = {adDetail} />
-      <Route path="/create" component = {CreateAd} />
-      <Route path="/login" component = {Login} />
-      <Route path="/register" component = {Register} />
-      <Redirect to="/login" />
-      </Switch>
-      
-    </Router>
+    <ErrorLogin>
+      <Router>
+        <Switch>
+          <Route exact path="/anuncios" component={AdBoard} />
+          <Route path={`/anuncios/:id`} component={adDetail} />
+          <Route path="/create" component={CreateAd} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Redirect to="/login" />
+        </Switch>
+
+      </Router>
+    </ErrorLogin>
   );
 }
 

@@ -5,6 +5,7 @@ import ReactImageFallback from "react-image-fallback";
 import './detail.css';
 import fallbackPic from '../resources/img-not-found.png'
 import EditAd from './EditAd/EditAd';
+import AdCard from './AdCard/AdCard'
 
 export default class adDetail extends Component {
     constructor(props) {
@@ -29,8 +30,8 @@ export default class adDetail extends Component {
         this.setState({
             editMode: mode,
         });
-
         this.componentDidMount();
+        this.forceUpdate();
     }
 
     render() {
@@ -41,13 +42,10 @@ export default class adDetail extends Component {
             // Meter un conditional render según editmode sea true or false
             <>
                 <Link to={`/anuncios/`}><p>Return to Ad Board</p></Link>
-                <div className="ad">
-                    <p>{data.price}€</p>
-                    <p>description: {data.description}</p>
-                    <p>type: {data.type}</p>
-                    <ReactImageFallback src={data.photo} fallbackImage={fallbackPic} className="image" />
-                </div>
+                <AdCard data={this.state.data} />
+
                 <button onClick={this.switchEditMode}> Edit Ad </button>
+
                 {this.state.editMode ? <EditAd ad={this.state.data}
                     closeEditor={this.switchEditMode}
                     fetchAd={this.getAd}
