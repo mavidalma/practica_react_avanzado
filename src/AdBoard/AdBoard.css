@@ -6,7 +6,10 @@
     padding: 10px;
 }
 .card-container {
-    border: 2px solid black;
     min-width: 320px;
+    max-width: 600px;
     margin: 20px auto;
+}
+.card-container img {
+    max-width: 100%;
 }
