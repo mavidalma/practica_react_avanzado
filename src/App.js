@@ -13,6 +13,10 @@ function App() {
 
     <ErrorLogin>
       <Router>
+          <div>
+            <h1>anunciaLOL</h1>
+            <Link to="/login"><button>Log out</button></Link>
+          </div>
         <Switch>
           <Route exact path="/anuncios" component={AdBoard} />
           <Route path={`/anuncios/:id`} component={adDetail} />
