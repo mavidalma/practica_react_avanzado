@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { fetchSingleAd } from '../api_caller';
 import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
-import ReactImageFallback from "react-image-fallback";
 import './detail.css';
-import fallbackPic from '../resources/img-not-found.png'
 import EditAd from './EditAd/EditAd';
-import AdCard from './AdCard/AdCard'
+import AdCard from '../AdCard'
 
 export default class adDetail extends Component {
     constructor(props) {
