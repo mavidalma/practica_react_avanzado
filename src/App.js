@@ -6,7 +6,8 @@ import Login from './Login/Login';
 import AdBoard from './AdBoard/AdBoard';
 import adDetail from './adDetail/adDetail';
 import CreateAd from './CreateAd/CreateAd';
-import ErrorLogin from './ErrorLogin/ErrorLogin.js'
+import ErrorLogin from './ErrorLogin/ErrorLogin.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Router>
           <div>
             <h1>anunciaLOL</h1>
+            <Link to="/create"><div>Crear anuncio</div></Link>
             <Link to="/login"><button>Log out</button></Link>
           </div>
         <Switch>

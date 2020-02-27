@@ -28,6 +28,22 @@
   color: #61dafb;
 }
 
+/* MANUALLY ADDED */
+
+Form {
+  max-width: 500px;
+}
+
+.card .img-container{
+  max-height: 15rem;
+  overflow: hidden;
+  padding: 5px 5px;
+}
+
+.card .card-img-top {
+  max-height: 100%
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

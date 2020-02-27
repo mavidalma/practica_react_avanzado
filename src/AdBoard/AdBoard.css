@@ -1,15 +1,32 @@
+
 .ads-wall{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
     align-items: center;
     padding: 10px;
 }
 .card-container {
-    min-width: 320px;
-    max-width: 600px;
     margin: 20px auto;
+    border: 2px solid black;
+    overflow: hidden;
 }
-.card-container img {
+.card-container .ad {
+    display: flex;
+    flex-direction: row;
+    max-width: 600px;
+    min-width: 300px;
+    max-height: 300px;
+
+}
+.info {
+    width: 60%;
+}
+.image-container {
+    width: 40%;
+}
+
+.image {
     max-width: 100%;
 }

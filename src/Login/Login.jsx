@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {userLogin} from '../api_caller';
 import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
+import { Form, Button  } from 'react-bootstrap';
 
 export default class Login extends Component {
     constructor(props) {
@@ -29,14 +30,52 @@ export default class Login extends Component {
     }
     render() {
         return (
+            <>
             <div className="welcome-mssg">
 			    <div>
 				    <h1> AnunciaLOL</h1>
                     <p> Please log into your account</p>
 			    </div>
-				
-			    <div className="form-container">
-                    <form 
+                <h2> LOGIN </h2>
+            </div>
+
+            <Form id="register-form" 
+                    className="register"
+                    onSubmit={this.submitForm}>
+
+                <Form.Group controlId="formUsername">
+                    <Form.Label>User name</Form.Label>
+                        <Form.Control name="username" 
+                                        id="username" 
+                                        className="form-input" 
+                                      type="text" 
+                                      placeholder="username"
+                                      value={this.state.username}
+                                      onChange={this.typeOnInput} 
+                                      required/>
+                </Form.Group>
+
+                <Form.Group controlId="formBasicPassword">
+                     <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" 
+                                  placeholder="Password" 
+                                  name="password" 
+                                  id="password" 
+                                  className="password form-input" 
+                                  type="password" 
+                                  placeholder="password"
+                                  onChange={this.typeOnInput}  
+                                  required/>
+                </Form.Group>
+
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>
+
+
+
+                 {/*  <form 
                     id="register-form" 
                     className="register"
                     onSubmit={this.submitForm}>
@@ -62,16 +101,17 @@ export default class Login extends Component {
                                required>    
                         </input>
 					    <button type="submit">Submit</button>
-				    </form>
-                </div>
+				    </form> */} 
+
             
-                <p>Not registered yet? <button><Link to={`/register`}>Go to register</Link></button></p>
+                <p>Not registered yet? <Button variant="outline-primary"><Link to={`/register`}>Go to register</Link></Button></p>
 
 			    <div className="problem-logging">
 			        <a href="">Forgot password?</a>
 			        <a href="">Report an issue</a>
 			    </div>
-		    </div>
+
+            </>
         )
     }
 }

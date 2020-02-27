@@ -40,7 +40,6 @@ export default class AdBoard extends Component {
                           getAds={this.getAds} 
                           props={this.props}
                 />
-                <Link to="/create"><div>Crear anuncio</div></Link>
                 <div className="ads-wall">{this.state.data.map(card => {
                     return ( //turn this into conditional rendering, either this component or "NO ITEMS"
                         < div key={card._id} className="card-container">

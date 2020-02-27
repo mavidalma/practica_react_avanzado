@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { getTags } from '../../api_caller';
 import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
+import { Dropdown, DropdownButton, Form } from 'react-bootstrap'
 
 export default class AdFilter extends Component {
 
@@ -71,6 +72,27 @@ export default class AdFilter extends Component {
     render() {
 
         return (
+/*
+            <Form>
+  <Form.Group controlId="formBasicEmail">
+    <Form.Label>Email address</Form.Label>
+    <Form.Control type="email" placeholder="Enter email" />
+    <Form.Text className="text-muted">
+      We'll never share your email with anyone else.
+    </Form.Text>
+  </Form.Group>
+
+  <Form.Group controlId="formBasicPassword">
+    <Form.Label>Password</Form.Label>
+    <Form.Control type="password" placeholder="Password" />
+  </Form.Group>
+  <Form.Group controlId="formBasicCheckbox">
+    <Form.Check type="checkbox" label="Check me out" />
+  </Form.Group>
+  <Button variant="primary" type="submit">
+    Submit
+  </Button>
+</Form>*/
             <form onSubmit={this.sendQuery}>
                 <input type="text"
                     placeholder="insert item"
@@ -112,6 +134,24 @@ export default class AdFilter extends Component {
                     })}
 
                 </select>
+
+              {/*  <DropdownButton id="dropdown-basic-button" 
+                                title="Tags" 
+                                name="tag"
+                                onChange={this.handleChange}
+                                value={this.state.params.tag}>     
+                        {this.state.tags.map(item => {
+                        if (item !== null) {
+                            return (
+                                <Dropdown.Item value={item}>{item}</Dropdown.Item>
+                            )
+                        } else {
+                            return <Dropdown.Item value="">All</Dropdown.Item>
+                        }
+                    })} 
+                </DropdownButton> */} 
+
+
                 <button type="submit">SEND</button>
                 <button onClick={this.clearFilter}> Clear</button>
             </form>
