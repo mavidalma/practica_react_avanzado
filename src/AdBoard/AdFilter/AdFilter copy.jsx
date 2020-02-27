@@ -11,8 +11,8 @@ export default class AdFilter extends Component {
             query: sessionStorage.getItem('search') ? sessionStorage.getItem('search') : "",
             params: {
                 name: sessionStorage.getItem('name'),
-                minPrice: sessionStorage.getItem('minPrice') ? sessionStorage.getItem('minPrice') : 0,
-                maxPrice: sessionStorage.getItem('maxPrice') ? sessionStorage.getItem('maxPrice') : 1000000,
+                minPrice: sessionStorage.getItem('minPrice'), //? sessionStorage.getItem('minPrice') : 0,
+                maxPrice: sessionStorage.getItem('maxPrice'), //? sessionStorage.getItem('maxPrice') : 1000000,
                 venta: sessionStorage.getItem('venta'),
                 tag: sessionStorage.getItem('tag'),
             },
@@ -50,11 +50,19 @@ export default class AdFilter extends Component {
         this.props.getAds(queryParams);
     }
 
+    getTags = async() => {
+        await getTags()
+            .then(data => this.setState({ tags: data }));
+        //.then(data => this.setState({ params: { ...this.state.params, tags: data }}))
+    }
+
     componenDidMount() {
         const maxPrice = this.getMaxPrice(this.props.data);
         this.setState({
             topPrice: maxPrice,
         })
+
+        this.getTags();
     }
 
     clearFilter = () => {
@@ -73,7 +81,7 @@ export default class AdFilter extends Component {
 
     render() {
         console.log(this.props.data)
-        console.log(this.props.props)
+        console.log(this.state.topPrice)
         return (
 /*
             <Form>
@@ -97,12 +105,13 @@ export default class AdFilter extends Component {
   </Button>
 </Form>*/
             <form onSubmit={this.sendQuery}>
-                 <label htmlFor="name">See what you've got</label>
-                 <input type="text"
+                <input type="text"
                     placeholder="insert item"
                     value={this.state.params.name}
                     name="name"
                     onChange={this.handleChange} />
+                <label htmlFor="name">See what you've got</label>
+
                 <div>
                     <label htmlFor="min-price">min price</label>
                     <input type="number"
@@ -115,7 +124,6 @@ export default class AdFilter extends Component {
                         name="maxPrice"
                         value={this.state.params.maxPrice} />
                 </div>
-                <label htmlFor="venta">Type of ad</label>
                 <select name="venta"
                     onChange={this.handleChange}
                     value={this.state.params.venta}>
@@ -123,11 +131,10 @@ export default class AdFilter extends Component {
                     <option value="true" >Venta</option>
                     <option value="false">Compra</option>
                 </select>
-                <label htmlFor="tag">Tag</label>
                 <select name="tag"
                     onChange={this.handleChange}
                     value={this.state.params.tag}> Filter by Tags
-                        {this.props.tags.map((item, index) => {
+                        {this.state.tags.map((item, index) => {
                         if (item !== null) {
                             return (
                                 <option key={index} value={item}>{item}</option>

@@ -64,6 +64,8 @@ export default class CreateAd extends Component {
                 <label htmlFor="price">item's price</label>
                 <input type="number"
                     name="price"
+                    min="1"
+                    max="1000000"
                     onChange={this.handleChange}
                     required
                 />

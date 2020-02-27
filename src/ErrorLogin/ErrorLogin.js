@@ -16,7 +16,7 @@ export default class ErrorLogin extends Component {
   }
 
   render() {
-    if (this.state.error === "Error: User not found") {
+    if (this.state.error.message === "Error: User not found") {
       return (
           <div className="error-message">
             <h1>Please log in</h1>
@@ -27,7 +27,13 @@ export default class ErrorLogin extends Component {
           </div>
         )
     } else if (this.state.error){
-      return <h1>{this.state.error}</h1>
+      return (
+      <div>
+        <h1>{this.state.error}</h1>
+        <h2>{this.state.error.message}</h2>
+        
+      </div>
+      )
     } else {
       return this.props.children;
     }

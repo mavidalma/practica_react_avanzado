@@ -15,9 +15,9 @@
 .card-container .ad {
     display: flex;
     flex-direction: row;
-    max-width: 600px;
-    min-width: 300px;
+    width: 600px;
     max-height: 300px;
+    padding: 10px;
 
 }
 .info {

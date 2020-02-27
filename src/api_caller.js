@@ -41,9 +41,9 @@ export const userRegister = async(username, password) => {
     const isRegisterOk = data.success;
     isRegisterOk ? window.alert("usuario correctamente creado") : window.alert('error creando usuario');
     return isRegisterOk;
-} catch (err) {
-    console.log(err);
-    throw new Error;
+} catch (error) {
+    console.log(error);
+    throw new Error();
   }
 }
 
@@ -69,9 +69,9 @@ export const userLogin = async(username, password) => {
     return hasLogged;
     //hasLogged ? window.alert("usuario correctamente logueado") : window.alert('error de login')
 
-} catch (err) {
-    console.log(err);
-    throw new Error;
+} catch (error) {
+    console.log(error);
+    throw new Error();
   }
 }
 
@@ -90,9 +90,9 @@ export const fetchAds = async(query) => {
 
     return results;
 
-} catch (err) {
-    console.log(err);
-    throw new Error;
+} catch (error) {
+    console.log(error);
+    throw new Error();
   }
 }
 
@@ -110,9 +110,9 @@ export const fetchSingleAd = async(query) => {
     const result = data.result;
     return result;
 
-} catch (err) {
-    console.log(err);
-    throw new Error;
+} catch (error) {
+    console.log(error);
+    throw new Error();
   }
 }
 
@@ -130,9 +130,9 @@ export const getTags = async() => {
         const results = data.results;
         return results;
     
-    } catch (err) {
-        console.log(err);
-        throw new Error;
+    } catch (error) {
+        console.log(error);
+        throw new Error();
     }
 
 }
@@ -165,9 +165,9 @@ export const createAdvertisement = async(name, price, description, tags, type, p
     
     hasposted ? window.alert("ad correctly created") : window.alert('error creating ad, please check the info provided');
     return hasposted;
-} catch (err) {
-    console.log(err);
-    throw new Error;
+} catch (error) {
+    console.log(error);
+    throw new Error();
   }
 }
 
@@ -196,8 +196,8 @@ export const editAd = async(id, name, price, description, tags, type, photo) => 
     hasChanged ? window.alert("ad correctly updated") : window.alert('edit failed')
     return hasChanged;
 
-} catch (err) {
-    console.log(err);
-    throw new Error;
+} catch (error) {
+    console.log(error);
+    throw new Error();
   }
 }

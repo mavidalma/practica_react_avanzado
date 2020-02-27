@@ -18,10 +18,10 @@ export default class EditAd extends Component {
         };
     };
 
-    editAd = event => {
+    editAd = async event => {
         event.preventDefault();
 
-        editAd(
+        await editAd(
             this.props.ad._id,
             this.state.name,
             this.state.price,
