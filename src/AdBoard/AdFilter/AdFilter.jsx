@@ -123,13 +123,13 @@ export default class AdFilter extends Component {
                 <select name="tag"
                     onChange={this.handleChange}
                     value={this.state.params.tag}> Filter by Tags
-                        {this.state.tags.map(item => {
+                        {this.state.tags.map((item, index) => {
                         if (item !== null) {
                             return (
-                                <option value={item}>{item}</option>
+                                <option key={index} value={item}>{item}</option>
                             )
                         } else {
-                            return <option value="">All</option>
+                            return <option key={index}value="">All</option>
                         }
                     })}
 

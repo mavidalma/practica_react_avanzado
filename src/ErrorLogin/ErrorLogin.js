@@ -26,6 +26,8 @@ export default class ErrorLogin extends Component {
             <p>Want to create an account? <Link to="/register"><button>Go to register</button> </Link></p>
           </div>
         )
+    } else if (this.state.error){
+      return <h1>{this.state.error}</h1>
     } else {
       return this.props.children;
     }
