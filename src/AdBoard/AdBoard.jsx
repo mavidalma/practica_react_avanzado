@@ -4,9 +4,6 @@ import './AdBoard.css';
 import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
 import AdFilter from './AdFilter/AdFilter';
 import AdCard from '../AdCard';
-import NavBar from '../navBar/navBar.js';
-
-//import {Tags} from './Tags/Tags'
 
 
 export default class AdBoard extends Component {
@@ -30,12 +27,12 @@ export default class AdBoard extends Component {
         //.then(data => this.setState({ params: { ...this.state.params, tags: data }}))
     }
 
-    getMaxPrice(data) {
+    getMaxPrice = (data) => {
         return data.map(item => item.price)
         .reduce((previous, current) => (current > previous) ? current : previous)
     }
 
-    componentWillMount() {
+    componentDidMount() {
 
         this.getAds(this.state.query);
         this.getTags();
@@ -52,10 +49,9 @@ export default class AdBoard extends Component {
 
     render() {
        // (this.state.data.length > 0) ? console.log(this.getMaxPrice(this.state.data)) : console.log("no data")
-       //  console.log(this.state.maxPrice)
+         console.log(this.state.maxPrice)
         return (
             <div>
-                <NavBar/>
                 <AdFilter data={this.state.data}
                     getAds={this.getAds}
                     tags={this.state.tags}

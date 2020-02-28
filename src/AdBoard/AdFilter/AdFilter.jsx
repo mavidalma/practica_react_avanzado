@@ -21,7 +21,7 @@ export default class AdFilter extends Component {
         }
     }
 
-    getMaxPrice(data) {
+    getMaxPrice =(data) => {
         return data.map(item => item.price).reduce((previous, current) => (current > previous) ? current : previous)
     }
 
@@ -74,6 +74,7 @@ export default class AdFilter extends Component {
     render() {
         console.log(this.props.data)
         console.log(this.props.props)
+        console.log(this.state.topPrice)
         return (
 /*
             <Form>

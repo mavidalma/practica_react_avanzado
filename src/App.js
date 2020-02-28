@@ -7,6 +7,7 @@ import AdBoard from './AdBoard/AdBoard';
 import adDetail from './adDetail/adDetail';
 import CreateAd from './CreateAd/CreateAd';
 import ErrorLogin from './ErrorLogin/ErrorLogin.js';
+import NavBar from './navBar/navBar.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
 
     <ErrorLogin>
       <Router>
+        <NavBar/>
         <Switch>
           <Route exact path="/anuncios" component={AdBoard} />
           <Route path={`/anuncios/:id`} component={adDetail} />

@@ -43,27 +43,7 @@ Form {
 .card .card-img-top {
   max-height: 100%
 }
-.navBar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  background-color: rgb(82, 82, 82);
-  margin-bottom: 10px;
-}
-.navBar #logo {
-  color:white;
-  margin-left: 10px;
-}
-.navBar .links {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-right: 10px;
-}
 
-Link :hover{
-  color: white;
-}
 
 /* up till here */
 @keyframes App-logo-spin {
