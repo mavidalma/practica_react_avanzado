@@ -11,18 +11,13 @@ export default class AdFilter extends Component {
             query: sessionStorage.getItem('search') ? sessionStorage.getItem('search') : "",
             params: {
                 name: sessionStorage.getItem('name'),
-                minPrice: sessionStorage.getItem('minPrice') ? sessionStorage.getItem('minPrice') : 0,
-                maxPrice: sessionStorage.getItem('maxPrice') ? sessionStorage.getItem('maxPrice') : 1000000,
+                minPrice: sessionStorage.getItem('minPrice') ? sessionStorage.getItem('minPrice') : "",
+                maxPrice: sessionStorage.getItem('maxPrice') ? sessionStorage.getItem('maxPrice') : "",
                 venta: sessionStorage.getItem('venta'),
                 tag: sessionStorage.getItem('tag'),
             },
             tags: [],
-            topPrice: 0,
         }
-    }
-
-    getMaxPrice =(data) => {
-        return data.map(item => item.price).reduce((previous, current) => (current > previous) ? current : previous)
     }
 
     handleChange = event => {
@@ -36,12 +31,25 @@ export default class AdFilter extends Component {
 
     sendQuery = event => {
         event.preventDefault();
+        const maxPrice = this.state.params.maxPrice;
+        const minPrice = this.state.params.minPrice;
+        const name = this.state.params.name;
+        const tag = this.state.params.tag;
+        const venta = this.state.params.venta;
 
-        let queryParams = `price=${this.state.params.minPrice}-${this.state.params.maxPrice}`;
+        let queryParams = ``;
 
-        if (this.state.params.name) { queryParams = queryParams + `&name=${this.state.params.name}` }
-        if (this.state.params.tag) { queryParams = queryParams + `&tag=${this.state.params.tag}` }
-        if (this.state.params.venta) { queryParams = queryParams + `&venta=${this.state.params.venta}` }
+        if (minPrice && !maxPrice) { 
+            queryParams = queryParams + `&price=${minPrice}-${this.props.maxPrice}`;
+        } else if(!minPrice && maxPrice) {
+            queryParams = queryParams + `&price=0-${maxPrice}`;
+        } else if(minPrice && maxPrice) {
+            queryParams = queryParams + `&price=${minPrice}-${maxPrice}`;
+        };
+
+        if (name) { queryParams = queryParams + `&name=${name}` }
+        if (tag) { queryParams = queryParams + `&tag=${tag}` }
+        if (venta) { queryParams = queryParams + `&venta=${venta}` }
 
         //this.setState({ query: queryParams });
         this.props.props.history.push(`/anuncios?${queryParams}`);
@@ -50,20 +58,13 @@ export default class AdFilter extends Component {
         this.props.getAds(queryParams);
     }
 
-    componenDidMount() {
-        const maxPrice = this.getMaxPrice(this.props.data);
-        this.setState({
-            topPrice: maxPrice,
-        })
-    }
-
     clearFilter = () => {
         this.setState({
             params: {
                 ...this.state.params,
                 name: "",
-                minPrice: 0,
-                maxPrice: 100000,
+                minPrice: "",
+                maxPrice: "",
                 venta: "",
                 tag: "",
             }
@@ -72,9 +73,7 @@ export default class AdFilter extends Component {
     }
 
     render() {
-        console.log(this.props.data)
-        console.log(this.props.props)
-        console.log(this.state.topPrice)
+
         return (
 /*
             <Form>
