@@ -15,7 +15,7 @@ function App() {
 
     <ErrorLogin>
       <Router>
-        <NavBar/>
+        <Route path="/" component={NavBar}/>
         <Switch>
           <Route exact path="/anuncios" component={AdBoard} />
           <Route path={`/anuncios/:id`} component={adDetail} />

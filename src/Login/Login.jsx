@@ -46,7 +46,6 @@ export default class Login extends Component {
                 <Form.Group controlId="formUsername">
                     <Form.Label>User name</Form.Label>
                         <Form.Control name="username" 
-                                        id="username" 
                                         className="form-input" 
                                       type="text" 
                                       placeholder="username"
@@ -60,7 +59,6 @@ export default class Login extends Component {
                     <Form.Control type="password" 
                                   placeholder="Password" 
                                   name="password" 
-                                  id="password" 
                                   className="password form-input" 
                                   type="password" 
                                   placeholder="password"
