@@ -81,50 +81,53 @@ export default class AdFilter extends Component {
 
     return (
       <form onSubmit={this.sendQuery}>
-        <input type="text"
-          placeholder="insert item"
-          value={this.state.params.name}
-          name="name"
-          onChange={this.handleChange} />
-        <label htmlFor="name">See what you've got</label>
+      <label htmlFor="name">See what you've got</label>
+      <input type="text"
+         placeholder="insert item"
+         value={this.state.params.name}
+         name="name"
+         onChange={this.handleChange} />
+     <div>
+         <label htmlFor="min-price">min price</label>
+         <input type="number"
+             onChange={this.handleChange}
+             name="minPrice"
+             value={this.state.params.minPrice} />
+         <label htmlFor="max-price">max price</label>
+         <input type="number"
+             onChange={this.handleChange}
+             name="maxPrice"
+             value={this.state.params.maxPrice} />
+     </div>
+     <label htmlFor="venta">Type of ad</label>
+     <select name="venta"
+         onChange={this.handleChange}
+         value={this.state.params.venta}>
+         <option value="" defaultValue>Todos</option>
+         <option value="true" >Venta</option>
+         <option value="false">Compra</option>
+     </select>
+     <label htmlFor="tag">Tag</label>
+     <select name="tag"
+         onChange={this.handleChange}
+         value={this.state.params.tag}> Filter by Tags
+             {this.props.tags.map((item, index) => {
+             if (item !== null) {
+                 return (
+                     <option key={index} value={item}>{item}</option>
+                 )
+             } else {
+                 return <option key={index}value="">All</option>
+             }
+         })}
 
-        <div>
-          <label htmlFor="min-price">min price</label>
-          <input type="number"
-            onChange={this.handleChange}
-            name="minPrice"
-            value={this.state.params.minPrice} />
-          <label htmlFor="max-price">max price</label>
-          <input type="number"
-            onChange={this.handleChange}
-            name="maxPrice"
-            value={this.state.params.maxPrice} />
-        </div>
-        <select name="venta"
-          onChange={this.handleChange}
-          value={this.state.params.venta}>
-          <option value="" defaultValue>Todos</option>
-          <option value="true" >Venta</option>
-          <option value="false">Compra</option>
-        </select>
-        <select name="tag"
-          onChange={this.handleChange}
-          value={this.state.params.tag}> Filter by Tags
-                        {this.state.tags.map((item, index) => {
-            if (item !== null) {
-              return (
-                <option key={index} value={item}>{item}</option>
-              )
-            } else {
-              return <option key={index} value="">All</option>
-            }
-          })}
+     </select>
+    <div>
+    <button type="submit">SEND</button>
+     <button onClick={this.clearFilter}> Clear</button>
+    </div>
 
-        </select>
-
-        <button type="submit">SEND</button>
-        <button onClick={this.clearFilter}> Clear</button>
-      </form>
+ </form>
     );
   }
 }

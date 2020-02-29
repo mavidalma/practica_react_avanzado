@@ -32,11 +32,7 @@ export default class Register extends Component {
     render() {
         return (
             <>
-                <div className="welcome-mssg">
-                    <h1> AnunciaLOL</h1>
-                    <p> Our network is only available for registered and authorized users.</p>
-                    <h2> Register form </h2>
-                </div>
+                <h2> Register form </h2>
 
                 <Form id="register-form"
                     className="register"
@@ -45,7 +41,6 @@ export default class Register extends Component {
                     <Form.Group controlId="formUsername">
                         <Form.Label>User name</Form.Label>
                         <Form.Control name="username"
-                            id="username"
                             className="form-input"
                             type="text"
                             placeholder="username"
@@ -59,7 +54,6 @@ export default class Register extends Component {
                         <Form.Control type="password"
                             placeholder="Password"
                             name="password"
-                            id="password"
                             className="password form-input"
                             type="password"
                             placeholder="password"

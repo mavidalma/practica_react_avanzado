@@ -30,6 +30,10 @@
 
 /* MANUALLY ADDED */
 
+.root {
+  margin-left: 100px;
+}
+
 Form {
   max-width: 500px;
 }

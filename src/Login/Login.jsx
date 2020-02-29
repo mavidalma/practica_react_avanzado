@@ -31,13 +31,7 @@ export default class Login extends Component {
     render() {
         return (
             <>
-            <div className="welcome-mssg">
-			    <div>
-				    <h1> AnunciaLOL</h1>
-                    <p> Please log into your account</p>
-			    </div>
                 <h2> LOGIN </h2>
-            </div>
 
             <Form id="register-form" 
                     className="register"
@@ -72,36 +66,6 @@ export default class Login extends Component {
             </Form>
 
 
-
-                 {/*  <form 
-                    id="register-form" 
-                    className="register"
-                    onSubmit={this.submitForm}>
-					    <h2> LOGIN </h2>
-					    <label htmlFor="username" className="form-label"> Username </label>
-                        <input 
-                            name="username" 
-                            id="username" 
-                            className="form-input" 
-                            type="text" 
-                            placeholder="username"
-                            value={this.state.username}
-                            onChange={this.typeOnInput} 
-                            required>
-                        </input>
-					    <label htmlFor="password" className="form-label"> password </label>
-                        <input name="password" 
-                               id="password" 
-                               className="password form-input" 
-                               type="password" 
-                               placeholder="password"
-                               onChange={this.typeOnInput}  
-                               required>    
-                        </input>
-					    <button type="submit">Submit</button>
-				    </form> */} 
-
-            
                 <p>Not registered yet? <Button variant="outline-primary"><Link to={`/register`}>Go to register</Link></Button></p>
 
 			    <div className="problem-logging">
