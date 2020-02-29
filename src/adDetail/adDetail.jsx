@@ -3,7 +3,8 @@ import { fetchSingleAd } from '../api_caller';
 import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
 import './detail.css';
 import EditAd from './EditAd/EditAd';
-import AdCard from '../AdCard'
+import AdCard from '../AdCard';
+import { Button } from "react-bootstrap";
 
 export default class adDetail extends Component {
     constructor(props) {
@@ -42,7 +43,7 @@ export default class adDetail extends Component {
                 <Link to={`/anuncios/`}><p>Return to Ad Board</p></Link>
                 <AdCard data={this.state.data} />
 
-                <button onClick={this.switchEditMode}> Edit Ad </button>
+                <Button onClick={this.switchEditMode} variant="outline-primary"> Edit Ad </Button>
 
                 {this.state.editMode ? <EditAd ad={this.state.data}
                     closeEditor={this.switchEditMode}

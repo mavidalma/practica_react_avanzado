@@ -30,9 +30,6 @@
 
 /* MANUALLY ADDED */
 
-.root {
-  margin-left: 100px;
-}
 
 Form {
   max-width: 500px;
@@ -47,6 +44,30 @@ Form {
 .card .card-img-top {
   max-height: 100%
 }
+
+.form-container {
+  display: flex;
+  justify-content: center;
+}
+form {
+  min-width: 300px;
+ /* margin-top: 80px;*/
+}
+
+form Button {
+  margin-right: 10px;
+  margin-top: 15px;
+  width: 100px;
+}
+form label, input, select {
+  display: block;
+  min-width: 300px;;
+}
+
+form input, select {
+  margin-bottom: 20px;
+}
+
 
 
 /* up till here */

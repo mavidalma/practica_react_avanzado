@@ -11,6 +11,7 @@ export default class AdBoard extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            error: "",
             data: [],
             tags: [],
             success: true,
@@ -22,6 +23,7 @@ export default class AdBoard extends Component {
         await fetchAds(query)
             .then(data => {
                 this.setState({success: data.success});
+                this.setState({error: data.error});
                 this.setState({data: data.results})
             });
 
@@ -44,12 +46,14 @@ export default class AdBoard extends Component {
     }
 
     componentDidMount() {
-        this.getAds(this.state.query);
+        this.getAds("");
         this.getTags();
     }
 
     render() {
+        
         console.log(this.state.success)
+        console.log(this.state.error)
         if(this.state.success){
         return (
             <div>
@@ -69,7 +73,7 @@ export default class AdBoard extends Component {
                 </div>
             </div>
         )
-    } else {
+    } else { //I tried to use a conditional (this.state.error === "Error: user not found") {} but since it first renders an empty version of the app, it doesn work
         return (
                 <div className="error-message">
                   <h1>Please log in</h1>

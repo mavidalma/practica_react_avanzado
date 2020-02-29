@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { editAd, getTags } from '../../api_caller';
 import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import AdForm from "../../AdForm/AdForm"
 
 export default class EditAd extends Component {
 
@@ -63,11 +65,17 @@ export default class EditAd extends Component {
 
 
     render() {
-        console.log(this.props.props)
-        console.log(this.props)
-        console.log(this.props.ad._id)
 
         return(
+            <> {/* 
+                I have NO CLUE why when passed through AdForm it desn't work. On "createAd" it works perfectly fine
+            
+                <AdForm handleChange = {this.handleChange}
+            tagArray={this.state.tagArray}
+            venta = {this.state.type}
+            send = {this.editAd}/>
+                 */}
+
             <form onSubmit = { this.editAd } >
                     <label htmlFor="name">Ad name</label>
                     <input type='text'
@@ -112,9 +120,10 @@ export default class EditAd extends Component {
                         placeholder="please insert your pic´s URL"
                     />
 
-                    <button type="submit"> edit ad</button>
+                    <Button type="submit" variant="primary"> Send Edit</Button>
 
             </form>
+            </>
         )
     }
 }
