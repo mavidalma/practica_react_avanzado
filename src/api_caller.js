@@ -87,12 +87,14 @@ export const fetchAds = async(query) => {
     
     const data = await response.json();
     const results = data.results;
+    console.log("api caller  " + data.error )
     
+    if(data.error === "Error: Not logged in") {throw new Error("Not logged in")}
     return data;
 
 } catch (error) {
     console.log(error);
-    throw new Error();
+    throw new Error(error);
   }
 }
 

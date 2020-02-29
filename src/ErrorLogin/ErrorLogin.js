@@ -16,7 +16,7 @@ export default class ErrorLogin extends Component {
   }
 
   render() {
-    if (this.state.error === "Error: User not found") {
+    if (this.state.error === "Error: Not logged in") {
       return (
           <div className="error-message">
             <h1>Please log in</h1>

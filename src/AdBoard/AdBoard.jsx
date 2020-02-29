@@ -19,12 +19,15 @@ export default class AdBoard extends Component {
         }
     }
 
-    getAds = async (query) => {
-        await fetchAds(query)
+    getAds = (query) => {
+        fetchAds(query)
             .then(data => {
                 this.setState({success: data.success});
+                console.log("data.succes setted")
                 this.setState({error: data.error});
+                console.log("data.error setted")
                 this.setState({data: data.results})
+                console.log("data setted")
             });
 
         /*        const adsList = await fetchAds(query)
@@ -48,12 +51,13 @@ export default class AdBoard extends Component {
     componentDidMount() {
         this.getAds("");
         this.getTags();
+        console.log("componentdidmount")
     }
 
     render() {
         
-        console.log(this.state.success)
-        console.log(this.state.error)
+        console.log("render success    " + this.state.success)
+        console.log("render error   " + this.state.error)
         if(this.state.success){
         return (
             <div>
@@ -64,7 +68,7 @@ export default class AdBoard extends Component {
                    // maxPrice = {this.state.maxPrice}
                 />
                 <div className="ads-wall">{this.state.data.map(card => {
-                    return ( //turn this into conditional rendering, either this component or "NO ITEMS"
+                    return (
                         < div key={card._id} className="card-container">
                             <AdCard data={card} />
                         </div>
@@ -73,7 +77,7 @@ export default class AdBoard extends Component {
                 </div>
             </div>
         )
-    } else { //I tried to use a conditional (this.state.error === "Error: user not found") {} but since it first renders an empty version of the app, it doesn work
+    } else { //I tried to use a conditional (this.state.error === "Error: not logged in") {} but since it first renders an empty version of the app, it doesn work
         return (
                 <div className="error-message">
                   <h1>Please log in</h1>

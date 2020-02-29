@@ -83,7 +83,7 @@ export default class AdFilter extends Component {
       <div className="form-container">
 
         <form onSubmit={this.sendQuery}>
-          <label htmlFor="name">See what you've got</label>
+          <label htmlFor="name">Ad name (title) </label>
           <input type="text"
             placeholder="insert item"
             value={this.state.params.name}
