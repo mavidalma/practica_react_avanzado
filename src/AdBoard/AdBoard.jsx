@@ -13,13 +13,17 @@ export default class AdBoard extends Component {
         this.state = {
             data: [],
             tags: [],
+            success: true,
            // maxPrice: 0,
         }
     }
 
     getAds = async (query) => {
         await fetchAds(query)
-            .then(data => this.setState({data: data}));
+            .then(data => {
+                this.setState({success: data.success});
+                this.setState({data: data.results})
+            });
 
         /*        const adsList = await fetchAds(query)
             .then(data => data);
@@ -45,6 +49,8 @@ export default class AdBoard extends Component {
     }
 
     render() {
+        console.log(this.state.success)
+        if(this.state.success){
         return (
             <div>
                 <AdFilter data={this.state.data}
@@ -63,5 +69,16 @@ export default class AdBoard extends Component {
                 </div>
             </div>
         )
+    } else {
+        return (
+                <div className="error-message">
+                  <h1>Please log in</h1>
+                  <h2> In order to use our patform you have to be a registered user.</h2>
+                    
+                  <p>Already register? <Link to="/login"><button>Go to login</button> </Link> </p>
+                  <p>Want to create an account? <Link to="/register"><button>Go to register</button> </Link></p>
+                </div>
+              )
+    }
     }
 }

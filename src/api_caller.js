@@ -87,8 +87,8 @@ export const fetchAds = async(query) => {
     
     const data = await response.json();
     const results = data.results;
-
-    return results;
+    
+    return data;
 
 } catch (error) {
     console.log(error);
