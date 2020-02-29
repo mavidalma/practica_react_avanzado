@@ -49,7 +49,7 @@ export default class EditAd extends Component {
             .then(data => this.setState({ tagArray: data }));
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.getTags();
         this.setState({
             name: this.props.ad.name,

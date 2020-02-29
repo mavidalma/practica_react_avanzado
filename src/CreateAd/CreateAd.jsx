@@ -52,6 +52,7 @@ export default class CreateAd extends Component {
         console.log(this.state)
 
         return (
+            <>
             <form onSubmit={this.sendAd}>
                 <label htmlFor="name">Ad name</label>
                 <input type='text'
@@ -105,6 +106,9 @@ export default class CreateAd extends Component {
                 <button type="submit"> Create ad</button>
 
             </form>
+            <Link to="/anuncios"><button> return to ad Board</button> </Link>
+            </>
+
 
         )
     }
