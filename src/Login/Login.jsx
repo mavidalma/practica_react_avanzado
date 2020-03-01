@@ -42,7 +42,7 @@ export default class Login extends Component {
                         <Form.Control name="username" 
                                         className="form-input" 
                                       type="text" 
-                                      placeholder="username"
+                                      placeholder="useruser"
                                       value={this.state.username}
                                       onChange={this.typeOnInput} 
                                       required/>
