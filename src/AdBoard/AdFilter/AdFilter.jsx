@@ -1,13 +1,5 @@
 import React, { Component } from "react";
-import { getTags } from "../../api_caller";
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch,
-  withRouter
-} from "react-router-dom";
-import { Dropdown, DropdownButton, Form, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 export default class AdFilter extends Component {
   constructor(props) {

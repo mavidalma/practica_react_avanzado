@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { fetchSingleAd } from '../api_caller';
-import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import './detail.css';
 import EditAd from './EditAd/EditAd';
 import AdCard from '../AdCard/AdCard';
@@ -35,23 +35,34 @@ export default class adDetail extends Component {
 
     render() {
 
-        const data = this.state.data;
-        
-        return (
+        if (this.state.data) {
+            return (
 
-            <>
-                <Link to={`/anuncios/`}><p>Return to Ad Board</p></Link>
-                <AdCard data={this.state.data} />
+                <div className = "detailContainer">
+                    <Link to={`/anuncios/`}><p>Return to Ad Board</p></Link>
+                    <AdCard data={this.state.data} />
+    
+                    <Button onClick={this.switchEditMode} variant="outline-primary"> Edit Ad </Button>
+    
+                    {this.state.editMode ? <EditAd ad={this.state.data}
+                        closeEditor={this.switchEditMode}
+                        fetchAd={this.getAd}
+                        props={this.props} /> 
+                        : <></>}
+                </div>
+            )
+        } else {
+            return (
+                <div className="error-message">
+                  <h1>Please log in</h1>
+                  <h2> In order to use our patform you have to be a registered user.</h2>
+                    
+                  <p>Already register? <Link to="/login"><button>Go to login</button> </Link> </p>
+                  <p>Want to create an account? <Link to="/register"><button>Go to register</button> </Link></p>
+                </div>
+              )
+        }
 
-                <Button onClick={this.switchEditMode} variant="outline-primary"> Edit Ad </Button>
-
-                {this.state.editMode ? <EditAd ad={this.state.data}
-                    closeEditor={this.switchEditMode}
-                    fetchAd={this.getAd}
-                    props={this.props} /> 
-                    : <></>}
-            </>
-        )
     }
 }
 

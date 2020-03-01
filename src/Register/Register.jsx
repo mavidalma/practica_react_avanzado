@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { userRegister } from '../api_caller';
-import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import { Form, Button  } from 'react-bootstrap';
 
 export default class Register extends Component {
@@ -65,7 +65,7 @@ export default class Register extends Component {
                 </Form>
 
 
-                <p>Already registered? <Button variant="outline-primary"><Link to={`/login`}>Go to login</Link></Button></p>
+                <p>Already registered? <Link to={`/login`}><Button variant="outline-primary">Go to login</Button></Link></p>
 
                 <div className="problem-logging">
                     <a href="">Forgot password?</a>

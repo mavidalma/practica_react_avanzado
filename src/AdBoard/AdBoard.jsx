@@ -29,6 +29,7 @@ export default class AdBoard extends Component {
                 this.setState({data: data.results})
                 console.log("data setted")
             });
+        this.getMaxPrice(this.state.data);
     }
 
     getTags = async () => {
@@ -45,14 +46,13 @@ export default class AdBoard extends Component {
     }
 
     componentDidMount() {
-        this.getAds("")
-            .then(this.getMaxPrice(this.state.data))
+        this.getAds("");
         this.getTags();
         console.log("componentdidmount") //to check out on console the number of times the component remounts and why it renders empty before mounting
     }
 
     render() {
-        
+
         if(this.state.success){
         return (
             <div>

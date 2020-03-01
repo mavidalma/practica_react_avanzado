@@ -1,12 +1,10 @@
-/*
-
-.ad {
-    border: 2px solid black;
-    margin: 10px;
+.detailContainer {
+margin: auto 10px;
+max-width: 600px;
+min-width: 300px;
+align-items: center;
 }
 
-image {
-    width: 200px;
-    height: 200px;
+.detailContainer Button {
+    margin: 10px auto;
 }
-*/

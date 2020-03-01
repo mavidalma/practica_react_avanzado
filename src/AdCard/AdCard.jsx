@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactImageFallback from "react-image-fallback";
-import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import fallbackPic from '../resources/img-not-found.png';
 
 
@@ -10,6 +10,7 @@ export default class AdCard extends Component {
     render() {
 
         const data = this.props.data;
+
         return (
             <>
                 <div className="ad">
