@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { fetchAds, getTags } from '../api_caller';
 import './AdBoard.css';
-import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import AdFilter from './AdFilter/AdFilter';
 import AdCard from '../AdCard/AdCard';
 
@@ -23,12 +23,8 @@ export default class AdBoard extends Component {
        await fetchAds(query)
             .then(data => {
                 this.setState({success: data.success});
-                console.log("data.succes setted")
                 this.setState({error: data.error});
-                console.log("data.error setted")
                 this.setState({data: data.results})
-                console.log("data setted");
-                console.log(data.results)
             });
       //  this.getMaxPrice(this.state.data);
     }
@@ -61,7 +57,7 @@ export default class AdBoard extends Component {
                     getAds={this.getAds}
                     tags={this.state.tags}
                     maxPrice = {this.state.maxPrice}
-                  // props={this.props}
+                    props={this.props}
                 />
                 <div className="ads-wall">{this.state.data.map(card => {
                     return (

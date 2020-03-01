@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { fetchSingleAd } from '../api_caller';
-import { Link } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import './detail.css';
 import EditAd from './EditAd/EditAd';
 import AdCard from '../AdCard/AdCard';

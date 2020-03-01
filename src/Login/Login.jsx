@@ -23,10 +23,9 @@ export default class Login extends Component {
 
     submitForm = async event => {
         event.preventDefault();
-        console.log(this.state.username, this.state.password)
         const response = await userLogin(this.state.username, this.state.password);
 
-        response ? this.props.history.push("/anuncios") : console.log("error loging in")
+        response ? this.props.history.push("/anuncios") : window.alert("error loging in")
     }
     render() {
         return (

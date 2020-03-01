@@ -16,7 +16,7 @@ export default class ErrorLogin extends Component {
   }
 
   render() {
-    if (this.state.error === "Error: Not logged in") {
+    if (this.state.error) { // (this.state.error.message === "Error: not logged in") throws error (TypeError: Cannot read property 'message' of null) 
       return (
           <div className="error-message">
             <h1>Please log in</h1>

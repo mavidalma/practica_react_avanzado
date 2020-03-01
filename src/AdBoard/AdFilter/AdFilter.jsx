@@ -66,6 +66,7 @@ export default class AdFilter extends Component {
       }
     });
     Object.keys(sessionStorage).forEach(key => sessionStorage.removeItem(key));
+    this.props.getAds(this.state.query);
   };
 
   render() {

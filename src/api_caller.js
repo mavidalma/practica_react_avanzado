@@ -44,9 +44,9 @@ export const userLogin = async(username, password) => {
     
     const data = await response.json();
     const hasLogged = data.success;
-    return hasLogged;
-    hasLogged ? window.alert("usuario correctamente logueado") : window.alert('error de login')
 
+    return hasLogged;
+   
 } catch (error) {
     console.log(error);
     throw new Error();
@@ -64,7 +64,6 @@ export const fetchAds = async(query) => {
     
     const data = await response.json();
     const results = data.results;
-    console.log("api caller  " + data.error )
     
    // if(data.error === "Error: Not logged in") {throw new Error("Not logged in")}
     return data;
@@ -79,7 +78,7 @@ export const fetchSingleAd = async(query) => {
     
     try {
     const endpoint = `${URL}anuncios/${query}`;
-    console.log('endpoint=', endpoint);
+
     const response = await fetch (endpoint, {
         method: 'GET',
         credentials: 'include',
@@ -138,6 +137,8 @@ export const createAdvertisement = async(name, price, description, tags, type, p
     
     const data = await response.json();
 
+    if(data.error === "Error: Not logged in") {throw new Error("Not logged in")}
+
     const hasposted = data.success;
 
     console.log(hasposted)
@@ -171,8 +172,12 @@ export const editAd = async(id, name, price, description, tags, type, photo) => 
     });
     
     const data = await response.json();
+
+    if(data.error === "Error: Not logged in") {throw new Error("Not logged in")};
+
     const hasChanged = data.success;
-    hasChanged ? window.alert("ad correctly updated") : window.alert('edit failed')
+    hasChanged ? window.alert("ad correctly updated") : window.alert('edit failed');
+
     return hasChanged;
 
 } catch (error) {
