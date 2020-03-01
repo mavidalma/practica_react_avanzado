@@ -15,7 +15,7 @@ export default class AdBoard extends Component {
             data: [],
             tags: [],
             success: true,
-            maxPrice: 0,
+            maxPrice: 100000000,
         }
     }
 
@@ -27,9 +27,10 @@ export default class AdBoard extends Component {
                 this.setState({error: data.error});
                 console.log("data.error setted")
                 this.setState({data: data.results})
-                console.log("data setted")
+                console.log("data setted");
+                console.log(data.results)
             });
-        this.getMaxPrice(this.state.data);
+      //  this.getMaxPrice(this.state.data);
     }
 
     getTags = async () => {
@@ -60,7 +61,7 @@ export default class AdBoard extends Component {
                     getAds={this.getAds}
                     tags={this.state.tags}
                     maxPrice = {this.state.maxPrice}
-                    props={this.props}
+                  // props={this.props}
                 />
                 <div className="ads-wall">{this.state.data.map(card => {
                     return (

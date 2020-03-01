@@ -10,8 +10,8 @@ export default class AdFilter extends Component {
         name: sessionStorage.getItem("name"),
         minPrice: sessionStorage.getItem("minPrice") ? sessionStorage.getItem("minPrice") : "",
         maxPrice: sessionStorage.getItem("maxPrice") ? sessionStorage.getItem("maxPrice") : "",
-        venta: sessionStorage.getItem("venta"),
-        tag: sessionStorage.getItem("tag")
+        venta: sessionStorage.getItem("venta") ? sessionStorage.getItem("venta") : "",
+        tag: sessionStorage.getItem("tag") ? sessionStorage.getItem("tag") : [],
       },
       tags: []
     };
