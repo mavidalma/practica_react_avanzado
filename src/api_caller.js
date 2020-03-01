@@ -1,26 +1,4 @@
 const URL = 'http://34.89.93.186:8080/apiv1/';
-/*
-class apiCaller {
-
-    register = async (username,password) => {
-        const endpoint = `${URL}apiv1/register`;
-        const response = await fetch (endpoint, {
-            method: 'POST',
-            body: JSON.stringify({
-                'username': username,
-                'password': password,
-            }),
-            headers: {
-                'content-type': 'application/json'
-            },
-        });
-        
-        console.log(response);
-
-    }
-
-}*/
-
 
 export const userRegister = async(username, password) => {
     
@@ -67,7 +45,7 @@ export const userLogin = async(username, password) => {
     const data = await response.json();
     const hasLogged = data.success;
     return hasLogged;
-    //hasLogged ? window.alert("usuario correctamente logueado") : window.alert('error de login')
+    hasLogged ? window.alert("usuario correctamente logueado") : window.alert('error de login')
 
 } catch (error) {
     console.log(error);

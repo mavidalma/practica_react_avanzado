@@ -3,7 +3,7 @@ import { fetchSingleAd } from '../api_caller';
 import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
 import './detail.css';
 import EditAd from './EditAd/EditAd';
-import AdCard from '../AdCard';
+import AdCard from '../AdCard/AdCard';
 import { Button } from "react-bootstrap";
 
 export default class adDetail extends Component {
@@ -34,11 +34,11 @@ export default class adDetail extends Component {
     }
 
     render() {
-        console.log(this.state.data)
 
         const data = this.state.data;
+        
         return (
-            // Meter un conditional render según editmode sea true or false
+
             <>
                 <Link to={`/anuncios/`}><p>Return to Ad Board</p></Link>
                 <AdCard data={this.state.data} />

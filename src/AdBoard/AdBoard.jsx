@@ -3,7 +3,7 @@ import { fetchAds, getTags } from '../api_caller';
 import './AdBoard.css';
 import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
 import AdFilter from './AdFilter/AdFilter';
-import AdCard from '../AdCard';
+import AdCard from '../AdCard/AdCard';
 
 
 export default class AdBoard extends Component {
@@ -15,12 +15,12 @@ export default class AdBoard extends Component {
             data: [],
             tags: [],
             success: true,
-           // maxPrice: 0,
+            maxPrice: 0,
         }
     }
 
-    getAds = (query) => {
-        fetchAds(query)
+    getAds = async(query) => {
+       await fetchAds(query)
             .then(data => {
                 this.setState({success: data.success});
                 console.log("data.succes setted")
@@ -29,43 +29,38 @@ export default class AdBoard extends Component {
                 this.setState({data: data.results})
                 console.log("data setted")
             });
-
-        /*        const adsList = await fetchAds(query)
-            .then(data => data);
-        this.setState({
-            data: adsList
-        });
-        return adsList*/
     }
+
     getTags = async () => {
         await getTags()
             .then(data => this.setState({ tags: data }));
-        //.then(data => this.setState({ params: { ...this.state.params, tags: data }}))
     }
 
     getMaxPrice = (data) => {
-        return data.map(item => item.price)
-            .reduce((previous, current) => (current > previous) ? current : previous)
+        const topPrice = data.map(item => item.price)
+            .reduce((previous, current) => (current > previous) ? current : previous);
+        this.setState({
+            maxPrice: topPrice,
+        })
     }
 
     componentDidMount() {
-        this.getAds("");
+        this.getAds("")
+            .then(this.getMaxPrice(this.state.data))
         this.getTags();
-        console.log("componentdidmount")
+        console.log("componentdidmount") //to check out on console the number of times the component remounts and why it renders empty before mounting
     }
 
     render() {
         
-        console.log("render success    " + this.state.success)
-        console.log("render error   " + this.state.error)
         if(this.state.success){
         return (
             <div>
                 <AdFilter data={this.state.data}
                     getAds={this.getAds}
                     tags={this.state.tags}
+                    maxPrice = {this.state.maxPrice}
                     props={this.props}
-                   // maxPrice = {this.state.maxPrice}
                 />
                 <div className="ads-wall">{this.state.data.map(card => {
                     return (

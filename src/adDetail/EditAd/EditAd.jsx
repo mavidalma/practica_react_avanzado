@@ -6,7 +6,6 @@ import AdForm from "../../AdForm/AdForm"
 
 export default class EditAd extends Component {
 
-    //exactamente igual que createAd salvo por chorradillas --> refactrorizar
     constructor(props) {
         super(props);
         this.state = {
@@ -68,12 +67,14 @@ export default class EditAd extends Component {
 
         return(
             <> {/* 
-                I have NO CLUE why when passed through AdForm it desn't work. On "createAd" it works perfectly fine
             
                 <AdForm handleChange = {this.handleChange}
             tagArray={this.state.tagArray}
             venta = {this.state.type}
             send = {this.editAd}/>
+
+            I have NO CLUE why it doesn´t when made passing props to AdForm it desn't work. On "createAd" it works perfectly fine
+
                  */}
 
             <form onSubmit = { this.editAd } >

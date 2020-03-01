@@ -56,7 +56,6 @@ export default class AdFilter extends Component {
     if (tag) { queryParams = queryParams + `&tag=${tag}` };
     if (venta) { queryParams = queryParams + `&venta=${venta}` };
 
-    //this.setState({ query: queryParams });
     this.props.props.history.push(`/anuncios?${queryParams}`);
     sessionStorage.setItem("search", queryParams);
 

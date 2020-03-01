@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactImageFallback from "react-image-fallback";
 import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
-import fallbackPic from './resources/img-not-found.png';
-import { Card, Button } from 'react-bootstrap';
+import fallbackPic from '../resources/img-not-found.png';
+
 
 export default class AdCard extends Component {
 
@@ -27,19 +27,6 @@ export default class AdCard extends Component {
 
                 </div>
             </>
-            /* 
-                        <Card style={{ width: '18rem', height:"25rem", margin: '10px'}}>
-                           <div className="img-container"> <Card.Img variant="top" src={data.photo} /> </div>
-                            <Card.Body>
-                            <Link to={`/anuncios/${data._id}`}><Card.Title>{data.e}</Card.Title></Link>
-                                <Card.Text>
-                                <p><span>Price:</span> {data.price}€</p>
-                                <p><span>description:</span> {data.description}</p>
-                                <p><span>type:</span> {data.type}</p>
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>*/
-
         )
     }
 }
