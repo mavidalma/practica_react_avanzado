@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { createAdvertisement, getTags } from '../api_caller';
+import { createAdvertisement, getTags } from '../../api_caller';
 import AdForm from "../AdForm/AdForm"
 
 export default class CreateAd extends Component {

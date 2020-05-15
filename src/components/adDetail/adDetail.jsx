@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { fetchSingleAd } from '../api_caller';
+import { fetchSingleAd } from '../../api_caller';
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import './detail.css';
 import EditAd from './EditAd/EditAd';

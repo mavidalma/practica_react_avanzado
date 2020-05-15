@@ -1,5 +1,4 @@
-import * as TYPES from './actions';
-
+import * as TYPES from './types';
 
 const initialState = {
     ads: [],
@@ -10,7 +9,7 @@ const initialState = {
     }
 };
 
-export function ads(state = initialState.ads, action) {
+export default function adsReducer(state = initialState.ads, action) {
     
     switch(action.type) {
         case TYPES.FETCH_ADS_SUCCESS:
@@ -22,10 +21,10 @@ export function ads(state = initialState.ads, action) {
         case TYPES.CREATE_AD:
             return [
                 ...state,
-                ad
+                action.ad
             ];
         case TYPES.EDIT_AD:
-            return
+            return state;
 
         default:
             return state;

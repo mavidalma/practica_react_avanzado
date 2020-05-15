@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactImageFallback from "react-image-fallback";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import fallbackPic from '../resources/img-not-found.png';
+import fallbackPic from '../../resources/img-not-found.png';
 
 
 export default class AdCard extends Component {

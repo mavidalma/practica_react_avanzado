@@ -1,20 +1,17 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
-import Register from './Register/Register';
-import Login from './Login/Login';
-import AdBoard from './AdBoard/AdBoard';
-import adDetail from './adDetail/adDetail';
-import CreateAd from './CreateAd/CreateAd';
-import ErrorLogin from './ErrorLogin/ErrorLogin.js';
-import NavBar from './navBar/navBar.js';
+import Register from '../Register/Register';
+import Login from '../Login/Login';
+import AdBoard from '../AdBoard/AdBoard';
+import adDetail from '../adDetail/adDetail';
+import CreateAd from '../CreateAd/CreateAd';
+import NavBar from '../navBar/navBar.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function App() {
+export default function App() {
   return (
-
-    <ErrorLogin>
-      <Router>
+    <main>
         <Route path="/" component={NavBar}/>
         <Switch>
           <Route exact path="/anuncios" component={AdBoard} />
@@ -24,10 +21,6 @@ function App() {
           <Route path="/register" component={Register} />
           <Redirect to="/login" />
         </Switch>
-
-      </Router>
-    </ErrorLogin>
+    </main>
   );
 }
-
-export default App;

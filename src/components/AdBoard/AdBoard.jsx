@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { fetchAds, getTags } from '../api_caller';
+import { fetchAds, getTags } from '../../api_caller';
 import './AdBoard.css';
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import AdFilter from './AdFilter/AdFilter';

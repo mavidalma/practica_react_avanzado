@@ -19,7 +19,7 @@ export const createAd = ad => ({
     ad
 });
 
-export const editrAd = () => ({
+export const editAd = () => ({
     type: TYPES.EDIT_AD
 });
 
