@@ -1,5 +1,5 @@
 import React from 'react';
-import App from '../App/App';
+import App from '../App';
 import ErrorLogin from '../ErrorLogin/ErrorLogin.js';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';

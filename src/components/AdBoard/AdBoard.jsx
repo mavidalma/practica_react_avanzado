@@ -2,10 +2,32 @@ import React, { Component } from 'react';
 import { fetchAds, getTags } from '../../api_caller';
 import './AdBoard.css';
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import AdFilter from './AdFilter/AdFilter';
+import AdFilter from '../AdFilter/AdFilter';
 import AdCard from '../AdCard/AdCard';
 
 
+export default function AdBoard ({ads}) {
+    
+    return (
+        <div>
+        <AdFilter data={ads}
+            getAds={this.getAds}
+            tags={this.state.tags}
+            maxPrice = {this.state.maxPrice}
+            props={this.props}
+        />
+        <div className="ads-wall">{this.state.data.map(card => {
+            return (
+                < div key={card._id} className="card-container">
+                    <AdCard data={card} />
+                </div>
+            )
+        })}
+        </div>
+    </div>
+    )
+}
+/*
 export default class AdBoard extends Component {
 
     constructor(props) {
@@ -43,13 +65,13 @@ export default class AdBoard extends Component {
     }
 
     componentDidMount() {
-        this.getAds("");
+        this.setState({data: this.props.data})
         this.getTags();
         console.log("componentdidmount") //to check out on console the number of times the component remounts and why it renders empty before mounting
     }
 
     render() {
-
+        
         if(this.state.success){
         return (
             <div>
@@ -81,4 +103,4 @@ export default class AdBoard extends Component {
               )
     }
     }
-}
+}*/

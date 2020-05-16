@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
 import Register from '../Register/Register';
@@ -9,8 +9,20 @@ import CreateAd from '../CreateAd/CreateAd';
 import NavBar from '../navBar/navBar.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default function App() {
-  return (
+
+
+class App extends Component {
+
+  componentDidMount() {
+    this.loadAds();
+  }
+
+  loadAds() {
+    this.props.loadAds();
+  }
+
+  render () {
+    return (
     <main>
         <Route path="/" component={NavBar}/>
         <Switch>
@@ -24,3 +36,6 @@ export default function App() {
     </main>
   );
 }
+}
+
+export default App;
