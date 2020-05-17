@@ -2,21 +2,22 @@ import React, { Component } from 'react';
 import { fetchAds, getTags } from '../../api_caller';
 import './AdBoard.css';
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import AdFilter from '../AdFilter/AdFilter';
+import AdFilter from '../AdFilter';
 import AdCard from '../AdCard/AdCard';
+import { ads } from '../../store/reducers';
 
-
+/*
 export default function AdBoard ({ads}) {
     console.log(ads)
     return (
         <div>
-      {/*  <AdFilter data={ads}
+        <AdFilter data={ads}
             getAds={this.getAds}
             tags={this.state.tags}
             maxPrice = {this.state.maxPrice}
             props={this.props}
-    />*/}
-        <div className="ads-wall">{ads(card => {
+    />
+        <div className="ads-wall">{ads.map(card => {
             return (
                 < div key={card._id} className="card-container">
                     <AdCard ad={card} />
@@ -26,15 +27,14 @@ export default function AdBoard ({ads}) {
         </div>
     </div>
     )
-}
-/*
+}*/
+
 export default class AdBoard extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             error: "",
-            data: [],
             tags: [],
             success: true,
             maxPrice: 100000000,
@@ -65,23 +65,23 @@ export default class AdBoard extends Component {
     }
 
     componentDidMount() {
-        this.setState({data: this.props.data})
         this.getTags();
         console.log("componentdidmount") //to check out on console the number of times the component remounts and why it renders empty before mounting
     }
 
     render() {
+
+        console.log(this.props.ads)
         
         if(this.state.success){
         return (
             <div>
-                <AdFilter data={this.state.data}
-                    getAds={this.getAds}
+                <AdFilter 
                     tags={this.state.tags}
                     maxPrice = {this.state.maxPrice}
                     props={this.props}
                 />
-                <div className="ads-wall">{this.state.data.map(card => {
+                <div className="ads-wall">{this.props.ads.map(card => {
                     return (
                         < div key={card._id} className="card-container">
                             <AdCard ad={card} />
@@ -103,4 +103,4 @@ export default class AdBoard extends Component {
               )
     }
     }
-}*/
+}

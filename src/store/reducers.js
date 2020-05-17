@@ -2,14 +2,15 @@ import * as TYPES from './types';
 
 const initialState = {
     ads: [],
-    user: null, 
+    user: null,
+    tags: [], 
     ui: {
         activeAd: {},
         fetching: false
     }
 };
 
-export default function adsReducer(state = initialState.ads, action) {
+export function ads(state = initialState.ads, action) {
     
     switch(action.type) {
         case TYPES.FETCH_ADS_SUCCESS:

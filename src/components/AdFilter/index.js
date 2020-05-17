@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import AdBoard from './AdBoard';
+import AdFilter from './AdFilter';
 
 import { fetchAds } from '../../store/actions';
 import { getAds } from '../../store/selectors';
@@ -15,4 +15,4 @@ const mapDispatchToProps = {
     fetchAds
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdBoard);
+export default connect(mapStateToProps, mapDispatchToProps)(AdFilter);

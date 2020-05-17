@@ -51,7 +51,7 @@ export default class AdFilter extends Component {
     this.props.props.history.push(`/anuncios?${queryParams}`);
     sessionStorage.setItem("search", queryParams);
 
-    this.props.getAds(queryParams);
+    this.props.fetchAds(queryParams);
   };
 
   clearFilter = () => {
@@ -66,7 +66,7 @@ export default class AdFilter extends Component {
       }
     });
     Object.keys(sessionStorage).forEach(key => sessionStorage.removeItem(key));
-    this.props.getAds(this.state.query);
+    this.props.fetchAds(this.state.query);
   };
 
   render() {

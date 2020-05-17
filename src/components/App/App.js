@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
 import Register from '../Register/Register';
 import Login from '../Login/Login';
-import AdBoard from '../AdBoard/AdBoard';
+import AdBoard from '../AdBoard';
 import adDetail from '../adDetail/adDetail';
 import CreateAd from '../CreateAd/CreateAd';
 import NavBar from '../navBar/navBar.js';
