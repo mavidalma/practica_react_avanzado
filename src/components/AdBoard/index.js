@@ -11,10 +11,8 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-function mapDispatchToProps(dispatch, ownProps) {
-  return {
+const mapDispatchToProps = {
     fetchAds
-  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdBoard);

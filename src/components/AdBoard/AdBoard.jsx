@@ -6,8 +6,8 @@ import AdFilter from '../AdFilter/AdFilter';
 import AdCard from '../AdCard/AdCard';
 
 
-export default function AdBoard (ads) {
-    
+export default function AdBoard ({ads}) {
+    console.log(ads)
     return (
         <div>
       {/*  <AdFilter data={ads}

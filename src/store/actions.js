@@ -1,5 +1,4 @@
 import * as TYPES from './types';
-import * as CALLER from '../api_caller';
 
 export const fetchAdsReq = () => ({
         type: TYPES.FETCH_ADS
@@ -16,11 +15,11 @@ export const fetchAdsFailure = error => ({
 });
 
 
-export const fetchAds = (query) => {
-    async function action(dispatch) {
+export const fetchAds = (query = "") => {
+    async function action(dispatch, getState, API) {
         try {
             dispatch(fetchAdsReq());
-            const call = await CALLER.fetchAds(query);
+            const call = await API.fetchAds(query);
             const ads = call.results;
             dispatch(fetchAdsSuccess(ads));
         } catch (error) {
