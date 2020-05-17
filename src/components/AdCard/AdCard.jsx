@@ -9,21 +9,21 @@ export default class AdCard extends Component {
 
     render() {
 
-        const data = this.props.data;
+        const ad = this.props.ad;
 
         return (
             <>
                 <div className="ad">
                     <div className="info">
-                        <Link to={`/anuncios/${data._id}`}><h2>{data.name}</h2></Link>
+                        <Link to={`/anuncios/${ad._id}`}><h2>{ad.name}</h2></Link>
                         <div className="data">
-                            <p><span>Price:</span> {data.price}€</p>
-                            <p><span>description:</span> {data.description}</p>
-                            <p><span>type:</span> {data.type}</p>
+                            <p><span>Price:</span> {ad.price}€</p>
+                            <p><span>description:</span> {ad.description}</p>
+                            <p><span>type:</span> {ad.type}</p>
                         </div>
                     </div>
                     <div className="image-container">
-                        <ReactImageFallback src={data.photo} fallbackImage={fallbackPic} className="image" />
+                        <ReactImageFallback src={ad.photo} fallbackImage={fallbackPic} className="image" />
                     </div>
 
                 </div>

@@ -40,7 +40,7 @@ export default class adDetail extends Component {
 
                 <div className = "detailContainer">
                     <Link to={`/anuncios/`}><p>Return to Ad Board</p></Link>
-                    <AdCard data={this.state.data} />
+                    <AdCard ad={this.state.data} />
     
                     <Button onClick={this.switchEditMode} variant="outline-primary"> Edit Ad </Button>
     

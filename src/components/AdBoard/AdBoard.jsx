@@ -6,20 +6,20 @@ import AdFilter from '../AdFilter/AdFilter';
 import AdCard from '../AdCard/AdCard';
 
 
-export default function AdBoard ({ads}) {
+export default function AdBoard (ads) {
     
     return (
         <div>
-        <AdFilter data={ads}
+      {/*  <AdFilter data={ads}
             getAds={this.getAds}
             tags={this.state.tags}
             maxPrice = {this.state.maxPrice}
             props={this.props}
-        />
-        <div className="ads-wall">{this.state.data.map(card => {
+    />*/}
+        <div className="ads-wall">{ads(card => {
             return (
                 < div key={card._id} className="card-container">
-                    <AdCard data={card} />
+                    <AdCard ad={card} />
                 </div>
             )
         })}
@@ -84,7 +84,7 @@ export default class AdBoard extends Component {
                 <div className="ads-wall">{this.state.data.map(card => {
                     return (
                         < div key={card._id} className="card-container">
-                            <AdCard data={card} />
+                            <AdCard ad={card} />
                         </div>
                     )
                 })}
