@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import App from './App';
-import { fetchAds } from '../../store/actions';
+import { fetchAds, fetchTags } from '../../store/actions';
 
 // function mapDispatchToProps(dispatch, ownProps) {
 //   return {
@@ -11,6 +11,7 @@ import { fetchAds } from '../../store/actions';
 
 const mapDispatchToProps = {
   loadAds: fetchAds,
+  loadTags: fetchTags,
 };
 
 const connected = connect(null, mapDispatchToProps);

@@ -14,7 +14,6 @@ export const fetchAdsFailure = error => ({
     error
 });
 
-
 export const fetchAds = (query = "") => {
     async function action(dispatch, getState, API) {
         try {
@@ -38,6 +37,38 @@ export const createAd = ad => ({
 export const editAd = () => ({
     type: TYPES.EDIT_AD
 });
+
+
+export const fetchTagsReq = () => ({
+    type: TYPES.FETCH_TAGS
+});
+
+export const fetchTagsSuccess = tags => ({
+type: TYPES.FETCH_TAGS_SUCCESS,
+tags
+});
+
+export const fetchTagsFailure = error => ({
+type: TYPES.FETCH_TAGS_FAILURE,
+error
+});
+
+export const fetchTags = () => {
+async function action(dispatch, getState, API) {
+    try {
+        dispatch(fetchTagsReq());
+        const tags = await API.getTags();
+        dispatch(fetchTagsSuccess(tags));
+    } catch (error) {
+        dispatch(fetchTagsFailure());
+    }
+}
+return action
+};
+
+
+
+
 
 export const fetchUser = () => ({
     type: TYPES.FETCH_USER

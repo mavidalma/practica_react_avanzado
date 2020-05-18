@@ -15,10 +15,14 @@ class App extends Component {
 
   componentDidMount() {
     this.loadAds();
+    this.loadTags();
   }
 
   loadAds() {
     this.props.loadAds();
+  }
+  loadTags() {
+    this.props.loadTags()
   }
 
   render () {
