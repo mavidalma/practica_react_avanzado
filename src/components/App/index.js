@@ -1,20 +1,22 @@
 import { connect } from 'react-redux';
 
 import App from './App';
-import { fetchAds, fetchTags } from '../../store/actions';
+import { fetchAds, fetchTags, userLogin } from '../../store/actions';
+import { isLogged } from '../../store/selectors';
 
-// function mapDispatchToProps(dispatch, ownProps) {
-//   return {
-//     loadBikes: () => dispatch(fetchBikes()),
-//   };
-// }
+ function mapStateToProps(state, ownProps) {
+   return {
+     isLogged: isLogged(state),
+   };
+ }
 
 const mapDispatchToProps = {
   loadAds: fetchAds,
   loadTags: fetchTags,
+  userLogin
 };
 
-const connected = connect(null, mapDispatchToProps);
+const connected = connect(mapStateToProps, mapDispatchToProps);
 const AppConnected = connected(App);
 
 export default AppConnected;

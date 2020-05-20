@@ -2,17 +2,22 @@ import { connect } from 'react-redux';
 
 import AdBoard from './AdBoard';
 
-import { fetchAds } from '../../store/actions';
-import { getAds } from '../../store/selectors';
+import { fetchAds, fetchTags, getUserFromStorage } from '../../store/actions';
+import { getAds, getTags, isLogged } from '../../store/selectors';
 
 function mapStateToProps(state, ownProps) {
   return {
     ads: getAds(state),
+    tags: getTags(state),
+    user: isLogged(state) 
   }
 }
 
 const mapDispatchToProps = {
-    fetchAds
+    fetchAds,
+    fetchTags,
+    getUserFromStorage
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdBoard);

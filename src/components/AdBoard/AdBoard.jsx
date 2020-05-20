@@ -34,9 +34,6 @@ export default class AdBoard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            error: "",
-            tags: [],
-            success: true,
             maxPrice: 100000000,
         }
     }
@@ -51,11 +48,6 @@ export default class AdBoard extends Component {
       //  this.getMaxPrice(this.state.data);
     }
 
-    getTags = async () => {
-        await getTags()
-            .then(data => this.setState({ tags: data }));
-    }
-
     getMaxPrice = (data) => {
         const topPrice = data.map(item => item.price)
             .reduce((previous, current) => (current > previous) ? current : previous);
@@ -65,19 +57,18 @@ export default class AdBoard extends Component {
     }
 
     componentDidMount() {
-        this.getTags();
-        console.log("componentdidmount") //to check out on console the number of times the component remounts and why it renders empty before mounting
+        this.props.getUserFromStorage();
+        this.props.fetchAds();
+        this.props.fetchTags();
     }
 
     render() {
-
-        console.log(this.props.ads)
-        
-        if(this.state.success){
+  
+        if(this.props.user){
         return (
             <div>
                 <AdFilter 
-                    tags={this.state.tags}
+                    tags={this.props.tags}
                     maxPrice = {this.state.maxPrice}
                     props={this.props}
                 />

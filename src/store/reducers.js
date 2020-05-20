@@ -2,7 +2,7 @@ import * as TYPES from './types';
 
 const initialState = {
     ads: [],
-    user: null,
+    user: false,
     tags: [], 
     ui: {
         activeAd: {},
@@ -36,10 +36,23 @@ export function tags(state = initialState.tags, action) {
     
     switch(action.type) {
         case TYPES.FETCH_TAGS_SUCCESS:
-        return action.tag;
+        return action.tags;
 
         case TYPES.FETCH_TAGS_FAILURE:
-            return action.error;
+            return action;
+
+        default:
+            return state;
+    }
+}
+
+export function user(state = initialState.user, action) {
+    switch(action.type) {
+        case TYPES.USER_LOGIN:
+        return true
+
+        case TYPES.USER_LOGOUT:
+            return false
 
         default:
             return state;

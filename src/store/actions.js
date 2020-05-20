@@ -22,7 +22,7 @@ export const fetchAds = (query = "") => {
             const ads = call.results;
             dispatch(fetchAdsSuccess(ads));
         } catch (error) {
-            dispatch(fetchAdsFailure());
+            dispatch(fetchAdsFailure(error));
         }
         
     }
@@ -58,29 +58,26 @@ async function action(dispatch, getState, API) {
     try {
         dispatch(fetchTagsReq());
         const tags = await API.getTags();
+        console.log("API fetching on action", tags);
         dispatch(fetchTagsSuccess(tags));
     } catch (error) {
-        dispatch(fetchTagsFailure());
+        dispatch(fetchTagsFailure(error));
     }
 }
 return action
 };
 
 
-
-
-
-export const fetchUser = () => ({
-    type: TYPES.FETCH_USER
+export const userLogin = () => ({
+    type: TYPES.USER_LOGIN
 });
 
-export const fetchUserSuccess = user => ({
-type: TYPES.FETCH_USER_SUCCESS,
-user
+export const userLogout = () => ({
+    type: TYPES.USER_LOGOUT
 });
 
-export const fetchUserFailure = error => ({
-type: TYPES.FETCH_USER_FAILURE,
-error
-});
-
+export const getUserFromStorage = () => {
+    return function (dispatch, getState, API) {
+        sessionStorage.getItem("AnunciaLOLUserLogged") ? dispatch(userLogin()) : dispatch(userLogout());
+    }
+};
