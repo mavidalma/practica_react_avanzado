@@ -26,9 +26,9 @@ export default class Login extends Component {
         const response = await userLogin(this.state.username, this.state.password);
 
         if(response) {
-            this.props.history.push("/anuncios");
+            sessionStorage.setItem("AnunciaLOLUserLogged", true);
             this.props.userLogin();
-            sessionStorage.setItem("AnunciaLOLUserLogged", true)
+            this.props.history.push("/anuncios");
          } else {
             window.alert("error loging in")
          };

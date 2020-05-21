@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
+import PrivateRoute from '../PrivateRoute/PrivateRoute'
 import Register from '../Register/Register';
 import Login from '../Login';
 import AdBoard from '../AdBoard';
@@ -30,9 +31,9 @@ class App extends Component {
     <main>
         <Route path="/" component={NavBar}/>
         <Switch>
-          <Route exact path="/anuncios" component={AdBoard} />
-          <Route path={`/anuncios/:id`} component={adDetail} />
-          <Route path="/create" component={CreateAd} />
+          <PrivateRoute exact path="/anuncios" component={AdBoard} />
+          <PrivateRoute path={`/anuncios/:id`} component={adDetail} />
+          <PrivateRoute path="/create" component={CreateAd} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Redirect to="/login" />

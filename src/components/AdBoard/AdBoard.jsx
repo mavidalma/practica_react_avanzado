@@ -38,23 +38,13 @@ export default class AdBoard extends Component {
         }
     }
 
-    getAds = async(query) => {
-       await fetchAds(query)
-            .then(data => {
-                this.setState({success: data.success});
-                this.setState({error: data.error});
-                this.setState({data: data.results})
-            });
-      //  this.getMaxPrice(this.state.data);
-    }
-
-    getMaxPrice = (data) => {
+   /* getMaxPrice = (data) => {
         const topPrice = data.map(item => item.price)
             .reduce((previous, current) => (current > previous) ? current : previous);
         this.setState({
             maxPrice: topPrice,
         })
-    }
+    }*/
 
     componentDidMount() {
         this.props.getUserFromStorage();
@@ -69,7 +59,6 @@ export default class AdBoard extends Component {
             <div>
                 <AdFilter 
                     tags={this.props.tags}
-                    maxPrice = {this.state.maxPrice}
                     props={this.props}
                 />
                 <div className="ads-wall">{this.props.ads.map(card => {
@@ -82,7 +71,7 @@ export default class AdBoard extends Component {
                 </div>
             </div>
         )
-    } else { //I tried to use a conditional (this.state.error === "Error: not logged in") {} but since it first renders an empty version of the app, it doesn work
+    } else {  //MAKE THIS A DIFFERENT COMPONENT <Returntologin /> 4 INSTANCE
         return (
                 <div className="error-message">
                   <h1>Please log in</h1>
