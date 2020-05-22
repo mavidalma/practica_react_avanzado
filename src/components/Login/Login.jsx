@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 import {userLogin} from '../../api_caller';
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import { Form, Button  } from 'react-bootstrap';
+//import { Form, Button  } from 'react-bootstrap';
+import { Form, Input } from '../FormProvider/FormProvider';
+
+
 
 export default class Login extends Component {
     constructor(props) {
@@ -22,8 +25,9 @@ export default class Login extends Component {
     }
 
     submitForm = async event => {
-        event.preventDefault();
-        const response = await userLogin(this.state.username, this.state.password);
+        console.log(event);
+       // event.preventDefault();
+       /* const response = await userLogin(this.state.username, this.state.password);
 
         if(response) {
             sessionStorage.setItem("AnunciaLOLUserLogged", true);
@@ -31,11 +35,25 @@ export default class Login extends Component {
             this.props.history.push("/anuncios");
          } else {
             window.alert("error loging in")
-         };
+         };*/
     }
     render() {
         return (
             <>
+            <Form onSubmit = {this.submitForm} >
+            <Input type="text" name="username" placeholder="username" />
+            <Input type="password" name="password" placeholder="password" /> 
+                <button type="submit">send!</button>
+            </Form>
+
+            </>
+        )
+    }
+}
+
+
+function old () {
+return (<> {/*
                 <h2> LOGIN </h2>
 
             <Form id="register-form" 
@@ -78,7 +96,5 @@ export default class Login extends Component {
 			        <a href="">Report an issue</a>
 			    </div>
 
-            </>
-        )
-    }
+*/} </>)
 }
