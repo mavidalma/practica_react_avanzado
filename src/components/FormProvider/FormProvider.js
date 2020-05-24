@@ -14,9 +14,14 @@ export const Form = ({submitFunc, ...props}) => {
         setData({...data, [name]: value});
     }
 
+    const onSubmit = (event) => {
+        event.preventDefault();
+        submitFunc(data);
+    }
+
     return (
         <FormContext.Provider value = {handleChange}>
-            <form onSubmit={submitFunc} {...props} >
+            <form onSubmit={onSubmit} {...props} >
                  {props.children}
             </form>
         </FormContext.Provider>

@@ -1,56 +1,44 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {userLogin} from '../../api_caller';
 import { BrowserRouter as Router, Link } from "react-router-dom";
-//import { Form, Button  } from 'react-bootstrap';
+import { Button  } from 'react-bootstrap';
 import { Form, Input } from '../FormProvider/FormProvider';
 
+export default function Login (props) {
 
-
-export default class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-         username: "",
-         password: "",   
-        };
-    }
-
-    typeOnInput = event => {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-      this.setState({
-          [name]: value
-      })  
-    }
-
-    submitForm = async event => {
-        console.log(event);
-        event.preventDefault();
-       const response = await userLogin(this.state.username, this.state.password);
-
+    const submitForm = async data => {
+        const response = await userLogin(data.username, data.password);
         if(response) {
             sessionStorage.setItem("AnunciaLOLUserLogged", true);
-            this.props.userLogin();
-            this.props.history.push("/anuncios");
+            props.userLogin();
+            props.history.push("/anuncios");
          } else {
             window.alert("error loging in")
          };
     }
-    render() {
+
         return (
             <>
-            <Form submitFunc = {this.submitForm} >
+
+            <h2> LOGIN </h2>
+            <Form submitFunc = {submitForm}>
 
                 <Input type="text" name="username" placeholder="username" />
                 <Input type="password" name="password" placeholder="password" /> 
-                <button type="submit">send!</button>
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
            
             </Form>
+            <p>Not registered yet? <Link to={`/register`}><Button variant="outline-primary">Go to register</Button></Link></p>
+
+            <div className="problem-logging">
+                <a href="">Forgot password?</a>
+                <a href="">Report an issue</a>
+            </div>
 
             </>
         )
-    }
 }
 
 
