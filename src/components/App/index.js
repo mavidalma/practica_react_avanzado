@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import App from './App';
-import { fetchAds, fetchTags, userLogin } from '../../store/actions';
+import { fetchAds, fetchTags, userLogin, getUserFromStorage } from '../../store/actions';
 import { isLogged } from '../../store/selectors';
 
  function mapStateToProps(state, ownProps) {
@@ -13,7 +13,8 @@ import { isLogged } from '../../store/selectors';
 const mapDispatchToProps = {
   loadAds: fetchAds,
   loadTags: fetchTags,
-  userLogin
+  userLogin,
+  getUserFromStorage
 };
 
 const connected = connect(mapStateToProps, mapDispatchToProps);

@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
-import { createAdvertisement, getTags } from '../../api_caller';
-import AdForm from "../AdForm/AdForm"
+import React, { useState, useEffect } from 'react';
+import { createAdvertisement } from '../../api_caller';
+import AdForm from "../AdForm/AdForm";
+import { Form, Input, Select } from '../FormProvider/FormProvider';
+import { Button } from "react-bootstrap";
 
-export default class CreateAd extends Component {
-    constructor(props) {
+export default function createAd ({tags, ...props}) {
+  /*  constructor(props) {
         super(props);
         this.state = {
             name: "",
@@ -14,21 +16,20 @@ export default class CreateAd extends Component {
             photo: "",
             tagArray: [],
         };
-    };
+    };*/
 
-    sendAd = event => {
-        event.preventDefault();
+    const sendAd = data => {
 
         createAdvertisement(
-            this.state.name,
-            this.state.price,
-            this.state.description,
-            this.state.tags,
-            this.state.type,
-            this.state.photo)
-            .then(data => data? this.props.history.push("/anuncios") : console.log(data));
+            data.name,
+            data.price,
+            data.description,
+            data.tags,
+            data.type,
+            data.photo)
+            .then(result => result ? props.history.push("/anuncios") : console.log(result));
     }
-
+/*
     handleChange = event => {
         const value = event.target.value;
         const name = event.target.name;
@@ -36,8 +37,11 @@ export default class CreateAd extends Component {
             [name]: value
         })
     }
+*/
 
-    getTags = () => {
+        
+    /*
+getTags = () => {
         getTags()
             .then(data => this.setState({ tagArray: data }));
     }
@@ -45,16 +49,46 @@ export default class CreateAd extends Component {
     componentWillMount() {
         this.getTags();
     }
+*/
+  
+    return (
+        
 
-
-    render() {
-         
-        return (
-            <AdForm handleChange = {this.handleChange}
-                    tagArray={this.state.tagArray}
-                    venta = {this.state.venta}
-                    send = {this.sendAd}/>
-        )
-    }
+        <Form onSubmit = {sendAd}>
+            {console.log(tags)};
+            <Input type='text'
+                    name="name"
+                    placeholder="ad name. Kep it under 20chars"
+                    maxLength="20"
+                    required
+                />
+            <Input type="number"
+                    name="price"
+                    min="1"
+                    max="1000000"
+                    required
+                />
+            <Input type="text"
+                    name="description"
+                    maxLength="286"
+                    placeholder="add a brief description of the item"
+                    required
+                />
+            <Select name="tag"
+                    options={tags}
+                />
+            <Select name="type"
+                    options={["sell", "buy"]}
+                />
+            <Input type="text"
+                    name="photo"
+                    maxLength="286"
+                    placeholder="please insert your pic´s URL"
+                    required
+                />        
+            <Button variant="primary" type="submit">
+                Submit
+            </Button>
+        </Form>
+    )
 }
-

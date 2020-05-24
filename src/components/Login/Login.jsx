@@ -21,7 +21,7 @@ export default function Login (props) {
             <>
 
             <h2> LOGIN </h2>
-            <Form submitFunc = {submitForm}>
+            <Form onSubmit = {submitForm}>
 
                 <Input type="text" name="username" placeholder="username" />
                 <Input type="password" name="password" placeholder="password" /> 

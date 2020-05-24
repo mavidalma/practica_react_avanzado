@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 
 const FormContext = React.createContext("")
 
-export const Form = ({submitFunc, ...props}) => {
+export const Form = ({onSubmit, ...props}) => {
     
     const [data, setData] = useState({})
 
@@ -14,14 +14,14 @@ export const Form = ({submitFunc, ...props}) => {
         setData({...data, [name]: value});
     }
 
-    const onSubmit = (event) => {
+    const submitFunc = (event) => {
         event.preventDefault();
-        submitFunc(data);
+        onSubmit(data);
     }
 
     return (
         <FormContext.Provider value = {handleChange}>
-            <form onSubmit={onSubmit} {...props} >
+            <form onSubmit={submitFunc} {...props} >
                  {props.children}
             </form>
         </FormContext.Provider>
@@ -31,6 +31,26 @@ export const Form = ({submitFunc, ...props}) => {
 export const Input = ({name, type, ...props}) => {
     const handleChange = useContext(FormContext);
     return (
+        <>
+        <label for={name} > {name} </label>
         <input name={name} type={type}onChange={handleChange} {...props}  />
+        </>
+    )
+}
+
+export const Select = ({name, options, ...props}) => {
+    const handleChange = useContext(FormContext);
+    return (
+        <>
+        <label for={name} > {name} </label>
+        <select name={name} onChange={handleChange} {...props} >
+            {options.map(item => {
+                if(item !== null) { 
+                    return <option value={item}>{item}</option> 
+                } else { 
+                return null; 
+                }})}
+        </select>
+        </>
     )
 }

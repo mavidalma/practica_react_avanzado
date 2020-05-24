@@ -1,10 +1,14 @@
 import React from 'react';
 import { Route, Redirect} from 'react-router-dom';
 import { isLogged } from '../../store/selectors';
-import { useSelector } from 'react-redux';
+import { getUserFromStorage } from '../../store/actions';
+import { useSelector, useDispatch } from 'react-redux';
 
 
  const PrivateRoute = ({...props}) => {
+
+   const dispatch = useDispatch();
+   dispatch(getUserFromStorage());
 
     const user = useSelector(state => isLogged(state));
     

@@ -14,7 +14,7 @@ export default function Register (props){
         return (
             <>
             <h2> Register form </h2>
-            <Form submitFunc = {submitForm}>
+            <Form onSubmit = {submitForm}>
 
                 <Input type="text" name="username" placeholder="username" />
                 <Input type="password" name="password" placeholder="password" /> 

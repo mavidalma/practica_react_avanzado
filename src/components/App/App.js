@@ -6,7 +6,7 @@ import Register from '../Register/Register';
 import Login from '../Login';
 import AdBoard from '../AdBoard';
 import adDetail from '../adDetail/adDetail';
-import CreateAd from '../CreateAd/CreateAd';
+import CreateAd from '../CreateAd';
 import NavBar from '../navBar/navBar.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 

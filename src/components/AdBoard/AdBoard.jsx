@@ -6,28 +6,6 @@ import AdFilter from '../AdFilter';
 import AdCard from '../AdCard/AdCard';
 import { ads } from '../../store/reducers';
 
-/*
-export default function AdBoard ({ads}) {
-    console.log(ads)
-    return (
-        <div>
-        <AdFilter data={ads}
-            getAds={this.getAds}
-            tags={this.state.tags}
-            maxPrice = {this.state.maxPrice}
-            props={this.props}
-    />
-        <div className="ads-wall">{ads.map(card => {
-            return (
-                < div key={card._id} className="card-container">
-                    <AdCard ad={card} />
-                </div>
-            )
-        })}
-        </div>
-    </div>
-    )
-}*/
 
 export default class AdBoard extends Component {
 
