@@ -1,7 +1,8 @@
 const URL = 'http://34.89.93.186:8080/apiv1/';
 
 export const userRegister = async(username, password) => {
-    
+    console.log("API CALLER user: ", username );
+    console.log("API CALLER password: ", password );
     try {
     const endpoint = `${URL}register`;
     const response = await fetch (endpoint, {

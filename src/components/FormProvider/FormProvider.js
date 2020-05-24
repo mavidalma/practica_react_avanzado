@@ -2,28 +2,28 @@ import React, { useState, useContext } from 'react';
 
 const FormContext = React.createContext("")
 
-export const Form = ({onSubmit}, {...props}) => {
+export const Form = ({submitFunc, ...props}) => {
     
-    const [value, setValue] = useState({})
+    const [data, setData] = useState({})
 
     const handleChange = event => {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        setValue({...value, [name]: value});
+        console.log("state data: ", data)
+        setData({...data, [name]: value});
     }
 
     return (
         <FormContext.Provider value = {handleChange}>
-            <form onSubmit={onSubmit(value)} {...props} >
-            {/* render props para meter Inputs aquí dentro. Ver bien cómo
-            por ejemplo, metiendo una prop "inputs" con los inputs a renderizar y haciendo un map */}
+            <form onSubmit={submitFunc} {...props} >
+                 {props.children}
             </form>
         </FormContext.Provider>
     )
 }
 
-export const Input = ({name, type}, {...props}) => {
+export const Input = ({name, type, ...props}) => {
     const handleChange = useContext(FormContext);
     return (
         <input name={name} type={type}onChange={handleChange} {...props}  />

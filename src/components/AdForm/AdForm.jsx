@@ -15,10 +15,6 @@ const Form = styled.form `
     > Button {
         width: 150px;
     }
-
-
-
-
 `
 export default class AdForm extends Component {
     

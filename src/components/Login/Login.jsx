@@ -26,8 +26,8 @@ export default class Login extends Component {
 
     submitForm = async event => {
         console.log(event);
-       // event.preventDefault();
-       /* const response = await userLogin(this.state.username, this.state.password);
+        event.preventDefault();
+       const response = await userLogin(this.state.username, this.state.password);
 
         if(response) {
             sessionStorage.setItem("AnunciaLOLUserLogged", true);
@@ -35,15 +35,17 @@ export default class Login extends Component {
             this.props.history.push("/anuncios");
          } else {
             window.alert("error loging in")
-         };*/
+         };
     }
     render() {
         return (
             <>
-            <Form onSubmit = {this.submitForm} >
-            <Input type="text" name="username" placeholder="username" />
-            <Input type="password" name="password" placeholder="password" /> 
+            <Form submitFunc = {this.submitForm} >
+
+                <Input type="text" name="username" placeholder="username" />
+                <Input type="password" name="password" placeholder="password" /> 
                 <button type="submit">send!</button>
+           
             </Form>
 
             </>
