@@ -7,12 +7,12 @@ import { useSelector, useDispatch } from 'react-redux';
 
  const PrivateRoute = ({...props}) => {
 
-   const dispatch = useDispatch();
-   dispatch(getUserFromStorage());
+  const dispatch = useDispatch();
+  dispatch(getUserFromStorage());
 
-    const user = useSelector(state => isLogged(state));
+  const user = useSelector(state => isLogged(state));
     
-   return user ? <Route {...props} /> : <Redirect to="/login" />;
+  return user ? <Route {...props} /> : <Redirect to="/login" />;
 };
 
 export default PrivateRoute;

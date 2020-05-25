@@ -11,13 +11,12 @@ import NavBar from '../navBar/navBar.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
-/*
+
   componentDidMount() {
    if(this.props.isLogged) {
-      //this.loadAds();
-   // this.loadTags();
+    this.loadTags();
     };
-  }*/
+  }
 
   loadAds() {
     this.props.loadAds();

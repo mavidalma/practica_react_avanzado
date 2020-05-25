@@ -52,11 +52,15 @@ getTags = () => {
 */
   
     return (
-        
+        <>
+        <div classname="createAd-header">
+            <h2>Create your ad</h2>
+            <p>Please take into account that all fields are required</p>
+        </div>
 
         <Form onSubmit = {sendAd}>
-            {console.log(tags)};
-            <Input type='text'
+            {console.log(tags)}
+            <Input  type='text'
                     name="name"
                     placeholder="ad name. Kep it under 20chars"
                     maxLength="20"
@@ -76,9 +80,11 @@ getTags = () => {
                 />
             <Select name="tag"
                     options={tags}
+                    defaultOption="lifestyle"
                 />
             <Select name="type"
                     options={["sell", "buy"]}
+                    defaultOption="sell"
                 />
             <Input type="text"
                     name="photo"
@@ -90,5 +96,6 @@ getTags = () => {
                 Submit
             </Button>
         </Form>
+        </>
     )
 }

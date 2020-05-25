@@ -13,6 +13,9 @@ export const Form = ({onSubmit, ...props}) => {
         console.log("state data: ", data)
         setData({...data, [name]: value});
     }
+    const setDefaultOption = (name, value) => {
+        setData({...data, [name]: value})
+    }
 
     const submitFunc = (event) => {
         event.preventDefault();
@@ -21,7 +24,7 @@ export const Form = ({onSubmit, ...props}) => {
 
     return (
         <FormContext.Provider value = {handleChange}>
-            <form onSubmit={submitFunc} {...props} >
+            <form onSubmit={submitFunc} trololo={setDefaultOption} {...props} >
                  {props.children}
             </form>
         </FormContext.Provider>
@@ -38,15 +41,17 @@ export const Input = ({name, type, ...props}) => {
     )
 }
 
-export const Select = ({name, options, ...props}) => {
+export const Select = ({name, options, defaultOption, trololo, ...props}) => {
     const handleChange = useContext(FormContext);
+    console.log("setDefaultOption: ", trololo)
     return (
+        
         <>
         <label for={name} > {name} </label>
         <select name={name} onChange={handleChange} {...props} >
-            {options.map(item => {
+            {options.map((item, i) => {
                 if(item !== null) { 
-                    return <option value={item}>{item}</option> 
+                    return item !== defaultOption ? <option value={item} key={i}>{item}</option> : <option value={item} key={i} selected>{item}</option> 
                 } else { 
                 return null; 
                 }})}
