@@ -5,7 +5,6 @@ const initialState = {
     user: false,
     tags: [], 
     ui: {
-        activeAd: {},
         fetching: false
     }
 };
