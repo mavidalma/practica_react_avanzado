@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import CreateAd from './CreateAd';
 
-import { getUserFromStorage } from '../../store/actions';
+import { getUserFromStorage, fetchTags } from '../../store/actions';
 import { getTags, isLogged } from '../../store/selectors';
 
 function mapStateToProps(state, ownProps) {
@@ -13,7 +13,8 @@ function mapStateToProps(state, ownProps) {
 }
 
 const mapDispatchToProps = {
-    getUserFromStorage
+    getUserFromStorage,
+    fetchTags
 
 }
 

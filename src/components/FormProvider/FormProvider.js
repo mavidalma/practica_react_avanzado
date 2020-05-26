@@ -1,6 +1,10 @@
 import React, { useState, useContext } from 'react';
 
-const FormContext = React.createContext("")
+const FormContext = React.createContext({
+    data: {},
+    handleChange: () => {},
+    setDefault: () => {}
+});
 
 export const Form = ({onSubmit, ...props}) => {
     
@@ -13,7 +17,10 @@ export const Form = ({onSubmit, ...props}) => {
         console.log("state data: ", data)
         setData({...data, [name]: value});
     }
+
     const setDefaultOption = (name, value) => {
+        console.log("state data: ", data)
+        console.log("imput trying to pass ", {[name]: value})
         setData({...data, [name]: value})
     }
 
@@ -23,16 +30,16 @@ export const Form = ({onSubmit, ...props}) => {
     }
 
     return (
-        <FormContext.Provider value = {handleChange}>
-            <form onSubmit={submitFunc} trololo={setDefaultOption} {...props} >
-                 {props.children}
-            </form>
+        <FormContext.Provider value = {{data, handleChange, setDefaultOption}}>
+                <form onSubmit={submitFunc} {...props} >
+                    {props.children}
+                </form>
         </FormContext.Provider>
     )
 }
 
 export const Input = ({name, type, ...props}) => {
-    const handleChange = useContext(FormContext);
+    const {handleChange} = useContext(FormContext);
     return (
         <>
         <label for={name} > {name} </label>
@@ -41,9 +48,9 @@ export const Input = ({name, type, ...props}) => {
     )
 }
 
-export const Select = ({name, options, defaultOption, trololo, ...props}) => {
-    const handleChange = useContext(FormContext);
-    console.log("setDefaultOption: ", trololo)
+export const Select = ({name, options, defaultOption, ...props}) => {
+    const {data, handleChange, setDefaultOption} = useContext(FormContext);
+    if (data[name] === undefined) {data[name]= defaultOption};
     return (
         
         <>

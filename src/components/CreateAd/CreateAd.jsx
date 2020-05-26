@@ -4,19 +4,7 @@ import AdForm from "../AdForm/AdForm";
 import { Form, Input, Select } from '../FormProvider/FormProvider';
 import { Button } from "react-bootstrap";
 
-export default function createAd ({tags, ...props}) {
-  /*  constructor(props) {
-        super(props);
-        this.state = {
-            name: "",
-            price: 0,
-            description: "",
-            tags: [],
-            type: "sell",
-            photo: "",
-            tagArray: [],
-        };
-    };*/
+export default function CreateAd ({tags, fetchTags, ...props}) {
 
     const sendAd = data => {
 
@@ -29,27 +17,8 @@ export default function createAd ({tags, ...props}) {
             data.photo)
             .then(result => result ? props.history.push("/anuncios") : console.log(result));
     }
-/*
-    handleChange = event => {
-        const value = event.target.value;
-        const name = event.target.name;
-        this.setState({
-            [name]: value
-        })
-    }
-*/
 
-        
-    /*
-getTags = () => {
-        getTags()
-            .then(data => this.setState({ tagArray: data }));
-    }
 
-    componentWillMount() {
-        this.getTags();
-    }
-*/
   
     return (
         <>
