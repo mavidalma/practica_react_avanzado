@@ -17,8 +17,10 @@ export default function CreateAd ({tags, fetchTags, ...props}) {
             data.photo)
             .then(result => result ? props.history.push("/anuncios") : console.log(result));
     }
-
-
+    
+    useEffect(()=> {
+        fetchTags();
+    })
   
     return (
         <>

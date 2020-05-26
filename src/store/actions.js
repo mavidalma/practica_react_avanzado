@@ -1,4 +1,5 @@
 import * as TYPES from './types';
+import { getTags } from './selectors';
 
 export const fetchAdsReq = () => ({
         type: TYPES.FETCH_ADS
@@ -56,10 +57,16 @@ error
 export const fetchTags = () => {
 async function action(dispatch, getState, API) {
     try {
+        const storeTags = getTags(getState());
+
+        if (storeTags.length < 1) {
         dispatch(fetchTagsReq());
         const tags = await API.getTags();
         console.log("API fetching on action", tags);
         dispatch(fetchTagsSuccess(tags));
+        } else {
+            return;
+        }
     } catch (error) {
         dispatch(fetchTagsFailure(error));
     }
