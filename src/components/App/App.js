@@ -5,9 +5,10 @@ import PrivateRoute from '../PrivateRoute/PrivateRoute'
 import Register from '../Register/Register';
 import Login from '../Login';
 import AdBoard from '../AdBoard';
-import adDetail from '../adDetail/adDetail';
+import AdDetail from '../adDetail/adDetail';
 import CreateAd from '../CreateAd';
-import NavBar from '../navBar/navBar.js';
+import NavBar from '../navBar/navBar';
+import ErrorLogin from '../ErrorLogin/ErrorLogin'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
@@ -31,10 +32,11 @@ class App extends Component {
         <Route path="/" component={NavBar}/>
         <Switch>
           <PrivateRoute exact path="/anuncios" component={AdBoard} />
-          <PrivateRoute path={`/anuncios/:id`} component={adDetail} />
+          <PrivateRoute path={`/anuncios/:id`} component={AdDetail} />
           <PrivateRoute path="/create" component={CreateAd} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <Route path="/errorlogin" component={ErrorLogin} />
           <Redirect to="/login" />
         </Switch>
     </main>

@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
   const user = useSelector(state => isLogged(state));
     
-  return user ? <Route {...props} /> : <Redirect to="/login" />;
+  return user ? <Route {...props} /> : <Redirect to="/errorlogin" />;
 };
 
 export default PrivateRoute;

@@ -6,7 +6,7 @@ import EditAd from './EditAd/EditAd';
 import AdCard from '../AdCard/AdCard';
 import { Button } from "react-bootstrap";
 
-export default class adDetail extends Component {
+export default class AdDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {

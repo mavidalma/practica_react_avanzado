@@ -30,32 +30,17 @@ export default class AdBoard extends Component {
     }
 
     render() {
-  
-        if(this.props.user){
         return (
             <div>
                 <AdFilter 
                     tags={this.props.tags}
                     props={this.props}
-                />
-                
+                />  
                 {this.props.loading && <Loading /> }
-
                 <AdWall ads={this.props.ads} />            
-
             </div>
         )
-    } else {  //MAKE THIS A DIFFERENT COMPONENT <Returntologin /> 4 INSTANCE
-        return (
-                <div className="error-message">
-                  <h1>Please log in</h1>
-                  <h2> In order to use our patform you have to be a registered user.</h2>
-                    
-                  <p>Already register? <Link to="/login"><button>Go to login</button> </Link> </p>
-                  <p>Want to create an account? <Link to="/register"><button>Go to register</button> </Link></p>
-                </div>
-              )
-    }
+
     }
 }
 
@@ -71,4 +56,4 @@ function AdWall ({ads}) {
     })}
        </div>
     )
-}
+};
