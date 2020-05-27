@@ -40,7 +40,9 @@ describe('check reducers', ()=> {
             type: TYPES.FETCH_ADS_SUCCESS,
             ads
         }
+
         expect(reducers.ads(initialState.ads, action)).toEqual(ads);
+        expect(reducers.ui(initialState.ui.fetching, action).fetching).toBe(false)
     });
 
     test('should implement a FETCH_TAGS_SUCCESS action', ()=> {
@@ -64,6 +66,14 @@ describe('check reducers', ()=> {
         }
         expect(reducers.user(initialState.user, action)).toBe(false);
     })
+
+    test('should toggle fetching state to true', ()=> {
+        const action = {
+            type: TYPES.FETCH_ADS,
+        }
+
+        expect(reducers.ui(initialState.ui.fetching, action).fetching).toBe(true)
+    });
 
     test('Should not recognize the action', ()=> {
         const action = {

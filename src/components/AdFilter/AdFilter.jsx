@@ -12,8 +12,7 @@ export default class AdFilter extends Component {
         maxPrice: sessionStorage.getItem("maxPrice") ? sessionStorage.getItem("maxPrice") : "",
         venta: sessionStorage.getItem("venta") ? sessionStorage.getItem("venta") : "",
         tag: sessionStorage.getItem("tag") ? sessionStorage.getItem("tag") : [],
-      },
-      tags: []
+      }
     };
   }
 
@@ -104,7 +103,7 @@ export default class AdFilter extends Component {
           <label htmlFor="tag">Tag</label>
           <select name="tag"
             onChange={this.handleChange}
-            value={this.state.params.tag}> Filter by Tags
+            value={this.props.tags}> Filter by Tags
              {this.props.tags.map((item, index) => {
               if (item !== null) {
                 return (

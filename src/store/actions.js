@@ -30,16 +30,6 @@ export const fetchAds = (query = "") => {
     return action
 }
 
-export const createAd = ad => ({
-    type: TYPES.CREATE_AD,
-    ad
-});
-
-export const editAd = () => ({
-    type: TYPES.EDIT_AD
-});
-
-
 export const fetchTagsReq = () => ({
     type: TYPES.FETCH_TAGS
 });

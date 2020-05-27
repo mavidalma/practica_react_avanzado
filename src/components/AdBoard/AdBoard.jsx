@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { fetchAds, getTags } from '../../api_caller';
 import './AdBoard.css';
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import AdFilter from '../AdFilter';
 import AdCard from '../AdCard/AdCard';
-import { ads } from '../../store/reducers';
+import Loading from '../Loading/Loading';
 
 
 export default class AdBoard extends Component {
@@ -39,14 +38,11 @@ export default class AdBoard extends Component {
                     tags={this.props.tags}
                     props={this.props}
                 />
-                <div className="ads-wall">{this.props.ads.map(card => {
-                    return (
-                        < div key={card._id} className="card-container">
-                            <AdCard ad={card} />
-                        </div>
-                    )
-                })}
-                </div>
+                
+                {this.props.loading && <Loading /> }
+
+                <AdWall ads={this.props.ads} />            
+
             </div>
         )
     } else {  //MAKE THIS A DIFFERENT COMPONENT <Returntologin /> 4 INSTANCE
@@ -61,4 +57,18 @@ export default class AdBoard extends Component {
               )
     }
     }
+}
+
+function AdWall ({ads}) {
+    return(
+        <div className="ads-wall">
+            {ads.map(card => {
+                 return (
+                < div key={card._id} className="card-container">
+                    <AdCard ad={card} />
+                 </div>
+        )
+    })}
+       </div>
+    )
 }

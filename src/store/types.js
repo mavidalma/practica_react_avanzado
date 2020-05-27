@@ -8,6 +8,3 @@ export const FETCH_TAGS_FAILURE = 'FETCH_TAGS_FAILURE';
 
 export const USER_LOGIN = 'USER_LOGIN';
 export const USER_LOGOUT = 'USER_LOGOUT';
-
-export const CREATE_AD = 'CREATE_AD';
-export const EDIT_AD = 'EDIT_AD';

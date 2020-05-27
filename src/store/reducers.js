@@ -18,14 +18,6 @@ export function ads(state = initialState.ads, action) {
         case TYPES.FETCH_ADS_FAILURE:
             return action.error;
 
-        case TYPES.CREATE_AD:
-            return [
-                ...state,
-                action.ad
-            ];
-        case TYPES.EDIT_AD:
-            return state;
-
         default:
             return state;
     }
@@ -55,5 +47,22 @@ export function user(state = initialState.user, action) {
 
         default:
             return state;
+    }
+}
+
+export function ui(state = initialState.ui, action) {
+    switch(action.type) {
+        case TYPES.FETCH_ADS:
+          return  {
+                ...state, 
+                fetching: true
+            };
+        case TYPES.FETCH_ADS_SUCCESS:
+            return {
+                ...state,
+                fetching: false
+            }
+        default:
+            return state
     }
 }
