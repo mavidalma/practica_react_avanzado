@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import AdFilter from '../AdFilter';
 import AdCard from '../AdCard/AdCard';
 import Loading from '../Loading/Loading';
+import T from 'prop-types';
 
 
 export default class AdBoard extends Component {
@@ -57,3 +58,17 @@ function AdWall ({ads}) {
        </div>
     )
 };
+
+Adwall.propTypes = {
+    ads: T.array.isRequired
+};
+
+AdBoard.propTypes = {
+    getUserFromStorage: T.func.isRequired,
+    fetchAds: T.func.isRequired,
+    fetchTags: T.func.isRequired,
+    ads: T.array.isRequired,
+    tags: T.array.isRequired,
+    user: T.bool.isRequired,
+    loading: T.bool.isRequired,
+}

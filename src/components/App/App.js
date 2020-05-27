@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
+import T from 'prop-types';
 import PrivateRoute from '../PrivateRoute/PrivateRoute'
 import Register from '../Register/Register';
 import Login from '../Login';
@@ -44,4 +45,10 @@ class App extends Component {
 }
 }
 
+App.proptypes = {
+loadTags: T.func
+}
+
 export default App;
+
+

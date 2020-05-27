@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import T from 'prop-types';
 import { createAdvertisement } from '../../api_caller';
-import AdForm from "../AdForm/AdForm";
 import { Form, Input, Select } from '../FormProvider/FormProvider';
 import { Button } from "react-bootstrap";
 
@@ -69,4 +69,9 @@ export default function CreateAd ({tags, fetchTags, ...props}) {
         </Form>
         </>
     )
+}
+
+CreateAd.proptypes = {
+    tags: T.array.required,
+    fetchTags: T.func.required,
 }

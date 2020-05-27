@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import T from 'prop-types';
 import { Button } from "react-bootstrap";
 
 export default class AdFilter extends Component {
@@ -124,4 +125,8 @@ export default class AdFilter extends Component {
       </div>
     );
   }
+}
+
+AdFilter.propTypes = {
+  fetchAds: T.func.isRequired
 }
