@@ -59,7 +59,7 @@ function AdWall ({ads}) {
     )
 };
 
-Adwall.propTypes = {
+AdWall.propTypes = {
     ads: T.array.isRequired
 };
 

@@ -1,5 +1,6 @@
 import * as TYPES from '../types';
 import * as action from '../actions';
+import * as API from '../../api_caller';
 
 describe('check ads actions', ()=> {
     const ads = [
@@ -38,17 +39,16 @@ describe('check ads actions', ()=> {
         let query = "";
         const dispatch = jest.fn();
         const getState = jest.fn();
-        const API = jest.fn()
-        beforeEach(()=> {
-            query = "";
-        })
 
         test('fetchAds should dispatch request and success', async ()=> {
             const fetch = action.fetchAds(query);
             
             await fetch(dispatch, getState);
+            //cuando quiere llamar a la API sale undefined y da error interno, por eso no puedo testar la accion concreta Success
 
-            expect(dispatch).toHaveBeenCalled();
-        })
+            expect(dispatch).toHaveBeenCalledTimes(2);
+            expect(dispatch).toHaveBeenCalledWith(action.fetchAdsReq());
+
+        });
     })
 })

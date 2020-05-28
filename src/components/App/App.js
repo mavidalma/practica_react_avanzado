@@ -45,7 +45,7 @@ class App extends Component {
 }
 }
 
-App.proptypes = {
+App.propTypes = {
 loadTags: T.func
 }
 

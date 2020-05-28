@@ -26,7 +26,6 @@ export const userRegister = async(username, password) => {
   }
 }
 
-
 export const userLogin = async(username, password) => {
     
     try {
@@ -75,10 +74,10 @@ export const fetchAds = async(query) => {
   }
 }
 
-export const fetchSingleAd = async(query) => {
+export const fetchSingleAd = async(id) => {
     
     try {
-    const endpoint = `${URL}anuncios/${query}`;
+    const endpoint = `${URL}anuncios/${id}`;
 
     const response = await fetch (endpoint, {
         method: 'GET',

@@ -71,7 +71,7 @@ export default function CreateAd ({tags, fetchTags, ...props}) {
     )
 }
 
-CreateAd.proptypes = {
-    tags: T.array.required,
-    fetchTags: T.func.required,
+CreateAd.propTypes = {
+    tags: T.array.isRequired,
+    fetchTags: T.func.isRequired,
 }
