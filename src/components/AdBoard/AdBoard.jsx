@@ -45,7 +45,7 @@ export default class AdBoard extends Component {
     }
 }
 
-export function AdWall ({ads}) {
+function AdWall ({ads}) {
     return(
         <div className="ads-wall">
             {ads.map(card => {
