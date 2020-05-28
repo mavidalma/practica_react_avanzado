@@ -39,16 +39,32 @@ describe('check ads actions', ()=> {
         let query = "";
         const dispatch = jest.fn();
         const getState = jest.fn();
+        const API = {fetchAds: jest.fn()}
 
         test('fetchAds should dispatch request and success', async ()=> {
             const fetch = action.fetchAds(query);
+            API.fetchAds.mockResolvedValue(ads);
             
-            await fetch(dispatch, getState);
-            //cuando quiere llamar a la API sale undefined y da error interno, por eso no puedo testar la accion concreta Success
+            await fetch(dispatch, getState, API);
 
             expect(dispatch).toHaveBeenCalledTimes(2);
             expect(dispatch).toHaveBeenCalledWith(action.fetchAdsReq());
+            expect(API.fetchAds).toHaveBeenCalled();
+            expect(dispatch).toHaveBeenCalledWith(action.fetchAdsSuccess());
 
         });
+/*
+        test('fetchAds should dispatch an error', async () => {
+            const fetch = action.fetchAds(query);
+            API.fetchAds.mockRejectedValue(error);
+            
+            await fetch(dispatch, getState, API);
+
+            expect(dispatch).toHaveBeenCalled();
+            expect(dispatch).toHaveBeenCalledWith(action.fetchAdsReq());
+            expect(API.fetchAds).toHaveBeenCalled();
+            expect(dispatch).toHaveBeenCalledWith(action.fetchAdsFailure());
+
+        });  */
     })
 })

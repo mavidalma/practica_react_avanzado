@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './navBar.css';
 
 

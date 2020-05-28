@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { userRegister } from '../../api_caller';
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter as Link } from "react-router-dom";
 import { Button  } from 'react-bootstrap';
 import { Form, Input } from  '../FormProvider/FormProvider'
 
@@ -26,8 +26,8 @@ export default function Register (props){
             <p>Already registered? <Link to={`/login`}><Button variant="outline-primary">Go to login</Button></Link></p>
 
             <div className="problem-logging">
-                <a href="">Forgot password?</a>
-                <a href="">Report an issue</a>
+                <a href="/">Forgot password?</a>
+                <a href="/">Report an issue</a>
             </div>
             </>
         )

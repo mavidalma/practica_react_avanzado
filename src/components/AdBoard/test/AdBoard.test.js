@@ -1,9 +1,7 @@
 import React from 'react';
 import AdBoard from '../AdBoard';
+import {AdWall} from '../AdBoard';
 import { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-
-Enzy
 
 describe('snapshop test od AdBoard', ()=> {
     const props = {
@@ -26,9 +24,9 @@ describe('snapshop test od AdBoard', ()=> {
         loading: false,
         tags: ['motor', 'lifestyle', 'work'],
         user: true,
-        fetchTags: jest.fn(),
+        fetchAds: jest.fn(),
         getUserFromStorage: jest.fn(),
-        fetchtags: jest.fn()
+        fetchTags: jest.fn()
     }
     let wrapper;
 
@@ -42,10 +40,10 @@ describe('snapshop test od AdBoard', ()=> {
 
     test("component renders", ()=> {
         expect(wrapper.exists()).toBe(true)
-    } )
+    });
 
-    test("ads render when component is loaded", ()=> {
-        wrapper.setProps({ loading: true });
-        expect(wrapper.contains(<Loading />)).to.equal(true);
-    } )
+    test("Adwall renders when component is loaded", ()=> {
+        console.log(<AdWall />)
+        expect(wrapper.matchesElement(<AdWall/>)).to.equal(true);
+    })
 })
