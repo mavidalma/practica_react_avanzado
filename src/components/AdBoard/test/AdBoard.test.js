@@ -39,22 +39,17 @@ describe('snapshop test od AdBoard', ()=> {
     });
 
     test("component renders", ()=> {
-        expect(wrapper.exists()).toBe(true)
+        expect(wrapper.exists('AdWall')).toBe(true)
     });
-    test("has tags props", ()=> {
-        expect(wrapper.props().tags).toEqual(props.tags)
-    });
-    
-/*
+
     test('should render Loading component when isLoading is set to true', ()=> {
         wrapper.setProps({ loading: true });
-        console.log(wrapper.debug());
-        expect(wrapper.find('Loading')).toBe(true);
+        expect(wrapper.exists('Loading')).toBe(true);
+    });
 
-    });*/
-/*
     test("Adwall renders when component is loaded", ()=> {
-        console.log(wrapper.debug());
-        expect(wrapper.find('AdWall')).toBe(true);
-    })*/
+ 
+        expect(wrapper.find('AdWall').props().ads).toEqual(props.ads);
+        expect(wrapper.exists('Loading')).toBe(false);
+    })
 })
