@@ -5,7 +5,7 @@ const FormContext = React.createContext({
     handleChange: () => {},
 });
 
-export const Form = ({onSubmit, ...props}) => {
+export const Form = ({onSubmit, store, ...props}) => {
     
     const [data, setData] = useState({})
 
@@ -15,11 +15,15 @@ export const Form = ({onSubmit, ...props}) => {
         const name = target.name;
         console.log("state data: ", data)
         setData({...data, [name]: value});
+      if(store === "session") {
+           sessionStorage.setItem(name, value);
+        }
     }
 
     const submitFunc = (event) => {
         event.preventDefault();
         onSubmit(data);
+        setData({});
     }
 
     return (
@@ -36,7 +40,7 @@ export const Input = ({name, type, ...props}) => {
     return (
         <>
         <label for={name} > {name} </label>
-        <input name={name} type={type}onChange={handleChange} {...props}  />
+        <input name={name} type={type} onChange={handleChange} {...props}  />
         </>
     )
 }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import T from 'prop-types';
 import { Button } from "react-bootstrap";
+import {Form, Input, Select} from '../FormProvider/FormProvider';
 
 export default class AdFilter extends Component {
   constructor(props) {
@@ -17,36 +18,30 @@ export default class AdFilter extends Component {
     };
   }
 
-  handleChange = event => {
+ /* handleChange = event => {
     const value = event.target.value;
     const name = event.target.name;
     this.setState({
       params: { ...this.state.params, [name]: value }
     });
     sessionStorage.setItem(name, value);
-  };
+  };*/
 
-  sendQuery = event => {
-    event.preventDefault();
-    const maxPrice = this.state.params.maxPrice;
-    const minPrice = this.state.params.minPrice;
-    const name = this.state.params.name;
-    const tag = this.state.params.tag;
-    const venta = this.state.params.venta;
+  sendQuery = data => {
 
     let queryParams = ``;
 
-    if (minPrice && !maxPrice) {
-      queryParams = queryParams + `&price=${minPrice}-${this.props.maxPrice}`;
-    } else if (!minPrice && maxPrice) {
-      queryParams = queryParams + `&price=0-${maxPrice}`;
-    } else if (minPrice && maxPrice) {
-      queryParams = queryParams + `&price=${minPrice}-${maxPrice}`;
+    if (data.minPrice && !data.maxPrice) {
+      queryParams = queryParams + `&price=${data.minPrice}-${this.props.maxPrice}`;
+    } else if (!data.minPrice && data.maxPrice) {
+      queryParams = queryParams + `&price=0-${data.maxPrice}`;
+    } else if (data.minPrice && data.maxPrice) {
+      queryParams = queryParams + `&price=${data.minPrice}-${data.maxPrice}`;
     }
 
-    if (name) { queryParams = queryParams + `&name=${name}` };
-    if (tag) { queryParams = queryParams + `&tag=${tag}` };
-    if (venta) { queryParams = queryParams + `&venta=${venta}` };
+    if (data.name) { queryParams = queryParams + `&name=${data.name}` };
+    if (data.tag) { queryParams = queryParams + `&tag=${data.tag}` };
+    if (data.type) { queryParams = queryParams + `&venta=${"sell" ? true : false}` };
 
     this.props.props.history.push(`/anuncios?${queryParams}`);
     sessionStorage.setItem("search", queryParams);
@@ -65,13 +60,53 @@ export default class AdFilter extends Component {
         tag: ""
       }
     });
-    Object.keys(sessionStorage).forEach(key => sessionStorage.removeItem(key));
-    this.props.fetchAds(this.state.query);
+    Object.keys(sessionStorage).forEach(key => key !== "AnunciaLOLUserLogged" ? sessionStorage.removeItem(key) : "");
+    this.props.fetchAds();
   };
 
   render() {
 
     return (
+      <div className="form-container">
+
+        <Form onSubmit={this.sendQuery} store="session">
+          <Input 
+            name="name"
+            type="text"
+            placeholder="insert item"
+            />
+            <div>
+              <Input type="number"
+                name="minPrice"/>
+              <Input type="number"
+                name="maxPrice" />
+            </div>
+          <p>True = venta // false = compra</p>
+          <Select 
+            name="Type"
+            options={["sell", "buy"]}
+            defaultOption= "sell"/>
+          <Select name="tag"
+            options={["", ...this.props.tags]} 
+            defaultOption = ""/>
+            <div>
+              <Button type="submit" variant="primary">SEND</Button>
+              <Button onClick={this.clearFilter} variant="secondary" > Clear</Button>
+            </div>
+        </Form>
+      </div>
+    );
+  }
+}
+
+AdFilter.propTypes = {
+  fetchAds: T.func.isRequired
+}
+
+
+function temp () {
+  return (
+      <>
       <div className="form-container">
 
         <form onSubmit={this.sendQuery}>
@@ -123,10 +158,6 @@ export default class AdFilter extends Component {
 
         </form>
       </div>
-    );
-  }
-}
-
-AdFilter.propTypes = {
-  fetchAds: T.func.isRequired
+      </>
+  );
 }

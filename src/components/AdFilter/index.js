@@ -8,7 +8,7 @@ import { getAds, adsTopPrice } from '../../store/selectors';
 function mapStateToProps(state, ownProps) {
   return {
     ads: getAds(state),
-   // maxPrice: adsTopPrice(state.ads)
+   // maxPrice: adsTopPrice(state)
   }
 }
 
