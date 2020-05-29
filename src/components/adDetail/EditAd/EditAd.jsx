@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { editAd, getTags } from '../../../api_caller';
 import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import AdForm from "../../AdForm/AdForm"
+import AdForm from "../../AdForm/AdForm";
+import T from 'prop-types';
 
 export default class EditAd extends Component {
 
@@ -66,17 +67,7 @@ export default class EditAd extends Component {
     render() {
 
         return(
-            <> {/* 
-            
-                <AdForm handleChange = {this.handleChange}
-            tagArray={this.state.tagArray}
-            venta = {this.state.type}
-            send = {this.editAd}/>
-
-            I have NO CLUE why it doesn´t when made passing props to AdForm it desn't work. On "createAd" it works perfectly fine
-
-                 */}
-
+            <> 
             <form onSubmit = { this.editAd } >
                     <label htmlFor="name">Ad name</label>
                     <input type='text'
@@ -127,4 +118,10 @@ export default class EditAd extends Component {
             </>
         )
     }
+}
+
+EditAd.propTypes = {
+    ad: T.object.isRequired,
+    fetchAd: T.func.isRequired,
+    closeEditor: T.func.isRequired
 }

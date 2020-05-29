@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactImageFallback from "react-image-fallback";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import fallbackPic from '../../resources/img-not-found.png';
+import T from 'prop-types';
 
 
 export default class AdCard extends Component {
@@ -30,4 +31,8 @@ export default class AdCard extends Component {
             </>
         )
     }
+}
+
+AdCard.propTypes = {
+    ad: T.object.isRequired
 }
