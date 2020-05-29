@@ -81,7 +81,6 @@ export default class AdFilter extends Component {
               <Input type="number"
                 name="maxPrice" />
             </div>
-          <p>True = venta // false = compra</p>
           <Select 
             name="Type"
             options={["sell", "buy"]}
