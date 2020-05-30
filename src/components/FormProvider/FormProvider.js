@@ -53,12 +53,12 @@ export const Input = ({name, type, ...props}) => {
 
 export const Select = ({name, options, defaultOption, ...props}) => {
     const {data, handleChange} = useContext(FormContext);
-    if (data[name] === undefined) {data[name]= defaultOption};
+  //  if (data[name] === undefined) {data[name]= defaultOption};
     return (
         
         <>
         <label for={name} > {name} </label>
-        <select name={name} onChange={handleChange} {...props} >
+        <select name={name} onChange={handleChange} value={data[name]} {...props} >
             {options.map((item, i) => {
                 if(item !== null) { 
                     return item !== defaultOption ? <option value={item} key={i}>{item}</option> : <option value={item} key={i} selected>{item}</option> 
