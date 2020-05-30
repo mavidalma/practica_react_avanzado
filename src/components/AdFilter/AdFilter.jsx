@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import T from 'prop-types';
 import { Button } from "react-bootstrap";
-import {Form, Input, Select} from '../FormProvider/FormProvider';
+import {Form, Input, Select, Clear} from '../FormProvider/FormProvider';
 
 export default class AdFilter extends Component {
   constructor(props) {
@@ -9,23 +9,14 @@ export default class AdFilter extends Component {
     this.state = {
       query: sessionStorage.getItem("search") ? sessionStorage.getItem("search") : "",
       params: {
-        name: sessionStorage.getItem("name"),
-        minPrice: sessionStorage.getItem("minPrice") ? sessionStorage.getItem("minPrice") : "",
-        maxPrice: sessionStorage.getItem("maxPrice") ? sessionStorage.getItem("maxPrice") : "",
-        type: sessionStorage.getItem("type") ? sessionStorage.getItem("type") : "",
-        tag: sessionStorage.getItem("tag") ? sessionStorage.getItem("tag") : "",
+        name: "",
+        minPrice: "",
+        maxPrice: "",
+        type: "",
+        tag: "",
       }
     };
   }
-
- /* handleChange = event => {
-    const value = event.target.value;
-    const name = event.target.name;
-    this.setState({
-      params: { ...this.state.params, [name]: value }
-    });
-    sessionStorage.setItem(name, value);
-  };*/
 
   sendQuery = data => {
 
@@ -43,33 +34,14 @@ export default class AdFilter extends Component {
     if (data.tag) { queryParams = queryParams + `&tag=${data.tag}` };
     if (data.type) { queryParams = queryParams + `&venta=${"sell" ? true : false}` };
 
-    this.props.props.history.push(`/anuncios?${queryParams}`);
-    sessionStorage.setItem("search", queryParams);
-
     this.props.fetchAds(queryParams);
   };
 
-  clearFilter = () => {
-   /* this.setState({
-      params: {
-        ...this.state.params,
-        name: "",
-        minPrice: "",
-        maxPrice: "",
-        venta: "",
-        tag: ""
-      }
-    });*/
-    Object.keys(sessionStorage).forEach(key => key !== "AnunciaLOLUserLogged" ? sessionStorage.removeItem(key) : "");
-    this.props.fetchAds();
-  };
-
   render() {
-
     return (
       <div className="form-container">
 
-        <Form onSubmit={this.sendQuery} store="session" initialState={this.state.params}>
+        <Form onSubmit={this.sendQuery} initialState={this.state.params}>
           <Input 
             name="name"
             type="text"
@@ -90,7 +62,7 @@ export default class AdFilter extends Component {
             defaultOption = ""/>
             <div>
               <Button type="submit" variant="primary">SEND</Button>
-              <Button onClick={this.clearFilter} variant="secondary" > Clear</Button>
+              <Clear message="clear" variant="secondary" /> 
             </div>
         </Form>
       </div>

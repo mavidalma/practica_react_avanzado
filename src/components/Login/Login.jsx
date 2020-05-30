@@ -21,7 +21,7 @@ export default function Login (props) {
             <>
 
             <h2> LOGIN </h2>
-            <Form onSubmit = {submitForm}>
+            <Form onSubmit = {submitForm} initialState= {{username:"", password:""}}>
 
                 <Input type="text" name="username" placeholder="username" />
                 <Input type="password" name="password" placeholder="password" /> 
@@ -33,8 +33,8 @@ export default function Login (props) {
             <p>Not registered yet? <Link to={`/register`}><Button variant="outline-primary">Go to register</Button></Link></p>
 
             <div className="problem-logging">
-                <a href="">Forgot password?</a>
-                <a href="">Report an issue</a>
+                <a href="/">Forgot password?</a>
+                <a href="/">Report an issue</a>
             </div>
 
             </>
