@@ -12,8 +12,8 @@ export default class AdFilter extends Component {
         name: sessionStorage.getItem("name"),
         minPrice: sessionStorage.getItem("minPrice") ? sessionStorage.getItem("minPrice") : "",
         maxPrice: sessionStorage.getItem("maxPrice") ? sessionStorage.getItem("maxPrice") : "",
-        venta: sessionStorage.getItem("venta") ? sessionStorage.getItem("venta") : "",
-        tag: sessionStorage.getItem("tag") ? sessionStorage.getItem("tag") : [],
+        type: sessionStorage.getItem("type") ? sessionStorage.getItem("type") : "",
+        tag: sessionStorage.getItem("tag") ? sessionStorage.getItem("tag") : "",
       }
     };
   }
@@ -50,7 +50,7 @@ export default class AdFilter extends Component {
   };
 
   clearFilter = () => {
-    this.setState({
+   /* this.setState({
       params: {
         ...this.state.params,
         name: "",
@@ -59,7 +59,7 @@ export default class AdFilter extends Component {
         venta: "",
         tag: ""
       }
-    });
+    });*/
     Object.keys(sessionStorage).forEach(key => key !== "AnunciaLOLUserLogged" ? sessionStorage.removeItem(key) : "");
     this.props.fetchAds();
   };
@@ -69,7 +69,7 @@ export default class AdFilter extends Component {
     return (
       <div className="form-container">
 
-        <Form onSubmit={this.sendQuery} store="session">
+        <Form onSubmit={this.sendQuery} store="session" initialState={this.state.params}>
           <Input 
             name="name"
             type="text"

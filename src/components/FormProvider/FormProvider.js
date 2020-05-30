@@ -1,13 +1,14 @@
 import React, { useState, useContext } from 'react';
+import { useEffect } from 'react';
 
 const FormContext = React.createContext({
     data: {},
     handleChange: () => {},
 });
 
-export const Form = ({onSubmit, store, ...props}) => {
+export const Form = ({onSubmit, initialState, store, ...props}) => {
     
-    const [data, setData] = useState({})
+    const [data, setData] = useState(initialState)
 
     const handleChange = event => {
         const target = event.target;
@@ -23,8 +24,13 @@ export const Form = ({onSubmit, store, ...props}) => {
     const submitFunc = (event) => {
         event.preventDefault();
         onSubmit(data);
-        setData({});
-    }
+    };
+
+    useEffect(()=> {
+        setData(initialState);
+    });
+
+
 
     return (
         <FormContext.Provider value = {{data, handleChange}}>
@@ -36,7 +42,8 @@ export const Form = ({onSubmit, store, ...props}) => {
 }
 
 export const Input = ({name, type, ...props}) => {
-    const {handleChange} = useContext(FormContext);
+    const {data, handleChange} = useContext(FormContext);
+    console.log("Input value: ", data.name);
     return (
         <>
         <label for={name} > {name} </label>
