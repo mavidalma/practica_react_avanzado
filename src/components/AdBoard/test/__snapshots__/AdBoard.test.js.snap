@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshop test od AdBoard AdBoad snapshot 1`] = `
+<div>
+  <Connect(AdFilter)
+    maxPrice={100000000}
+    props={
+      Object {
+        "ads": Array [
+          Object {
+            "description": "description1",
+            "name": "test1",
+            "price": 25,
+            "tag": "motor",
+            "type": "sell",
+          },
+          Object {
+            "description": "description2",
+            "name": "test2",
+            "price": 10,
+            "tag": "work",
+            "type": "buy",
+          },
+        ],
+        "className": "test",
+        "fetchAds": [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        },
+        "fetchTags": [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        },
+        "getUserFromStorage": [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        },
+        "loading": false,
+        "tags": Array [
+          "motor",
+          "lifestyle",
+          "work",
+        ],
+        "user": true,
+      }
+    }
+    tags={
+      Array [
+        "motor",
+        "lifestyle",
+        "work",
+      ]
+    }
+  />
+  <AdWall
+    ads={
+      Array [
+        Object {
+          "description": "description1",
+          "name": "test1",
+          "price": 25,
+          "tag": "motor",
+          "type": "sell",
+        },
+        Object {
+          "description": "description2",
+          "name": "test2",
+          "price": 10,
+          "tag": "work",
+          "type": "buy",
+        },
+      ]
+    }
+  />
+</div>
+`;

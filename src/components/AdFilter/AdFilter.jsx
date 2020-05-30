@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import T from 'prop-types';
 import { Button } from "react-bootstrap";
 import {Form, Input, Select, Clear} from '../FormProvider/FormProvider';

@@ -34,15 +34,15 @@ describe('snapshop test od AdBoard', ()=> {
         wrapper = shallow(<AdBoard {...props} />);
     });
 
-  /*  test('AdBoad snapshot', ()=> {
+    test('AdBoad snapshot', ()=> {
         expect(wrapper).toMatchSnapshot();
-    });*/
+    });
 
     test("component renders", ()=> {
         expect(wrapper.exists('AdWall')).toBe(true)
     });
 
-    test('should render Loading component when isLoading is set to true', ()=> {
+    test('should render Loading component when fetching ads', ()=> {
         wrapper.setProps({ loading: true });
         expect(wrapper.exists('Loading')).toBe(true);
     });
@@ -51,5 +51,5 @@ describe('snapshop test od AdBoard', ()=> {
  
         expect(wrapper.find('AdWall').props().ads).toEqual(props.ads);
         expect(wrapper.exists('Loading')).toBe(false);
-    })
+    });
 })
