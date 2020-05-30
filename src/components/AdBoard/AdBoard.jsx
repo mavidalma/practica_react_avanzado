@@ -35,6 +35,7 @@ export default class AdBoard extends Component {
             <div>
                 <AdFilter 
                     tags={this.props.tags}
+                    maxPrice={this.state.maxPrice}
                     props={this.props}
                 />  
                 {this.props.loading && <Loading /> }

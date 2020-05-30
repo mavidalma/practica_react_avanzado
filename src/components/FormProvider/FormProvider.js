@@ -1,13 +1,17 @@
 import React, { useState, useContext } from 'react';
+import { useEffect } from 'react';
+import { Button } from "react-bootstrap";
+
 
 const FormContext = React.createContext({
     data: {},
     handleChange: () => {},
+    clearForm: () => {},
 });
 
-export const Form = ({onSubmit, ...props}) => {
+export const Form = ({onSubmit, initialState, store, ...props}) => {
     
-    const [data, setData] = useState({})
+   const [data, setData] = useState(initialState)
 
     const handleChange = event => {
         const target = event.target;
@@ -20,10 +24,15 @@ export const Form = ({onSubmit, ...props}) => {
     const submitFunc = (event) => {
         event.preventDefault();
         onSubmit(data);
+    };
+
+    const clearForm = () => {
+        setData(initialState);
+        onSubmit(initialState);
     }
 
     return (
-        <FormContext.Provider value = {{data, handleChange}}>
+        <FormContext.Provider value = {{data, handleChange, clearForm}}>
                 <form onSubmit={submitFunc} {...props} >
                     {props.children}
                 </form>
@@ -32,11 +41,12 @@ export const Form = ({onSubmit, ...props}) => {
 }
 
 export const Input = ({name, type, ...props}) => {
-    const {handleChange} = useContext(FormContext);
+    const {data, handleChange} = useContext(FormContext);
+    console.log("Input value: ", data[name]);
     return (
         <>
         <label for={name} > {name} </label>
-        <input name={name} type={type}onChange={handleChange} {...props}  />
+        <input name={name} type={type} onChange={handleChange} value={data[name]} {...props}  />
         </>
     )
 }
@@ -58,4 +68,10 @@ export const Select = ({name, options, defaultOption, ...props}) => {
         </select>
         </>
     )
+}
+
+export const Clear = ({message, ...props}) => {
+    const {clearForm} = useContext(FormContext);
+    return <Button onClick={clearForm}> {message}</Button>
+
 }
