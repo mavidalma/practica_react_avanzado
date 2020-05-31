@@ -10,11 +10,11 @@ import { fetchTags } from '../../store/actions';
 import { getTags } from '../../store/selectors'
 
 export default function AdDetail ({...props}) {
+    
     const dispatch = useDispatch();
-    dispatch(fetchTags);
+    dispatch(fetchTags());
 
     const tags = useSelector(state => getTags(state));
-
 
     const [ad, setAd] = useState({})
     const [edit, setEdit] = useState(false);
@@ -44,12 +44,13 @@ export default function AdDetail ({...props}) {
 
                 <Button onClick={switchEditMode} variant="outline-primary"> Edit Ad </Button>
     
-                {edit ? <EditAd ad={ad.data}
-                    closeEditor={switchEditMode}
-                    fetchAd={getAd}
-                    tags={tags}
-                    {...props} />
-                : ""}
+                {edit ? <EditAd 
+                            ad={ad.data}
+                            closeEditor={switchEditMode}
+                            fetchAd={getAd}
+                            tags={tags}
+                            {...props} />
+                    : ""}
             </div>
             )
     } else { return (<></>)}
