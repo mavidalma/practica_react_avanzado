@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { editAd, getTags } from '../../../api_caller';
+import { editAd, getTags } from '../../api_caller';
 import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import AdForm from "../../AdForm/AdForm";
+
 import T from 'prop-types';
 
 export default class EditAd extends Component {
