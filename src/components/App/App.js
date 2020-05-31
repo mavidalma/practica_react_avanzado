@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import T from 'prop-types';
 import PrivateRoute from '../PrivateRoute/PrivateRoute'
 import Register from '../Register/Register';
@@ -14,19 +14,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
 
-  componentDidMount() {
-   if(this.props.isLogged) {
-    this.loadTags();
-    };
-  }
-
-  loadAds() {
-    this.props.loadAds();
-  }
-  loadTags() {
-    this.props.loadTags()
-  }
-
   render () {
     return (
     <main>
@@ -38,7 +25,7 @@ class App extends Component {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/errorlogin" component={ErrorLogin} />
-          <Redirect to="/login" />
+          <Redirect to="/anuncios" />
         </Switch>
     </main>
   );

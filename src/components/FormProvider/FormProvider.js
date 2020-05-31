@@ -9,7 +9,7 @@ const FormContext = React.createContext({
     clearForm: () => {},
 });
 
-export const Form = ({onSubmit, initialState, store, ...props}) => {
+export const Form = ({onSubmit, initialState, ...props}) => {
     
    const [data, setData] = useState(initialState)
 
@@ -26,9 +26,9 @@ export const Form = ({onSubmit, initialState, store, ...props}) => {
         onSubmit(data);
     };
 
-    const clearForm = () => {
+    const clearForm = (event) => {
         setData(initialState);
-        onSubmit(initialState);
+        if (event.target.hasAttribute("relaunch")) {onSubmit(initialState)}
     }
 
     return (
@@ -70,8 +70,8 @@ export const Select = ({name, options, defaultOption, ...props}) => {
     )
 }
 
-export const Clear = ({message, ...props}) => {
+export const Clear = ({message, relaunch, ...props}) => {
     const {clearForm} = useContext(FormContext);
-    return <Button onClick={clearForm}> {message}</Button>
+    return <Button onClick={clearForm} relaunch={relaunch} {...props}> {message}</Button>
 
 }

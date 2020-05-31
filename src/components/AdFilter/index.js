@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import AdFilter from './AdFilter';
 
 import { fetchAds } from '../../store/actions';
-import { getAds, adsTopPrice } from '../../store/selectors';
+import { adsTopPrice } from '../../store/selectors';
 
 function mapStateToProps(state, ownProps) {
   return {
-    ads: getAds(state),
-   // maxPrice: adsTopPrice(state)
+    maxPrice: adsTopPrice(state)
   }
 }
 

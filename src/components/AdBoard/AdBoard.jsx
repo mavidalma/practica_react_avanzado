@@ -9,23 +9,7 @@ import T from 'prop-types';
 
 export default class AdBoard extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            maxPrice: 100000000,
-        }
-    }
-
-   /* getMaxPrice = (data) => {
-        const topPrice = data.map(item => item.price)
-            .reduce((previous, current) => (current > previous) ? current : previous);
-        this.setState({
-            maxPrice: topPrice,
-        })
-    }*/
-
     componentDidMount() {
-        this.props.getUserFromStorage();
         this.props.fetchAds();
         this.props.fetchTags();
     }
@@ -35,7 +19,6 @@ export default class AdBoard extends Component {
             <div>
                 <AdFilter 
                     tags={this.props.tags}
-                    maxPrice={this.state.maxPrice}
                     props={this.props}
                 />  
                 {this.props.loading && <Loading /> }

@@ -1,8 +1,14 @@
-# Intro a REACT
+# REACT avanzado
 
-## librerías usadas
+## Redux
 
-Para la práctica he usado styled-components, React-bootstrap y React-Image-fallback
+Como info. de user solo meto un booleano para saber si está logueado o no. Al no tener más funcionalidad que la de dejar acceder al contenido o no, no tiene sentido identificar al user (todos van a ser iguales...)
 
-## Estilos
-Como el estilo no era el bojetivo de la práctica,  he usado un poco de styled components, un poco de React-Bootstrap y un poco de CSS "normal".  Queda un poco incoherente, pero la idea era tocar un poco de las tres para pillarles el punto.
+La edición de un Ad se hace directamente con la API. Podría sacarlo filtrando los Ads del store, pero teniendo el método en la API, preferí dejarlo así para poder acceder directamente a través de las url params. Más sencillo emho.
+
+## Form
+Lo uso en Login, Register, AdFilter y CreateAd, no llegué a meterlo en EditAd, pero toda la funcionalidad está preparada
+
+## Testing
+
+Como el manejo del store lo hago siempre en las cargas de los componentes, no tenía ningún componente en el que testar una acción "directamente ejecutada por el usuario" en el store... Pero si testo las actions, reducers y selectors que se ejecutan en la App.

@@ -1,68 +1,58 @@
-import React, { Component } from 'react';
+import React, {useState, useEffect} from 'react';
 import { fetchSingleAd } from '../../api_caller';
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import './detail.css';
-import EditAd from './EditAd/EditAd';
+import EditAd from '../EditAd/EditAd';
 import AdCard from '../AdCard/AdCard';
 import { Button } from "react-bootstrap";
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchTags } from '../../store/actions';
+import { getTags } from '../../store/selectors'
 
-export default class AdDetail extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: [],
-            editMode: false,
-        }
-    }
+export default function AdDetail ({...props}) {
+    
+    const dispatch = useDispatch();
+    dispatch(fetchTags());
 
-    getAd = (query) => {
+    const tags = useSelector(state => getTags(state));
+
+    const [ad, setAd] = useState({})
+    const [edit, setEdit] = useState(false);
+
+    const getAd = (query) => {
         fetchSingleAd(query)
-            .then(data => this.setState({ data: data }));
+            .then(data => setAd({data}));
     }
 
-    componentDidMount() {
-        this.getAd(this.props.match.params.id)
-    }
-    switchEditMode = () => {
-        const mode = !this.state.editMode;
+    useEffect( ()=> {
+        getAd(props.match.params.id)
+    }, ad.data);
 
-        this.setState({
-            editMode: mode,
-        });
-        this.componentDidMount();
-        this.forceUpdate();
-    }
-
-    render() {
-
-        if (this.state.data) {
-            return (
-
-                <div className = "detailContainer">
-                    <Link to={`/anuncios/`}><p>Return to Ad Board</p></Link>
-                    <AdCard ad={this.state.data} />
+    const switchEditMode = () => setEdit(!edit);
     
-                    <Button onClick={this.switchEditMode} variant="outline-primary"> Edit Ad </Button>
+/*
+    useEffect(()=> {
+        toggled = !edit
+        setEdit(...edit, toggled)
+    }, [edit])*/
+
+    if (ad.data) {
+         return (
+            <div className = "detailContainer">
+                <Link to={`/anuncios/`}><p>Return to Ad Board</p></Link>
+                <AdCard ad={ad.data} />
+
+                <Button onClick={switchEditMode} variant="outline-primary"> Edit Ad </Button>
     
-                    {this.state.editMode ? <EditAd ad={this.state.data}
-                        closeEditor={this.switchEditMode}
-                        fetchAd={this.getAd}
-                        props={this.props} /> 
-                        : <></>}
-                </div>
+                {edit ? <EditAd 
+                            ad={ad.data}
+                            closeEditor={switchEditMode}
+                            fetchAd={getAd}
+                            tags={tags}
+                            {...props} />
+                    : ""}
+            </div>
             )
-        } else {
-            return (
-                <div className="error-message">
-                  <h1>Please log in</h1>
-                  <h2> In order to use our patform you have to be a registered user.</h2>
-                    
-                  <p>Already register? <Link to="/login"><button>Go to login</button> </Link> </p>
-                  <p>Want to create an account? <Link to="/register"><button>Go to register</button> </Link></p>
-                </div>
-              )
-        }
-
-    }
+    } else { return (<></>)}
 }
 
