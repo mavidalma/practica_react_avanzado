@@ -1,10 +1,19 @@
 import React, { useEffect } from 'react';
 import T from 'prop-types';
 import { createAdvertisement } from '../../api_caller';
-import { Form, Input, Select } from '../FormProvider/FormProvider';
+import { Form, Input, Select, Clear } from '../FormProvider/FormProvider';
 import { Button } from "react-bootstrap";
 
 export default function CreateAd ({tags, fetchTags, ...props}) {
+
+    const initialState = {
+        name: "",
+        minPrice: "",
+        description: "",
+        type: "sell",
+        tag: "",
+        photo: "",
+    };
 
     const sendAd = data => {
 
@@ -29,7 +38,7 @@ export default function CreateAd ({tags, fetchTags, ...props}) {
             <p>Please take into account that all fields are required</p>
         </div>
 
-        <Form onSubmit = {sendAd}>
+        <Form onSubmit = {sendAd} initialState={initialState} >
             {console.log(tags)}
             <Input  type='text'
                     name="name"
@@ -63,9 +72,8 @@ export default function CreateAd ({tags, fetchTags, ...props}) {
                     placeholder="please insert your pic´s URL"
                     required
                 />        
-            <Button variant="primary" type="submit">
-                Submit
-            </Button>
+            <Button variant="primary" type="submit"> Submit </Button>
+            <Clear message="clear form" variant="outline-primary" /> 
         </Form>
         </>
     )

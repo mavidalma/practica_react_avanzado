@@ -46,8 +46,8 @@ describe('check reducers', ()=> {
     });
 
     test('adsTopPrice should return higher price', ()=> {
-        console.log(initialState);
-        const price = selector.adsTopPrice(initialState.ads);
+    
+        const price = selector.adsTopPrice(initialState);
         expect(price).toBe(25);
     });
 

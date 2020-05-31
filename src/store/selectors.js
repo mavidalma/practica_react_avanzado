@@ -4,12 +4,11 @@ export const isLogged = state => state.user;
 export const isFetching = state => state.ui.fetching;
 
 export const adsTopPrice = state => {
-    if (state.ads) {   
+    if (state.ads.length > 0) {   
     const topPrice = state.ads.map(item => item.price)
         .reduce((previous, current) => (current > previous) ? current : previous);
-        console.log("adsTopPrice", topPrice)
         return topPrice
 }
-    return                            
+    return                        
 }
 

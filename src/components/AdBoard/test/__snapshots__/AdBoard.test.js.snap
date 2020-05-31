@@ -3,7 +3,6 @@
 exports[`snapshop test od AdBoard AdBoad snapshot 1`] = `
 <div>
   <Connect(AdFilter)
-    maxPrice={100000000}
     props={
       Object {
         "ads": Array [
@@ -45,17 +44,7 @@ exports[`snapshop test od AdBoard AdBoad snapshot 1`] = `
             },
           ],
         },
-        "getUserFromStorage": [MockFunction] {
-          "calls": Array [
-            Array [],
-          ],
-          "results": Array [
-            Object {
-              "type": "return",
-              "value": undefined,
-            },
-          ],
-        },
+        "getUserFromStorage": [MockFunction],
         "loading": false,
         "tags": Array [
           "motor",

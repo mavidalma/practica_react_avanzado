@@ -3,7 +3,7 @@ import T from 'prop-types';
 import { Button } from "react-bootstrap";
 import {Form, Input, Select, Clear} from '../FormProvider/FormProvider';
 
-export default function AdFilter ({fetchAds, tags, ...props}) {
+export default function AdFilter ({fetchAds, tags, maxPrice, ...props}) {
   const initialState = {
         name: "",
         minPrice: "",
@@ -17,7 +17,7 @@ export default function AdFilter ({fetchAds, tags, ...props}) {
     let queryParams = ``;
 
     if (data.minPrice && !data.maxPrice) {
-      queryParams = queryParams + `&price=${data.minPrice}-${this.props.maxPrice}`;
+      queryParams = queryParams + `&price=${data.minPrice}-${maxPrice}`;
     } else if (!data.minPrice && data.maxPrice) {
       queryParams = queryParams + `&price=0-${data.maxPrice}`;
     } else if (data.minPrice && data.maxPrice) {
@@ -32,9 +32,10 @@ export default function AdFilter ({fetchAds, tags, ...props}) {
   };
 
     return (
+      
       <div className="form-container">
 
-        <Form onSubmit={sendQuery} initialState={initialState}>
+        <Form onSubmit={sendQuery} initialState={initialState} >
           <Input 
             name="name"
             type="text"
@@ -55,7 +56,7 @@ export default function AdFilter ({fetchAds, tags, ...props}) {
             defaultOption = ""/>
             <div>
               <Button type="submit" variant="primary">SEND</Button>
-              <Clear message="clear" variant="secondary" /> 
+              <Clear message="clear" variant="outline-primary" relaunch="true"/> 
             </div>
         </Form>
       </div>
