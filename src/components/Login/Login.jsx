@@ -23,7 +23,7 @@ export default function Login (props) {
             <h2> LOGIN </h2>
             <Form onSubmit = {submitForm} initialState= {{username:"", password:""}}>
 
-                <Input type="text" name="username" placeholder="username" />
+                <Input type="email" name="email" placeholder="email" />
                 <Input type="password" name="password" placeholder="password" /> 
                 <Button variant="primary" type="submit">
                     Submit

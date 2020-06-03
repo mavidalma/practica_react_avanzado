@@ -18,6 +18,7 @@ export default function Register (props){
 
                 <Input type="text" name="username" placeholder="username" />
                 <Input type="password" name="password" placeholder="password" /> 
+                <Input type="email" name="email" placeholder="email" /> 
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
