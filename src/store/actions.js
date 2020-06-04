@@ -20,7 +20,7 @@ export const fetchAds = (query = "") => {
         try {
             dispatch(fetchAdsReq());
             const call = await API.fetchAds(query);
-            const ads = call.results;
+            const ads = call.ads;
             dispatch(fetchAdsSuccess(ads));
         } catch (error) {
             dispatch(fetchAdsFailure(error));

@@ -7,14 +7,19 @@ import { Form, Input } from  '../FormProvider/FormProvider'
 export default function Register (props){
 
     const submitForm = async data => {
-        const response = await userRegister(data.username, data.password);
+        const response = await userRegister(data.username, data.email, data.password);
         response ? props.history.push("/login") : console.log("error registering")
+    }
+    const initialState = {
+        username: "",
+        password: "",
+        email: ""
     }
 
         return (
             <>
             <h2> Register form </h2>
-            <Form onSubmit = {submitForm}>
+            <Form onSubmit = {submitForm} initialState={initialState}>
 
                 <Input type="text" name="username" placeholder="username" />
                 <Input type="password" name="password" placeholder="password" /> 

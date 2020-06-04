@@ -7,7 +7,8 @@ import { Form, Input } from '../FormProvider/FormProvider';
 export default function Login (props) {
 
     const submitForm = async data => {
-        const response = await userLogin(data.username, data.password);
+        console.log("sent to fetch: ", data.email, data.password)
+        const response = await userLogin(data.email, data.password);
         if(response) {
             sessionStorage.setItem("AnunciaLOLUserLogged", true);
             props.userLogin();
@@ -15,13 +16,13 @@ export default function Login (props) {
          } else {
             window.alert("error loging in")
          };
-    }
+    }   
 
         return (
             <>
 
             <h2> LOGIN </h2>
-            <Form onSubmit = {submitForm} initialState= {{username:"", password:""}}>
+            <Form onSubmit = {submitForm} initialState= {{email:"", password:""}}>
 
                 <Input type="email" name="email" placeholder="email" />
                 <Input type="password" name="password" placeholder="password" /> 

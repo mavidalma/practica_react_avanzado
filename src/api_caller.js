@@ -4,13 +4,14 @@ const JWT = Cookie.get('anunciaLOL');
 
 const URL = 'http://localhost:3000/api';
 
-export const userRegister = async(username, password) => {
+export const userRegister = async(username, email, password) => {
     console.log("API CALLER user: ", username );
     console.log("API CALLER password: ", password );
     try {
     const endpoint = `${URL}/user/register`;
     const response = await fetch (endpoint, {
         method: 'POST',
+        mode: 'no-cors',
         body: JSON.stringify({
             'username': username,
             'email': email,
@@ -36,14 +37,15 @@ export const userLogin = async(email, password) => {
     try {
     const endpoint = `${URL}/user/login`;
     const response = await fetch (endpoint, {
+        mode: 'no-cors',
         method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
             'email': email,
             'password': password,
         }),
-        headers: {
-            'content-type': 'application/json'
-        },
         //credentials: 'include',
     });
     
@@ -87,14 +89,14 @@ export const fetchSingleAd = async(id) => {
 
     const response = await fetch (endpoint, {
         method: 'GET',
-       // credentials: 'include',
+       //credentials: 'include',
         });
     
     const data = await response.json();
   /*const  const result = data.result;
     return result;*/
 
-    return data;
+    return data.ad;
 
 } catch (error) {
     console.log(error);
