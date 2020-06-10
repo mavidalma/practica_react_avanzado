@@ -32,29 +32,36 @@ export const userRegister = async(username, email, password) => {
   }
 }
 
-export const userLogin = async(email, password) => {
+export const userLogin = async (email, password) => {
     
     try {
     const endpoint = `${URL}/user/login`;
     const response = await fetch (endpoint, {
-        mode: 'no-cors',
+        //mode: 'no-cors',
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             'email': email,
-            'password': password,
-        }),
-        //credentials: 'include',
+            'password': password
+        })
     });
+    /*.then(data => {
+      const response = data.json()
+      console.log(response);
+      return response
+    })*/
     
-    const data = await response.json();
-    const hasLogged = data.success;
-    //data has data.succes & data.token
+    
+    console.log("response from server: ", response)
+    const data = await response.json()
+    
     const token = data.token;
     Cookie.set('anunciaLOL', token);
-
+    
+    const hasLogged = data.success;
+    
     return hasLogged;
    
 } catch (error) {
