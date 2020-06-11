@@ -47,21 +47,12 @@ export const userLogin = async (email, password) => {
             'password': password
         })
     });
-    /*.then(data => {
-      const response = data.json()
-      console.log(response);
-      return response
-    })*/
-    
-    
-    console.log("response from server: ", response)
-    const data = await response.json()
+   
+    const data = await response.json() 
     
     const token = data.token;
     Cookie.set('anunciaLOL', token);
-    
     const hasLogged = data.success;
-    
     return hasLogged;
    
 } catch (error) {
@@ -75,8 +66,7 @@ export const fetchAds = async(query) => {
     try {
     const endpoint = `${URL}/ads?${query}`;
     const response = await fetch (endpoint, {
-        method: 'GET',
-        //credentials: 'include',
+        method: 'GET'
         });
     
     const data = await response.json();
@@ -92,11 +82,10 @@ export const fetchAds = async(query) => {
 export const fetchSingleAd = async(id) => {
     
     try {
-    const endpoint = `${URL}ads/${id}`;
+    const endpoint = `${URL}/ads/${id}`;
 
     const response = await fetch (endpoint, {
-        method: 'GET',
-       //credentials: 'include',
+        method: 'GET'
         });
     
     const data = await response.json();

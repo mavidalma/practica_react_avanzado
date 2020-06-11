@@ -4,8 +4,8 @@ import './navBar.css';
 
 
 export default function navBar(props) {
-    console.log(props.location.pathname)
-  if (props.location.pathname === "/login" || props.location.pathname === "/register") {
+
+    if (props.location.pathname === "/login" || props.location.pathname === "/register") {
         return (
             <div className="navBar">
                 <h1 id="logo">anuncia<span>LOL</span></h1>

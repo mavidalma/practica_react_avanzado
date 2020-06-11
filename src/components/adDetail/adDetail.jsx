@@ -25,16 +25,11 @@ export default function AdDetail ({...props}) {
     }
 
     useEffect( ()=> {
+        console.log("ad Detail: ", props.match.params.id)
         getAd(props.match.params.id)
     }, ad.data);
 
     const switchEditMode = () => setEdit(!edit);
-    
-/*
-    useEffect(()=> {
-        toggled = !edit
-        setEdit(...edit, toggled)
-    }, [edit])*/
 
     if (ad.data) {
          return (

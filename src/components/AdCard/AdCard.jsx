@@ -16,7 +16,7 @@ export default class AdCard extends Component {
             <>
                 <div className="ad">
                     <div className="info">
-                        <Link to={`/anuncios/${ad._id}`}><h2>{ad.name}</h2></Link>
+                        <Link to={`/anuncios/${ad._id}`}><h2>{ad.title}</h2></Link>
                         <div className="data">
                             <p><span>Price:</span> {ad.price}€</p>
                             <p><span>description:</span> {ad.description}</p>
