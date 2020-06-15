@@ -20,11 +20,11 @@ export default class AdCard extends Component {
                         <div className="data">
                             <p><span>Price:</span> {ad.price}€</p>
                             <p><span>description:</span> {ad.description}</p>
-                            <p><span>type:</span> {ad.type}</p>
+                            <p><span>type:</span> {ad.type ? "sell" : "buy"}</p>
                         </div>
                     </div>
                     <div className="image-container">
-                        <ReactImageFallback src={ad.photo} fallbackImage={fallbackPic} className="image" />
+                        <ReactImageFallback src={ad.cover} fallbackImage={fallbackPic} className="image" />
                     </div>
 
                 </div>

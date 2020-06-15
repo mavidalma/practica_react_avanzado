@@ -2,7 +2,7 @@ import Cookie from 'js-cookie';
 
 const JWT = Cookie.get('anunciaLOL');
 
-const URL = 'http://localhost:3000/api';
+const URL = 'http://15.236.170.25:3000/api';
 
 export const userRegister = async(username, email, password) => {
     console.log("API CALLER user: ", username );
