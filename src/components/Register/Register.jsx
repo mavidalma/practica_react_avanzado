@@ -1,8 +1,9 @@
 import React from 'react';
 import { userRegister } from '../../api_caller';
-import { BrowserRouter as Link } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import { Button  } from 'react-bootstrap';
 import { Form, Input } from  '../FormProvider/FormProvider'
+import "../Login/login.css"
 
 export default function Register (props){
 
@@ -17,7 +18,8 @@ export default function Register (props){
     }
 
         return (
-            <>
+            <div className="loginBackground">
+            <div className="loginContainer">
             <h2> Register form </h2>
             <Form onSubmit = {submitForm} initialState={initialState}>
 
@@ -29,13 +31,14 @@ export default function Register (props){
                 </Button>
            
             </Form>
-            <p>Already registered? <Link to={`/login`}><Button variant="outline-primary">Go to login</Button></Link></p>
+            <p>Already registered? <Link to={`/login`}><Button variant="outline-primary">Go to Login</Button></Link></p>
 
             <div className="problem-logging">
                 <a href="/">Forgot password?</a>
                 <a href="/">Report an issue</a>
             </div>
-            </>
+            </div>
+            </div>
         )
 }
 

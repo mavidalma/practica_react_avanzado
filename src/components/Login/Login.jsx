@@ -3,6 +3,7 @@ import {userLogin} from '../../api_caller';
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { Button  } from 'react-bootstrap';
 import { Form, Input } from '../FormProvider/FormProvider';
+import "./login.css"
 
 export default function Login (props) {
 
@@ -19,8 +20,8 @@ export default function Login (props) {
     }   
 
         return (
-            <>
-
+            <div className="loginBackground">
+            <div className="loginContainer">
             <h2> LOGIN </h2>
             <Form onSubmit = {submitForm} initialState= {{email:"", password:""}}>
 
@@ -38,7 +39,8 @@ export default function Login (props) {
                 <a href="/">Report an issue</a>
             </div>
 
-            </>
+            </div>
+            </div>
         )
 }
 

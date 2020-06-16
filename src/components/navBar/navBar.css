@@ -19,3 +19,14 @@
   .logo-link:hover{
     color: black;
   }
+
+  .linkBack {
+    font-size: 1.5rem;
+    color: white;
+    text-decoration: none;
+  }
+
+  .linkBack:hover {
+    color: rgb(68, 187, 226);
+    text-decoration: none;
+  }
