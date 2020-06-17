@@ -24,7 +24,7 @@ export default class AdCard extends Component {
                         </div>
                     </div>
                     <div className="image-container">
-                        <ReactImageFallback src={`http://15.236.170.25:3000/${ad.cover}`} fallbackImage={fallbackPic} className="image" />
+                        <ReactImageFallback src={`http://anuncialol.api.mavidalma.es/${ad.cover}`} fallbackImage={fallbackPic} className="image" />
                     </div>
 
                 </div>
