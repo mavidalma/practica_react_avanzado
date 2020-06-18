@@ -2,7 +2,7 @@ import Cookie from 'js-cookie';
 
 const JWT = Cookie.get('anunciaLOL');
 
-const URL = `http://anuncialol.api.mavidalma.es/api`;
+const URL = `https://anuncialol.api.mavidalma.es/api`;
 
 export const userRegister = async(username, email, password) => {
     console.log("API CALLER user: ", username );
