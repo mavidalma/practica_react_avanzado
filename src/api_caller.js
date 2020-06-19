@@ -1,17 +1,12 @@
 import Cookie from 'js-cookie';
 
-const JWT = Cookie.get('anunciaLOL');
-
 const URL = `https://anuncialol.api.mavidalma.es/api`;
 
 export const userRegister = async(username, email, password) => {
-    console.log("API CALLER user: ", username );
-    console.log("API CALLER password: ", password );
     try {
     const endpoint = `${URL}/user/register`;
     const response = await fetch (endpoint, {
         method: 'POST',
-        mode: 'no-cors',
         body: JSON.stringify({
             'username': username,
             'email': email,
@@ -37,7 +32,6 @@ export const userLogin = async (email, password) => {
     try {
     const endpoint = `${URL}/user/login`;
     const response = await fetch (endpoint, {
-        //mode: 'no-cors',
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -123,24 +117,30 @@ export const getTags = async() => {
 
 }
 
-export const createAdvertisement = async(name, price, description, tags, type, cover) => {
+export const createAdvertisement = async(title, price, description, tag, type, city, cover, pictures) => {
     
     try {
-    const endpoint = `${URL}ads/create`;
+    const JWT = Cookie.get("anunciaLOL");
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('price', price);
+    formData.append('description', description);
+    formData.append('tags', tag);
+    formData.append('cover', cover);
+    formData.append('pictures', pictures);
+    formData.append("type", type);
+
+    console.log("const data: ", formData)
+
+    const endpoint = `${URL}/ads/create`;
+    console.log("sending to fetch: ", title, price, description, city, "tags:", [tag], type, cover, pictures)
     const response = await fetch (endpoint, {
         method: 'POST',
-        body: JSON.stringify({
-            'name': name,
-            'price': price,
-            'description': description,
-            'tags': tags,
-            'type': type,
-            'cover': cover
-        }),
+        body: formData,
         headers: {
-            'content-type': 'application/json',
-            "token": JWT
+            'token': JWT
         },
+        redirect: "follow"
        // credentials: 'include',
     });
     
@@ -149,8 +149,8 @@ export const createAdvertisement = async(name, price, description, tags, type, c
     if(data.error === "Error: Not logged in") {throw new Error("Not logged in")}
 
     const hasposted = data.success;
-
-    console.log(hasposted)
+    console.log("data: ", data)
+    console.log("data success:", hasposted)
     
     hasposted ? window.alert("ad correctly created") : window.alert('error creating ad, please check the info provided');
     return hasposted;
@@ -163,7 +163,8 @@ export const createAdvertisement = async(name, price, description, tags, type, c
 export const editAd = async(id, name, price, description, tags, type, cover) => {
     
     try {
-    const endpoint = `${URL}anuncios/${id}`;
+        const JWT = Cookie.get("anunciaLOL");
+    const endpoint = `${URL}/ads/${id}`;
     const response = await fetch (endpoint, {
         method: 'PUT',
         body: JSON.stringify({

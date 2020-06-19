@@ -7,23 +7,27 @@ import { Button } from "react-bootstrap";
 export default function CreateAd ({tags, fetchTags, ...props}) {
 
     const initialState = {
-        name: "",
-        minPrice: "",
+        title: "",
+        price: "",
         description: "",
         type: "sell",
+        city: "",
         tag: "",
-        photo: "",
     };
 
-    const sendAd = data => {
+    const sendAd = (data, files) => {
+        console.log( "on createAd sendAD: ", data, files);
+        const type= data.type === "sell" ? true : false;
 
         createAdvertisement(
-            data.name,
+            data.title,
             data.price,
             data.description,
-            data.tags,
-            data.type,
-            data.photo)
+            data.tag,
+            type,
+            data.city,
+            files.cover || "",
+            files.pictures || [])
             .then(result => result ? props.history.push("/anuncios") : console.log(result));
     }
     
@@ -41,7 +45,7 @@ export default function CreateAd ({tags, fetchTags, ...props}) {
         <Form onSubmit = {sendAd} initialState={initialState} >
             {console.log(tags)}
             <Input  type='text'
-                    name="name"
+                    name="title"
                     placeholder="ad name. Kep it under 20chars"
                     maxLength="20"
                     required
@@ -56,22 +60,29 @@ export default function CreateAd ({tags, fetchTags, ...props}) {
                     name="description"
                     maxLength="286"
                     placeholder="add a brief description of the item"
-                    required
                 />
-            <Select name="tag"
-                    options={tags}
-                    defaultOption="lifestyle"
+            <Input type="text"
+                    name="tag"
+                    maxLength="40"
+                    placeholder="choose one keyword"
+                />
+            <Input type="text"
+                    name="city"
+                    maxLength="40"
                 />
             <Select name="type"
                     options={["sell", "buy"]}
                     defaultOption="sell"
                 />
-            <Input type="text"
-                    name="photo"
-                    maxLength="286"
-                    placeholder="please insert your pic´s URL"
-                    required
-                />        
+            <Input type="file"
+                    name="cover"
+                    accept="image/png, image/jpeg" 
+                />  
+            <Input type="file"
+                    name="pictures"
+                    accept="image/png, image/jpeg"
+                    multiple 
+                />    
             <Button variant="primary" type="submit"> Submit </Button>
             <Clear message="clear form" variant="outline-primary" /> 
         </Form>

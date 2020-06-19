@@ -5,6 +5,7 @@ import { Button } from "react-bootstrap";
 
 const FormContext = React.createContext({
     data: {},
+    files: {},
     handleChange: () => {},
     clearForm: () => {},
 });
@@ -12,18 +13,26 @@ const FormContext = React.createContext({
 export const Form = ({onSubmit, initialState, ...props}) => {
     
    const [data, setData] = useState(initialState)
+   const [files, setFiles] = useState()
 
     const handleChange = event => {
+        console.log("type: ", event.target.type)
         const target = event.target;
         const value = target.value;
         const name = target.name;
+        const file = target.files;
+        console.log("state files: ", files)
         console.log("state data: ", data)
-        setData({...data, [name]: value});
+        if( target.type === "file") {
+            setFiles({...files, [name]: file[0]});
+        } else {
+            setData({...data, [name]: value});
+        }
     }
 
     const submitFunc = (event) => {
         event.preventDefault();
-        onSubmit(data);
+        onSubmit(data, files);
     };
 
     const clearForm = (event) => {
@@ -41,12 +50,13 @@ export const Form = ({onSubmit, initialState, ...props}) => {
 }
 
 export const Input = ({name, type, ...props}) => {
-    const {data, handleChange} = useContext(FormContext);
-    console.log("Input value: ", data[name]);
+    const {data, files, handleChange} = useContext(FormContext);
+   // console.log("Input value: ", data[name]);
     return (
         <>
         <label for={name} > {name} </label>
-        <input name={name} type={type} onChange={handleChange} value={data[name]} {...props}  />
+        {data.type === "file" && <input name={name} type={type} onChange={handleChange} {...props} /> }
+        {data.type !== "file" && <input name={name} type={type} onChange={handleChange} value={data[name]} {...props}  /> }
         </>
     )
 }
