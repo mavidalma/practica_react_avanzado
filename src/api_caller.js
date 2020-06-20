@@ -130,10 +130,8 @@ export const createAdvertisement = async(title, price, description, tag, type, c
     formData.append('pictures', pictures);
     formData.append("type", type);
 
-    console.log("const data: ", formData)
-
     const endpoint = `${URL}/ads/create`;
-    console.log("sending to fetch: ", title, price, description, city, "tags:", [tag], type, cover, pictures)
+    
     const response = await fetch (endpoint, {
         method: 'POST',
         body: formData,
@@ -160,23 +158,24 @@ export const createAdvertisement = async(title, price, description, tag, type, c
   }
 }
 
-export const editAd = async(id, name, price, description, tags, type, cover) => {
+export const editAd = async(id, title, price, description, tag, type, city, cover, pictures) => {
     
     try {
         const JWT = Cookie.get("anunciaLOL");
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('price', price);
+        formData.append('description', description);
+        formData.append('tags', tag);
+        formData.append('cover', cover);
+        formData.append('pictures', pictures);
+        formData.append("type", type);
+
     const endpoint = `${URL}/ads/${id}`;
     const response = await fetch (endpoint, {
         method: 'PUT',
-        body: JSON.stringify({
-            'name': name,
-            'price': price,
-            'description': description,
-            'tags': tags,
-            'type': type,
-            'cover': cover
-        }),
+        body: formData,
         headers: {
-            'content-type': 'application/json',
             "token": JWT
         },
       //  credentials: 'include',

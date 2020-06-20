@@ -22,7 +22,6 @@ export default class EditAd extends Component {
 
     editAd = async event => {
         event.preventDefault();
-
         await editAd(
             this.props.ad._id,
             this.state.name,
@@ -54,7 +53,7 @@ export default class EditAd extends Component {
     componentDidMount() {
         this.getTags();
         this.setState({
-            name: this.props.ad.name,
+            name: this.props.ad.title,
             price: this.props.ad.price,
             description: this.props.ad.description,
             tags: this.props.ad.tags,

@@ -5,7 +5,7 @@ import {Form, Input, Select, Clear} from '../FormProvider/FormProvider';
 
 export default function AdFilter ({fetchAds, tags, maxPrice, ...props}) {
   const initialState = {
-        name: "",
+        filter: "",
         minPrice: "",
         maxPrice: "",
         type: "sell",
@@ -37,7 +37,7 @@ export default function AdFilter ({fetchAds, tags, maxPrice, ...props}) {
 
         <Form onSubmit={sendQuery} initialState={initialState} >
           <Input 
-            name="name"
+            name="title"
             type="text"
             placeholder="insert item"
             />
