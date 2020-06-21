@@ -126,6 +126,7 @@ export const createAdvertisement = async(title, price, description, tag, type, c
     formData.append('price', price);
     formData.append('description', description);
     formData.append('tags', tag);
+    formData.append('city', city);
     formData.append('cover', cover);
     formData.append('pictures', pictures);
     formData.append("type", type);
@@ -147,11 +148,10 @@ export const createAdvertisement = async(title, price, description, tag, type, c
     if(data.error === "Error: Not logged in") {throw new Error("Not logged in")}
 
     const hasposted = data.success;
-    console.log("data: ", data)
-    console.log("data success:", hasposted)
     
     hasposted ? window.alert("ad correctly created") : window.alert('error creating ad, please check the info provided');
     return hasposted;
+
 } catch (error) {
     console.log(error);
     throw new Error();
@@ -161,20 +161,19 @@ export const createAdvertisement = async(title, price, description, tag, type, c
 export const editAd = async(id, title, price, description, tag, type, city, cover, pictures) => {
     
     try {
-        const JWT = Cookie.get("anunciaLOL");
-        const formData = new FormData();
-        formData.append('title', title);
-        formData.append('price', price);
-        formData.append('description', description);
-        formData.append('tags', tag);
-        formData.append('cover', cover);
-        formData.append('pictures', pictures);
-        formData.append("type", type);
+    const JWT = Cookie.get("anunciaLOL");
 
     const endpoint = `${URL}/ads/${id}`;
     const response = await fetch (endpoint, {
         method: 'PUT',
-        body: formData,
+        body: JSON.stringify({
+            title, 
+            price, 
+            description, 
+            tag, 
+            type, 
+            city
+        }),
         headers: {
             "token": JWT
         },

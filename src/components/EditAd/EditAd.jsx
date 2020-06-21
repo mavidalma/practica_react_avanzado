@@ -1,126 +1,90 @@
-import React, { Component } from 'react';
-import { editAd, getTags } from '../../api_caller';
-import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
+import React from 'react';
+import { editAd } from '../../api_caller';
 import { Button } from "react-bootstrap";
-
+import { Form, Input, Select, Clear} from '../FormProvider/FormProvider';
 import T from 'prop-types';
 
-export default class EditAd extends Component {
+export default function EditAd ({ad, tags, closeEditor, fetchAd, ...props}) {
+    
+    const initialState = {
+        title: ad.title,
+        price: ad.price,
+        description: ad.description,
+        tag: ad.tags,
+        type: ad.type || true,
+        city: ad.city,
+    }
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: "",
-            price: 0,
-            description: "",
-            tags: [],
-            type: "sell",
-            photo: "",
-            tagArray: [],
-        };
-    };
+    const sendEdition = async data => {
+        console.log("original ad on editAd: ", ad);
+        console.log(" edited ad on senEdition: ", data);
+        const type= data.type === "sell" ? true : false;
 
-    editAd = async event => {
-        event.preventDefault();
-        await editAd(
-            this.props.ad._id,
-            this.state.name,
-            this.state.price,
-            this.state.description,
-            this.state.tags,
-            this.state.type,
-            this.state.photo)
+
+       await editAd(
+            ad._id,
+            data.title,
+            data.price,
+            data.description,
+            data.tag,
+            type,
+            data.city)
             .then(data => console.log(data));
             
-        this.props.props.history.push(`${this.props.ad._id}`);   
-        this.props.fetchAd(this.props.props.match.params.id)
-        this.props.closeEditor();
+        fetchAd(ad._id);
+        closeEditor();
     }
+    console.log(tags)
 
-    handleChange = event => {
-        const value = event.target.value;
-        const name = event.target.name;
-        this.setState({
-            [name]: value
-        })
-    }
+    return(
+        <Form onSubmit = { sendEdition } initialState={initialState} >
+         
+            <Input name="title"
+                   type='text'
+                   placeholder="ad name. Kep it under 20chars"
+                   maxLength="20"
+            />
 
-    getTags = () => {
-        getTags()
-            .then(data => this.setState({ tagArray: data }));
-    }
-
-    componentDidMount() {
-        this.getTags();
-        this.setState({
-            name: this.props.ad.title,
-            price: this.props.ad.price,
-            description: this.props.ad.description,
-            tags: this.props.ad.tags,
-            type: this.props.ad.type,
-            photo: this.props.ad.photo,
-        })
-    }
-
-
-    render() {
-
-        return(
-            <> 
-            <form onSubmit = { this.editAd } >
-                    <label htmlFor="name">Ad name</label>
-                    <input type='text'
-                        name="name"
-                        onChange={this.handleChange}
-                        placeholder="ad name. Kep it under 20chars"
-                        maxLength="20"
-                    />
-                    <label htmlFor="price">item's price</label>
-                    <input type="number"
-                        name="price"
-                        onChange={this.handleChange}
-                    />
-                    <label htmlFor="description">item's description</label>
-                    <input type="text"
-                        name="description"
-                        onChange={this.handleChange}
-                        maxLength="286"
-                        placeholder="add a brief description of the item"
-                    />
-                    <select name="tag"
-                        onChange={this.handleChange}> Add a tag!!!!!!!!!!!
-                        {this.state.tagArray.map(item => {
-                            if (item !== null) {
-                                return (
-                                    <option value={item}>{item}</option>
-                                )
-                            }
-                        })}
-
-                    </select>
-                    <select name="type"
-                        onChange={this.handleChange}
-                        value={this.state.venta}> choose your ad´s type
-                        <option value="sell" defaultValue>Venta</option>
-                        <option value="buy">Compra</option>
-                    </select>
-                    <input type="text"
-                        name="photo"
-                        onChange={this.handleChange}
-                        maxLength="286"
-                        placeholder="please insert your pic´s URL"
-                    />
-
-                    <Button type="submit" variant="primary"> Send Edit</Button>
-
-            </form>
-            </>
+            <Input type="number"
+                   name="price"
+                   min="1"
+                   max="1000000"
+                />
+            <Input type="text"
+                   name="description"
+                   maxLength="286"
+                   placeholder="add a brief description of the item"
+                />
+            <Input name="tag"
+                    maxLength="40"
+                    placeholder= {ad.tags}
+                />
+            <Input name="city"
+                    maxLength="40"
+                    placeholder= {ad.city}
+                />
+            <Select name="type"
+                    options={["sell", "buy"]}
+                    defaultOption="sell"
+                />
+           {/*} <Input type="file"
+                    name="cover"
+                    accept="image/png, image/jpeg" 
+                />
+            <Input type="file"
+                    name="pictures"
+                    accept="image/png, image/jpeg"
+                    multiple 
+    />   */}
+            <Button type="submit" variant="primary"> Send Edit</Button>
+            <Clear message="return to original" variant="outline-primary" /> 
+        </Form >
         )
     }
-}
 
 EditAd.propTypes = {
     ad: T.object.isRequired,
     fetchAd: T.func.isRequired,
-    closeEditor: T.func.isRequired
+    closeEditor: T.func.isRequired,
+    tags: T.array.isRequired
 }
